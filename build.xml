@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<project name="SwishSprite" default="build" basedir="./">
+	<property file="${os.name}.build.properties"/>
+	<property file="build.properties"/>
+	
+	<macrodef name="build-js">
+		<attribute name="options" default="-m" />
+		<attribute name="debug" default="false" />
+		<attribute name="compress" default="" />
+		<attribute name="output" />
+		<sequential>
+			<fail unless="source.order" message="version needs to be specified in the build.properties as the output directory" />
+			<fail unless="source.dir" message="The folder that contains all the source" />
+			<fail unless="compressor" message="Path to the uglify-js program" />
+			<validate-js list="${source.order}" dir="${source.dir}" />
+			<echo message="+---------------------------------+" />
+			<echo message="| Building the Library JavaScript |" />
+			<echo message="+---------------------------------+" />
+			<resourcelist id="files"> 
+				<file file="${source.order}" />
+				<filterchain>
+					<prefixlines prefix="${source.dir}/" /> 
+				</filterchain>
+			</resourcelist>
+		    <pathconvert property="allFiles" refid="files" pathsep=" " />
+			<exec executable="${compressor}" failonerror="true">
+				<arg line="${allFiles}" />
+				<arg line="-o @{output}" />
+				<arg line="@{options}" />
+				<arg line="-c @{compress}" />
+				<arg line="--define DEBUG=@{debug},RELEASE=!@{debug}" />
+			</exec>
+			<replaceregexp file="@{output}" match="\$\{version\}" replace="${version}" flags="g" />
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="validate-js">
+		<attribute name="list" />
+		<attribute name="dir" />
+		<sequential>
+			<fail unless="js.validator" message="js.validator needs to be specified in the build.properties as the JSHint or similar lint app" />
+			<echo message="+--------------------------+" />
+			<echo message="| Validating the JS Source |" />
+			<echo message="+--------------------------+" />
+			<loadfile property="files" srcFile="@{list}">
+				<filterchain>
+					<prefixlines prefix=" @{dir}/" />
+					<striplinebreaks />
+					<trim />
+				</filterchain>
+			</loadfile>
+			<exec executable="${js.validator}">
+	            <arg line="${files}" />
+	        </exec>
+		</sequential>
+	</macrodef>
+	
+	<target name="build" description="Compile JS project in debug mode">
+		<build-js output="${output}-${version}.js" debug="true" options="-b" />
+	</target>
+	
+	<target name="buildRelease" description="Compile JS project in release mode">
+		<build-js output="${output}-${version}.min.js" />
+	</target>
+	
+	<target name="buildAll" description="Build all versions of the library">
+		<antcall target="build" />
+		<antcall target="buildRelease" />
+	</target>
+	
+</project>

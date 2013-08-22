@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>SwishSprite Test Example</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/main.css">
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="../deploy/SwishSprite-1.0.0.js"></script>
+		<script type="text/javascript">
+			
+			$(function(){
+				
+				var AudioUtils = cloudkid.AudioUtils,
+					SwishSprite = cloudkid.SwishSprite,
+					loadButton = $("#load"),
+					playbar = $("#playbar").hide(),
+					audio = null;
+				
+				/**
+				*  Load the JSON data
+				*/
+				$.getJSON("sounds/output.json", function(data){
+					
+					var aliases = $("#aliases"),
+						buttons = '';
+					
+					// Create a button for each alias
+					for(var alias in data.spritemap)
+					{
+						buttons += '<li><button data-alias="'+alias+'" class="alias disabled" disabled>'+alias+'</button></li>';
+					}
+					aliases.append(buttons);
+					
+					// When clicked on the load button
+					loadButton
+						.removeAttr('disabled')
+						.removeClass('disabled')
+						.click(function(){
+
+							// Disable the laod button
+							var loadButton = $(this)
+								.attr('disabled', true)
+								.addClass('disabled')
+								.off('click');
+
+							// Create the new audio sprite
+							audio = AudioUtils.createFromSpriteMap(data);
+
+							// Add listener for the Loaded event
+							audio.addEventListener(SwishSprite.LOAD_STARTED, onAudioLoaded);
+
+							// User load
+							audio.loadByUserInteraction();
+						});
+				});
+								
+				/**
+				*  The audio has finished loading
+				*/
+				var onAudioLoaded = function(){
+					$('body').removeClass('unloaded');
+
+					$(".alias")
+						.removeAttr('disabled')
+						.removeClass('disabled')
+						.click(function(){
+							playbar.show().width("0%");
+							audio.removeEventListener(SwishSprite.PROGRESS);
+							audio.addEventListener(SwishSprite.PROGRESS, function(p){
+								playbar.width(Math.round(p*100)+"%");
+							});
+							audio.play($(this).data('alias'));
+					});
+					$(".control")
+						.removeAttr('disabled')
+						.removeClass('disabled')
+						.click(function(){
+							audio[$(this).data('action')]();
+					});
+				};
+			});
+		</script>		
+ 	</head>
+	<body class="unloaded">
+		<button id="load" class="disabled" disabled>Load</button>
+		<div class="controlsFrame">
+			<div class="controls">
+				<h1>Controls</h1>
+				<ul>				
+					<li><button data-action="stop" class="control disabled" disabled>Stop</button></li>
+					<li><button data-action="pause" class="control disabled" disabled>Pause</button></li>
+					<li><button data-action="resume" class="control disabled" disabled>Resume</button></li>
+					<li><button data-action="mute" class="control disabled" disabled>Mute</button></li>
+					<li><button data-action="unmute" class="control disabled" disabled>Unmute</button></li>
+				</ul>
+				<br style="clear:both">
+			</div>
+			<div class="timeline">
+				<div class="playbar" id="playbar"></div>
+			</div>
+		</div>
+		<div class="aliases">
+			<h1>Aliases</h1>
+			<ul id="aliases"></ul>
+			<br style="clear:both">
+		</div>
+	</body>
+</html>

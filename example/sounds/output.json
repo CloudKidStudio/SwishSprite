@@ -1,0 +1,80 @@
+{
+  "resources": [
+    "sounds/output.m4a",
+    "sounds/output.oga",
+    "sounds/output.mp3"
+  ],
+  "spritemap": {
+    "silence": {
+      "start": 0,
+      "end": 5,
+      "loop": true
+    },
+    "boing": {
+      "start": 6,
+      "end": 6.7785714285714285,
+      "loop": false
+    },
+    "buzzer": {
+      "start": 8,
+      "end": 9.82265306122449,
+      "loop": false
+    },
+    "crowd": {
+      "start": 11,
+      "end": 13.110453514739229,
+      "loop": false
+    },
+    "drop": {
+      "start": 15,
+      "end": 15.545850340136054,
+      "loop": false
+    },
+    "eh": {
+      "start": 17,
+      "end": 19.317732426303856,
+      "loop": false
+    },
+    "falling": {
+      "start": 21,
+      "end": 22.335419501133785,
+      "loop": false
+    },
+    "harp": {
+      "start": 24,
+      "end": 26.734603174603173,
+      "loop": false
+    },
+    "laugh": {
+      "start": 28,
+      "end": 29.87297052154195,
+      "loop": false
+    },
+    "meow": {
+      "start": 31,
+      "end": 32.34789115646259,
+      "loop": false
+    },
+    "music": {
+      "start": 34,
+      "end": 44.549455782312926,
+      "loop": true
+    },
+    "outtamyway": {
+      "start": 46,
+      "end": 50.199954648526074,
+      "loop": false
+    },
+    "pacifier": {
+      "start": 52,
+      "end": 52.07920634920635,
+      "loop": false
+    },
+    "wheels": {
+      "start": 54,
+      "end": 55.57827664399093,
+      "loop": false
+    }
+  },
+  "autoplay": "silence"
+}
