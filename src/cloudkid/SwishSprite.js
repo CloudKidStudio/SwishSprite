@@ -50,6 +50,9 @@
 	
 	/** The collection of sounds */
 	_sounds = null,
+
+	/** Some formats require a little padding to the end of a sprite */
+	_formatPadding = 0,
 	
 	/** The sound name of the current sprite we're playing */
 	_playingAlias = null,
@@ -110,6 +113,10 @@
 	/** The sound has been unpaused */
 	SwishSprite.RESUMED = "unpaused";
 	
+	/** A little pading for the m4a audio format will help add extra
+	time for the Kindle Fire who likes to end the sound too early */
+	SwishSprite.M4A_PADDING = 0.1;
+	
 	/** The version of this library */
 	SwishSprite.VERSION = "${version}";
 	
@@ -155,6 +162,7 @@
 		_successfullyPlayedSound = false;
 		_pageVisibility = new cloudkid.PageVisibility(onFocus, onBlur);
 		_autoPaused = -1;
+		_formatPadding = playableUrl.indexOf(".m4a") > -1 ? SwishSprite.M4A_PADDING : 0;
 		
 		_audio = global.document.createElement("audio");
 				
@@ -310,11 +318,14 @@
 	*  @param The name of the audio
 	*/
 	p.setSound = function(alias, startTime, duration, isLoop)
-	{		
+	{
+		// Only add the padding for non-looping sounds
+		var padding = !isLoop ? _formatPadding : 0;
+		
 		_sounds[alias] = {
 			start: startTime,
-			end: startTime + duration,
-			duration: duration,
+			end: startTime + duration + padding,
+			duration: duration + padding,
 			loop: isLoop
 		};
 	};
