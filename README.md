@@ -139,7 +139,7 @@ Audio codec support vary widely between browsers. We suggest using m4a, oga, mp3
 | **COMPLETE**      | Event dispatched when sound play completed          |
 | **PROGRESS**      | Event dispatched when the play progress has changed |
 | **PAUSED**        | Event dispatched when the playback has paused       |
-| **UNPAUSED**      | Event dispatched when the playback as resumed       |
+| **RESUMED**      | Event dispatched when the playback as resumed       |
 
 ##Build Instructions
 

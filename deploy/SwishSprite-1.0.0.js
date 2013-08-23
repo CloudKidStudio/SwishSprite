@@ -87,7 +87,7 @@
     }, p = SwishSprite.prototype = new cloudkid.EventDispatcher(), _audio = null, _paused = !0, _loaded = !1, _updatingLoad = !1, _updatingPlay = !1, _loadStartedByUserInteraction = !1, _loadStarted = !1, _playInterval = null, _loadInterval = null, _playTimeout = null, _loadAmount = 0, _sounds = null, _playingAlias = null, _scrubberMoved = null, _outOfRangeCount = null, _scrubberNotMovingCount = 0, _successfullyPlayedSound = !1, _scrubberStartTime = null, _checkInterval = null, _lastScrubberPos = null, _instance = null, _pageVisibility = null, _autoPaused = -1, _lastCurrentTime = null;
     SwishSprite.LOAD_STARTED = "loadStarted", SwishSprite.LOADED = "loaded", SwishSprite.LOAD_PROGRESS = "loadProgress", 
     SwishSprite.COMPLETE = "complete", SwishSprite.PROGRESS = "progress", SwishSprite.PAUSED = "paused", 
-    SwishSprite.UNPAUSED = "unpaused", SwishSprite.VERSION = "1.0.0", p.manualUpdate = !1, 
+    SwishSprite.RESUMED = "unpaused", SwishSprite.VERSION = "1.0.0", p.manualUpdate = !1, 
     p.initialize = function(data) {
         var AudioUtils = cloudkid.AudioUtils;
         if (!AudioUtils.supported()) throw "HTML5 Audio is not supported!";
@@ -115,7 +115,7 @@
         _audio.pause(), _paused = !0, oldPaused || this.dispatchEvent(SwishSprite.PAUSED);
     }, p.resume = function() {
         Debug.log("SwishSprite.resume"), _paused && _playingAlias && (this.play(_playingAlias, _audio.currentTime), 
-        this.dispatchEvent(SwishSprite.UNPAUSED));
+        this.dispatchEvent(SwishSprite.RESUMED));
     }, p.stop = function() {
         Debug.log("SwishSprite.stop"), this.pause(), _playingAlias = null;
     }, p.getLength = function(alias) {

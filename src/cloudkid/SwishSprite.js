@@ -108,7 +108,7 @@
 	SwishSprite.PAUSED = "paused";
 	
 	/** The sound has been unpaused */
-	SwishSprite.UNPAUSED = "unpaused";
+	SwishSprite.RESUMED = "unpaused";
 	
 	/** The version of this library */
 	SwishSprite.VERSION = "${version}";
@@ -240,7 +240,7 @@
 		if (_paused && _playingAlias)
 		{
 			this.play(_playingAlias, _audio.currentTime);
-			this.dispatchEvent(SwishSprite.UNPAUSED);
+			this.dispatchEvent(SwishSprite.RESUMED);
 		}
 	};
 	
