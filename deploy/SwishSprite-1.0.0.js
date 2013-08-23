@@ -82,26 +82,26 @@
     }, namespace("cloudkid").EventDispatcher = EventDispatcher;
 }(window), function(global, undefined) {
     "use strict";
-    var SwishSprite = function(url) {
-        this.initialize(url);
+    var SwishSprite = function(data) {
+        this.initialize(data);
     }, p = SwishSprite.prototype = new cloudkid.EventDispatcher(), _audio = null, _paused = !0, _loaded = !1, _updatingLoad = !1, _updatingPlay = !1, _loadStartedByUserInteraction = !1, _loadStarted = !1, _playInterval = null, _loadInterval = null, _playTimeout = null, _loadAmount = 0, _sounds = null, _playingAlias = null, _scrubberMoved = null, _outOfRangeCount = null, _scrubberNotMovingCount = 0, _successfullyPlayedSound = !1, _scrubberStartTime = null, _checkInterval = null, _lastScrubberPos = null, _instance = null, _pageVisibility = null, _autoPaused = -1, _lastCurrentTime = null;
     SwishSprite.LOAD_STARTED = "loadStarted", SwishSprite.LOADED = "loaded", SwishSprite.LOAD_PROGRESS = "loadProgress", 
     SwishSprite.COMPLETE = "complete", SwishSprite.PROGRESS = "progress", SwishSprite.PAUSED = "paused", 
     SwishSprite.UNPAUSED = "unpaused", SwishSprite.VERSION = "1.0.0", p.manualUpdate = !1, 
-    p.initialize = function(url) {
+    p.initialize = function(data) {
         var AudioUtils = cloudkid.AudioUtils;
         if (!AudioUtils.supported()) throw "HTML5 Audio is not supported!";
         if (null !== _instance) throw "SwishSprite instance is already create. Destroy before re-creating";
-        var playableUrl = AudioUtils.getPlayableURL(url);
+        this.clear();
+        var playableUrl = null !== data && "object" == typeof data ? AudioUtils.importSpriteMap(this, data) : AudioUtils.getPlayableURL(data);
         if (!playableUrl) throw "The supplied filetype is unsupported in this browser.";
         _instance = this, _loadStartedByUserInteraction = !1, _loaded = !1, _paused = !0, 
         _loadStarted = !1, _scrubberNotMovingCount = 0, _successfullyPlayedSound = !1, _pageVisibility = new cloudkid.PageVisibility(onFocus, onBlur), 
-        _autoPaused = -1, this.clear(), _audio = global.document.createElement("audio"), 
-        _audio.addEventListener("canplay", onLoadChange), _audio.addEventListener("canplaythrough", onCanPlayThrough), 
-        _audio.addEventListener("loadeddata", onLoadChange), _audio.addEventListener("loadedmetadata", onLoadChange), 
-        _audio.addEventListener("progress", onLoadChange), _audio.addEventListener("ended", soundPlayComplete), 
-        _audio.addEventListener("stalled", onStalled), Debug.log("_audio.src: " + playableUrl), 
-        _audio.src = playableUrl;
+        _autoPaused = -1, _audio = global.document.createElement("audio"), _audio.addEventListener("canplay", onLoadChange), 
+        _audio.addEventListener("canplaythrough", onCanPlayThrough), _audio.addEventListener("loadeddata", onLoadChange), 
+        _audio.addEventListener("loadedmetadata", onLoadChange), _audio.addEventListener("progress", onLoadChange), 
+        _audio.addEventListener("ended", soundPlayComplete), _audio.addEventListener("stalled", onStalled), 
+        Debug.log("_audio.src: " + playableUrl), _audio.src = playableUrl;
     }, p.getAudioElement = function() {
         return _audio;
     }, p.mute = function() {
@@ -246,13 +246,14 @@
 }(window), function(global, undefined) {
     "use strict";
     var AudioUtils = {};
-    AudioUtils.createFromSpriteMap = function(config) {
-        if (config.resources === undefined) throw "Sprite configuration must contain a resources Array of file types";
-        var audio = new cloudkid.SwishSprite(config.resources);
-        if (config.spritemap === undefined) throw "Sprite configuration must contain a dictionary of audio sprites";
+    AudioUtils.importSpriteMap = function(audio, config) {
+        if (config.resources === undefined) throw "Sprite configuration must contain 'resources': an array of file types";
+        var playableUrl = AudioUtils.getPlayableURL(config.resources);
+        if (config.spritemap === undefined) throw "Sprite configuration must contain 'spritemap': a dictionary of audio sprites";
         var s, alias;
-        for (alias in config.spritemap) s = config.spritemap[alias], audio.setSound(alias, s.start, s.end - s.start, s.loop);
-        return audio;
+        for (alias in config.spritemap) s = config.spritemap[alias], Debug.log(alias), Debug.log(s), 
+        audio.setSound(alias, s.start, s.end - s.start, s.loop);
+        return playableUrl;
     }, AudioUtils.supported = function() {
         return _fileSupport;
     };

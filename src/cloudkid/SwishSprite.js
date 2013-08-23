@@ -7,9 +7,9 @@
 	*  file (multiple sounds in a single timeline) using HTML5 audio
 	*  @author Matt Moore <matt@cloudkid.com>
 	*/
-	var SwishSprite = function(url)
+	var SwishSprite = function(data)
 	{
-		this.initialize(url);
+		this.initialize(data);
 	},
 	
 	/** Reference to tye prototype, extends event dispatcher */
@@ -119,9 +119,9 @@
 	
 	/**
 	*  Create the audio sprite
-	*  @param The name of the audio file to load
+	*  @param The name of the audio file to load, array of resources, or a spritemap
 	*/
-	p.initialize = function(url)
+	p.initialize = function(data)
 	{
 		var AudioUtils = cloudkid.AudioUtils;
 		
@@ -135,8 +135,11 @@
 			throw "SwishSprite instance is already create. Destroy before re-creating";
 		}
 		
-		// Use AudioUtils to get the best file for the current browser
-		var playableUrl = AudioUtils.getPlayableURL(url);
+		this.clear();
+		
+		var playableUrl = (data !== null && typeof data === "object") ? 
+			AudioUtils.importSpriteMap(this, data):
+			AudioUtils.getPlayableURL(data);
 				
 		if (!playableUrl)
 		{
@@ -152,8 +155,6 @@
 		_successfullyPlayedSound = false;
 		_pageVisibility = new cloudkid.PageVisibility(onFocus, onBlur);
 		_autoPaused = -1;
-		
-		this.clear();
 		
 		_audio = global.document.createElement("audio");
 				

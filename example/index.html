@@ -48,7 +48,7 @@
 								.off('click');
 
 							// Create the new audio sprite
-							audio = AudioUtils.createFromSpriteMap(data);
+							audio = new SwishSprite(data);
 
 							// Add listener for the Loaded event
 							audio.addEventListener(SwishSprite.LOAD_STARTED, onAudioLoaded);

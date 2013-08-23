@@ -45,7 +45,7 @@ We suggest using [audiosprite](https://github.com/CloudKidStudio/audiosprite) to
 $.getJSON("sprite.json", function(data){
 
 	// Create new SwishSprite from map
-	var audio = cloudkid.AudioUtils.createFromSpriteMap(data);
+	var audio = new cloudkid.SwishSprite(data);
 });
 ```
 
@@ -61,7 +61,30 @@ Audio codec support vary widely between browsers. We suggest using m4a, oga, mp3
 
 **SwishSprite(resources)** Constructor for the SwishSprite
 
-+ @param **resources** _string|array_ can be a URL or an array of URL in order of browser preference
++ @param **resources** _string|array|object_ Can be a URL string, an array of URL in order of browser preference, or a spritemap in the following format:
+    ```js
+      {
+      	// The list of files, orderd by preference
+        "resources": [
+          "sounds/output.m4a",
+          "sounds/output.oga",
+          "sounds/output.mp3"
+        ],
+        // The spritemap dictionary
+        "spritemap": {
+          "silence": {
+            "start": 0,
+            "end": 5,
+            "loop": true
+          },
+          "boing": {
+            "start": 6,
+            "end": 6.7785714285714285,
+            "loop": false
+          }
+        }
+      }
+    ```
 
 **getAudioElement()** Get the DOM Element used by the SwishSprite
 
@@ -104,7 +127,7 @@ Audio codec support vary widely between browsers. We suggest using m4a, oga, mp3
 
 ####Properties
 
-**manualUpdate** _boolean_ If you plan to manually call the SwishSprite's update function by setting your own interval.
+**manualUpdate** _boolean_ If you plan to manually call the SwishSprite's `update` method by setting your own external interval. The default is false.
 
 ####Events
 
@@ -118,39 +141,14 @@ Audio codec support vary widely between browsers. We suggest using m4a, oga, mp3
 | **PAUSED**        | Event dispatched when the playback has paused       |
 | **UNPAUSED**      | Event dispatched when the playback as resumed       |
 
+##Build Instructions
 
-###cloudkid.AudioUtils
+1. Install [NPM](https://npmjs.org/)
+2. Install [UglifyJS](https://github.com/mishoo/UglifyJS) `npm install uglifyjs -g`
+3. Install [JSHint](https://github.com/jshint/jshint/) `npm install jshint -g`
+4. Install [Apache Ant](http://ant.apache.org/)
+5. Build project `ant -f build.xml buildAll`
 
-####Methods
-
-**createFromSpriteMap(map)** Create and SwishSprite from an audio sprite map. 
-
-+ @param **map** _object_ The data which represents the sprites in the audio file. Must be in this format:
-    ```js
-      {
-      	// The list of files, orderd by preference
-        "resources": [
-          "sounds/output.m4a",
-          "sounds/output.oga",
-          "sounds/output.mp3"
-        ],
-        // The spritemap dictionary
-        "spritemap": {
-          "silence": {
-            "start": 0,
-            "end": 5,
-            "loop": true
-          },
-          "boing": {
-            "start": 6,
-            "end": 6.7785714285714285,
-            "loop": false
-          }
-        }
-      }
-    ```
-+ @return _SwishSprite_ Returns the instance of the SwishSprite object.
-    
 ##License
 
 Copyright (c) 2013 Matt Moore and [CloudKid, LLC](http://cloudkid.com)
