@@ -62,29 +62,31 @@ Audio codec support vary widely between browsers. We suggest using m4a, oga, mp3
 **SwishSprite(resources)** Constructor for the SwishSprite
 
 + @param **resources** _string|array|object_ Can be a URL string, an array of URL in order of browser preference, or a spritemap in the following format:
-    ```js
-      {
-      	// The list of files, orderd by preference
-        "resources": [
-          "sounds/output.m4a",
-          "sounds/output.oga",
-          "sounds/output.mp3"
-        ],
-        // The spritemap dictionary
-        "spritemap": {
-          "silence": {
-            "start": 0,
-            "end": 5,
-            "loop": true
-          },
-          "boing": {
-            "start": 6,
-            "end": 6.7785714285714285,
-            "loop": false
-          }
-        }
-      }
-    ```
+
+	```
+	{
+		// The list of files, orderd by preference
+		"resources": [
+			"sounds/output.m4a",
+			"sounds/output.oga",
+			"sounds/output.mp3"
+		],
+		// The spritemap dictionary
+		"spritemap": {
+			"silence": {
+				"start": 0,
+				"end": 5,
+				"loop": true
+			},
+			"boing": {
+				"start": 6,
+				"end": 6.7785714285714285,
+				"loop": false
+			}
+		}
+	}
+	```
+
 
 **getAudioElement()** Get the DOM Element used by the SwishSprite
 
