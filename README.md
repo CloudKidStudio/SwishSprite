@@ -168,17 +168,18 @@ Audio codec support vary widely between browsers. We suggest using m4a, oga, mp3
 
 ####Events
 
-| Constant          | String        | Description                        |
-|-------------------|----------------------------------------------------|
-| **LOAD_STARTED**  | loadStarted   | when load has started              |
-| **LOADED**        | loaded        | with audio loaded                  |
-| **LOAD_PROGRESS** | loadProgress  | when percentage of load changed    |
-| **COMPLETE**      | complete      | when sound play completed          |
-| **PROGRESS**      | progress      | when the play progress has changed |
-| **PAUSED**        | paused        | when the playback has paused       |
-| **RESUMED**       | resumed       | when the playback as resumed       |
-| **STOPPED**       | stopped       | when playback has stopped          |
-| **STARTED**       | started       | when playback has started          |
+| Constant			| String		| Description							|
+|-------------------|-------------------------------------------------------|
+| **LOAD_STARTED**	| loadStarted	| when load has started					|
+| **LOADED**		| loaded		| with audio loaded						|
+| **LOAD_PROGRESS**	| loadProgress	| when percentage of load changed		|
+| **COMPLETE**		| complete		| when sound play completed				|
+| **PROGRESS**		| progress		| when the play progress has changed	|
+| **PAUSED**		| paused		| when the playback has paused			|
+| **RESUMED**		| resumed		| when the playback as resumed			|
+| **STOPPED**		| stopped		| when playback has stopped				|
+| **STARTED**		| started		| when playback has started				|
+
 
 ##Build Instructions
 
