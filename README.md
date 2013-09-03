@@ -191,6 +191,6 @@ Audio codec support vary widely between browsers. We suggest using m4a, oga, mp3
 
 ##License
 
-Copyright (c) 2013 Matt Moore and [CloudKid, LLC](http://cloudkid.com)
+Copyright (c) 2013 Matt Moore [@mattmoore](http://github.com/mattmoore) and [CloudKid, LLC](http://cloudkid.com)
 
 Released under the MIT License.
