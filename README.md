@@ -169,7 +169,7 @@ Audio codec support vary widely between browsers. We suggest using m4a, oga, mp3
 ####Events
 
 | Constant			| String		| Description							|
-|-------------------|-------------------------------------------------------|
+|-------------------|---------------|---------------------------------------|
 | **LOAD_STARTED**	| loadStarted	| when load has started					|
 | **LOADED**		| loaded		| with audio loaded						|
 | **LOAD_PROGRESS**	| loadProgress	| when percentage of load changed		|
