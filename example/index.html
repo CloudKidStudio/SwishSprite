@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="css/main.css">
 		
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script src="../deploy/SwishSprite-1.0.0.js"></script>
+		<script src="../deploy/SwishSprite-1.0.1.js"></script>
 		<script type="text/javascript">
 			
 			$(function(){
@@ -51,10 +51,10 @@
 							audio = new SwishSprite(data);
 
 							// Add listener for the Loaded event
-							audio.addEventListener(SwishSprite.LOAD_STARTED, onAudioLoaded);
+							audio.on(SwishSprite.LOAD_STARTED, onAudioLoaded);
 
 							// User load
-							audio.loadByUserInteraction();
+							audio.load();
 						});
 				});
 								
@@ -63,16 +63,25 @@
 				*/
 				var onAudioLoaded = function(){
 					$('body').removeClass('unloaded');
-
+					
+					audio.off(SwishSprite.LOAD_STARTED)
+						.on({
+							stopped : function(){
+								playbar.hide();
+							},
+							started : function(){
+								playbar.show();
+							},
+							progress : function(p){
+								playbar.width(Math.round(p*100)+"%");
+							}
+						});
+					
 					$(".alias")
 						.removeAttr('disabled')
 						.removeClass('disabled')
 						.click(function(){
-							playbar.show().width("0%");
-							audio.removeEventListener(SwishSprite.PROGRESS);
-							audio.addEventListener(SwishSprite.PROGRESS, function(p){
-								playbar.width(Math.round(p*100)+"%");
-							});
+							playbar.show().width("0%");							
 							audio.play($(this).data('alias'));
 					});
 					$(".control")

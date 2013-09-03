@@ -111,7 +111,13 @@
 	SwishSprite.PAUSED = "paused";
 	
 	/** The sound has been unpaused */
-	SwishSprite.RESUMED = "unpaused";
+	SwishSprite.RESUMED = "resumed";
+	
+	/** The sound has been stopped or canceled */
+	SwishSprite.STOPPED = "stopped";
+	
+	/** The sound has begun playing */
+	SwishSprite.STARTED = "started";
 	
 	/** A little pading for the m4a audio format will help add extra
 	time for the Kindle Fire who likes to end the sound too early */
@@ -196,6 +202,7 @@
 	p.mute = function()
 	{
 		_audio.volume = 0;
+		return this;
 	};
 	
 	/**
@@ -204,6 +211,7 @@
 	p.unmute = function()
 	{
 		_audio.volume = 1;
+		return this;
 	};
 
 	/**
@@ -232,8 +240,9 @@
 		
 		if (!oldPaused)
 		{
-			this.dispatchEvent(SwishSprite.PAUSED);
+			this.trigger(SwishSprite.PAUSED);
 		}
+		return this;
 	};
 	
 	/**
@@ -248,8 +257,9 @@
 		if (_paused && _playingAlias)
 		{
 			this.play(_playingAlias, _audio.currentTime);
-			this.dispatchEvent(SwishSprite.RESUMED);
+			this.trigger(SwishSprite.RESUMED);
 		}
+		return this;
 	};
 	
 	/**
@@ -261,8 +271,13 @@
 		{
 			Debug.log("SwishSprite.stop");
 		}
+		if (_playingAlias !== null)
+		{
+			this.trigger(SwishSprite.STOPPED);
+		}
 		this.pause();
 		_playingAlias = null;
+		return this;
 	};
 	
 	/**
@@ -328,6 +343,7 @@
 			duration: duration + padding,
 			loop: isLoop
 		};
+		return this;
 	};
 	
 	/**
@@ -337,7 +353,6 @@
 	p.prepare = function(alias)
 	{
 		if (_sounds[alias] === undefined) return;
-		
 		_audio.currentTime = _sounds[alias].start;
 	};
 	
@@ -347,16 +362,17 @@
 	p.clear = function()
 	{
 		_sounds = {};
+		return this;
 	};
 	
 	/**
 	*  For iOS, start loading the audio via user click
 	*/
-	p.loadByUserInteraction = function()
+	p.load = function()
 	{
 		if (DEBUG) 
 		{
-			Debug.log("SwishSprite.loadByUserInteraction");
+			Debug.log("SwishSprite.load");
 		}		
 		if (!_loadStartedByUserInteraction)
 		{
@@ -382,10 +398,11 @@
 			{
 				if (DEBUG)
 				{
-					Debug.log("loadByUserInteraction: Audio did not play: " + e.message);
+					Debug.log("load: Audio did not play: " + e.message);
 				}
 			}
 		}
+		return this;
 	};
 	
 	/**
@@ -485,9 +502,11 @@
 			_paused = false;
 			_audio.play();
 			
+			_instance.trigger(SwishSprite.STARTED);
+			
 			// Set an initial progress update
 			var progress = Math.max(0, Math.min((_audio.currentTime - _sounds[_playingAlias].start) / _sounds[_playingAlias].duration, 1));
-			_instance.dispatchEvent(SwishSprite.PROGRESS, progress);
+			_instance.trigger(SwishSprite.PROGRESS, progress);
 		
 			// Set timeout for if the sound suddently stop playing
 			_playTimeout = global.setTimeout(onPlayTimeout, _sounds[_playingAlias].duration * 1000 + 500);
@@ -566,7 +585,7 @@
 			{
 				// Report the process event, clamp between 0 and 1, incase the current time is out of bounds
 				var progress = Math.max(0, Math.min((_audio.currentTime - sound.start) / sound.duration, 1));
-				_instance.dispatchEvent(SwishSprite.PROGRESS, progress);
+				_instance.trigger(SwishSprite.PROGRESS, progress);
 			}
 			_lastCurrentTime = _audio.currentTime;
 			
@@ -624,7 +643,7 @@
 		_audio.removeEventListener("ended", soundPlayComplete);
 		_audio.removeEventListener("stalled", onStalled);
 		
-		this.removeAllEventListeners();
+		this.off();
 		
 		this.stop();
 		this.clear();
@@ -653,7 +672,7 @@
 		if (!_loadStarted)
 		{
 			_loadStarted = true;
-			_instance.dispatchEvent(SwishSprite.LOAD_STARTED);
+			_instance.trigger(SwishSprite.LOAD_STARTED);
 		
 			// Start a timer that checks the scrubber position
 			_checkInterval = global.setInterval(checkUpdate, 1000);
@@ -783,7 +802,7 @@
 			if (loadAmount !== _loadAmount)
 			{
 				_loadAmount = loadAmount;
-				_instance.dispatchEvent(SwishSprite.LOAD_PROGRESS, _loadAmount);
+				_instance.trigger(SwishSprite.LOAD_PROGRESS, _loadAmount);
 				if (DEBUG) 
 				{
 					Debug.log("Audio load Percentage: " + (loadAmount * 100).toFixed(2) + "%");
@@ -805,7 +824,7 @@
 				if (_sounds.silence !== undefined) 
 					_instance.play("silence");
 								
-				_instance.dispatchEvent(SwishSprite.LOADED);
+				_instance.trigger(SwishSprite.LOADED);
 			}
 		}
 	},
@@ -858,16 +877,16 @@
 					{
 						Debug.log("Play sound (" + _playingAlias + ") because it is set to loop.");
 					}
-					_instance.dispatchEvent(SwishSprite.PROGRESS, 1);
-					_instance.dispatchEvent(SwishSprite.COMPLETE);
+					_instance.trigger(SwishSprite.PROGRESS, 1);
+					_instance.trigger(SwishSprite.COMPLETE);
 					if (_playingAlias) _instance.play(_playingAlias);
 				}, 0);
 		} 
 		else 
 		{
 			_instance.stop();
-			_instance.dispatchEvent(SwishSprite.PROGRESS, 1);
-			_instance.dispatchEvent(SwishSprite.COMPLETE);
+			_instance.trigger(SwishSprite.PROGRESS, 1);
+			_instance.trigger(SwishSprite.COMPLETE);
 		}
 	};
 	

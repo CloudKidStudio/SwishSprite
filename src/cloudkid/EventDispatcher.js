@@ -18,7 +18,7 @@
 	*  @param The event string name
 	*  @param Additional parameters
 	*/
-	p.dispatchEvent = function(type, params)
+	p.trigger = function(type, params)
 	{
 		if (this._listeners[type] !== undefined) 
 		{	
@@ -33,16 +33,46 @@
 	
 	/**
 	*  Add an event listener
-	*  @param The type of event
-	*  @param The listener function
+	*  @param The type of event (can be multiple events separated by spaces)
+	*  @param The callback function when even is fired
 	*/
-	p.addEventListener = function(type, listener)
+	p.on = function(name, callback)
 	{
-		if (this._listeners[type] === undefined)
+		// Callbacks map
+		if (type(name) === 'object')
 		{
-			this._listeners[type] = [];	
+			for (var key in name)
+			{
+				if (name.hasOwnProperty(key))
+				{
+					this.on(key, name[key]);
+				}
+			}
 		}
-		this._listeners[type].push(listener);
+		// Callback
+		else if (type(callback) === 'function')
+		{
+			var names = name.split(' '), n = null;
+			for (var i = 0, nl = names.length; i < nl; i++)
+			{
+				n = names[i];
+				this._listeners[n] = this._listeners[n] || [];
+				
+				if (this._callbackIndex(n, callback) === -1)
+				{
+					this._listeners[n].push(callback);
+				}
+			}
+		}
+		// Callbacks array
+		else if (type(callback) === 'array')
+		{
+			for (var f = 0, fl = callback.length; f < fl; f++)
+			{
+				this.on(name, callback[f]);
+			}
+		}
+		return this;
 	};
 	
 	/**
@@ -50,32 +80,84 @@
 	*  @param The type of event string
 	*  @param The listener function
 	*/
-	p.removeEventListener = function(type, listener)
-	{		
-		if (this._listeners[type])
+	p.off = function(name, callback)
+	{	
+		// remove all 
+		if (name === undefined)
 		{
-			if (listener === undefined)
+			this._listeners = [];
+		}
+		// remove multiple callbacks
+		else if (type(callback) === 'array')
+		{
+			for (var f = 0, fl = callback.length; f < fl; f++) 
 			{
-				delete this._listeners[type];
-				return;
+				this.off(name, callback[f]);
 			}
-			for (var i = 0; i < this._listeners[type].length; i++)
+		}
+		else
+		{
+			var names = name.split(' '), n = null;
+			for (var i = 0, nl = names.length; i < nl; i++)
 			{
-				if (this._listeners[type][i] === listener)
+				n = names[i];
+				this._listeners[n] = this._listeners[n] || [];
+				
+				// remove all by time
+				if (callback === undefined)
 				{
-					this._listeners[type].splice(i, 1);
-					break;
+					this._listeners[n].length = 0;
+				}
+				else
+				{
+					var index = this._callbackIndex(n, callback);
+					if (index !== -1)
+					{
+						this._listeners[name].splice(index, 1);
+					}
 				}
 			}
 		}
-	};	
+		return this;
+	};
 	
 	/**
-	*  Remove all of the event listeners
+	* Return type of the value.
+	*
+	* @param  {Mixed} value
+	* @return {String}
 	*/
-	p.removeAllEventListeners = function()
+	function type(value)
 	{
-		this._listeners = {};
+		if (value === null)
+		{
+			return String(value);
+		}
+		if (typeof value === 'object' || typeof value === 'function')
+		{
+			return Object.prototype.toString.call(value).match(/\s([a-z]+)/i)[1].toLowerCase() || 'object';
+		}
+		return typeof value;
+	}
+	
+	/**
+	 * Returns callback array index.
+	 *
+	 * @param  {String}   name Event name.
+	 * @param  {Function} fn   Function
+	 *
+	 * @return {Int} Callback array index, or -1 if isn't registered.
+	 */
+	p._callbackIndex = function(name, callback)
+	{		
+		for (var i = 0, l = this._listeners[name].length; i < l; i++)
+		{
+			if (this._listeners[name][i] === callback)
+			{
+				return i;
+			}
+		}
+		return -1;
 	};
 	
 	/** Assign to the global spacing */

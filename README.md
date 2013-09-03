@@ -23,7 +23,7 @@ audio.setSound('music', 5, 20, true);
 audio.setSound('bleep', 26, 0.5, false);
 
 // Add listener for the Loaded event
-audio.addEventListener(SwishSprite.LOAD_STARTED, function(){
+audio.on(SwishSprite.LOAD_STARTED, function(){
 	
     // Play the audio when it's done loading
 	audio.play('music');
@@ -33,7 +33,7 @@ audio.addEventListener(SwishSprite.LOAD_STARTED, function(){
 // for mobile browser that require a user's
 // input before initiating the audio load
 $('button#load').click(function(){
-	audio.loadByUserInteraction();
+	audio.load();
 });
 
 ```
@@ -94,13 +94,23 @@ Audio codec support vary widely between browsers. We suggest using m4a, oga, mp3
     
 **mute()** Mute the audio volume
 
++ @return _SwishSprite_ The current instance of SwishSprite
+
 **unmute()** Unmute the audio volume
+
++ @return _SwishSprite_ The current instance of SwishSprite
 
 **pause()** Pause the current sprite playback
 
++ @return _SwishSprite_ The current instance of SwishSprite
+
 **resume()** Resume the current sprite playback
 
++ @return _SwishSprite_ The current instance of SwishSprite
+
 **stop()** Stop the sprite playback and clear the current sprite
+
++ @return _SwishSprite_ The current instance of SwishSprite
 
 **getLength(alias)** Return the length of a sprite in seconds
 
@@ -116,16 +126,41 @@ Audio codec support vary widely between browsers. We suggest using m4a, oga, mp3
 + @param **alias** _string|undefined_ If undefined, returns the current sprite else the name of the sprite. 
 + @return _object_ Returns and object with keys of start (number of seconds when the sprite begins on the audio), end (number of seconds when the sprite ends), duration (the total number of seconds of the sprite), and loop (boolean if the sprite should loop).
 
+**setSound(alias, startTime, duration, isLoop)** Set the sound date for a particular sprite sound.
+
++ @param **alias** _string_ The alias to set for playing
++ @param **startTime** _number_ The start position of the sprite in seconds
++ @param **duration** _number_ The length of the sprite in seconds
++ @param **isLoop** _boolean_ If the sound should loop during playback
++ @return _SwishSprite_ The current instance of SwishSprite
+
 **clear()** Remove all of the current sound sprite data.
 
-**loadByUserInteraction()** Some mobile browsers require a sound to be load only by a user interaction. This should be triggered upon callback of a user click. 
++ @return _SwishSprite_ The current instance of SwishSprite
+
+**load()** Some mobile browsers require a sound to be load only by a user interaction. This should be triggered upon callback of a user click. 
+
++ @return _SwishSprite_ The current instance of SwishSprite
 
 **play(alias, playStartTime)** Play an sprite by name
 
 + @param **alias** _string_ The name alias for a sprite
 + @param **playStartTime** _number|undefined_ The optional start time to play a sound. This is in global seconds to the whole audio, not local as returned by `getPosition`
++ @return _boolean_ If we were able to successfully start playing
 
 **update()** Optional, for optimization purposes, you can use your own update function as the internal ticker for the playback. If you play to use this feature make sure to set `manualUpdate` to true;
+
+**on(name, callback)** Add an event listeners (see Events section below for complete list)
+
++ @param **name** _string|object_ The name of the event or multiple events separated by spaces or an object map of the `{ event : callback, event1 : callback1 }`
++ @param **callback** _array|function_ The collection of functions or single function to call when event is fired
++ @return _SwishSprite_ The current instance of SwishSprite
+
+**off(name, callback)** Remove an event listener (see Events section below for complete list)
+
++ @param **name** _string|undefined_ The name of the event. If undefined, remove all event listeners
++ @param **callback** _array|function|undefined_ The function, collection of functions to remove. If undefined, we remove all listeners for a given type. 
++ @return _SwishSprite_ The current instance of SwishSprite
 
 ####Properties
 
@@ -133,15 +168,17 @@ Audio codec support vary widely between browsers. We suggest using m4a, oga, mp3
 
 ####Events
 
-| Event             | Description                                         |
-|-------------------|-----------------------------------------------------|
-| **LOAD_STARTED**  | Event dispatched when load has started              |
-| **LOADED**        | Event dispatched with audio loaded                  |
-| **LOAD_PROGRESS** | Event dispatched when percentage of load changed    |
-| **COMPLETE**      | Event dispatched when sound play completed          |
-| **PROGRESS**      | Event dispatched when the play progress has changed |
-| **PAUSED**        | Event dispatched when the playback has paused       |
-| **RESUMED**      | Event dispatched when the playback as resumed       |
+| Constant          | String        | Description                        |
+|-------------------|----------------------------------------------------|
+| **LOAD_STARTED**  | loadStarted   | when load has started              |
+| **LOADED**        | loaded        | with audio loaded                  |
+| **LOAD_PROGRESS** | loadProgress  | when percentage of load changed    |
+| **COMPLETE**      | complete      | when sound play completed          |
+| **PROGRESS**      | progress      | when the play progress has changed |
+| **PAUSED**        | paused        | when the playback has paused       |
+| **RESUMED**       | resumed       | when the playback as resumed       |
+| **STOPPED**       | stopped       | when playback has stopped          |
+| **STARTED**       | started       | when playback has started          |
 
 ##Build Instructions
 
