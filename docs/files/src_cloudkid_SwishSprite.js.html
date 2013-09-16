@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src/cloudkid/SwishSprite.js - CloudKid OS API</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../cloudkid.png" title="CloudKid OS API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Debug.html">Debug</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src/cloudkid/SwishSprite.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+(function(global, undefined){
+	
+	&quot;use strict&quot;;
+	
+	/**
+	*  This class is responsible for playback of an audiosprite 
+	*  file (multiple sounds in a single timeline) using HTML5 audio
+	*  @author Matt Moore &lt;matt@cloudkid.com&gt;
+	*/
+	var SwishSprite = function(data)
+	{
+		this.initialize(data);
+	},
+	
+	/** Reference to tye prototype, extends event dispatcher */
+	p = SwishSprite.prototype = new cloudkid.EventDispatcher(),
+	
+	/** The audio element */
+	_audio = null,
+	
+	/** If we&#x27;re paused */
+	_paused = true,
+	
+	/** If the current audio has been loaded */
+	_loaded = false,
+	
+	/** If the loading update should run */
+	_updatingLoad = false,
+	
+	/** If the playing update should run */
+	_updatingPlay = false,
+	
+	/** For iOS, if the load has been started by user action */
+	_loadStartedByUserInteraction = false,
+	
+	/** If the load has started */
+	_loadStarted = false,
+	
+	/** The interval ID for playback */
+	_playInterval = null,
+	
+	/** The interval ID for loading */
+	_loadInterval = null,
+	
+	/** The playback timeout ID */
+	_playTimeout = null,
+	
+	/** The previous interval loaded percentage */
+	_loadAmount = 0,
+	
+	/** The collection of sounds */
+	_sounds = null,
+
+	/** Some formats require a little padding to the end of a sprite */
+	_formatPadding = 0,
+	
+	/** The sound name of the current sprite we&#x27;re playing */
+	_playingAlias = null,
+	
+	/** If the scrubber playhead has moved */
+	_scrubberMoved = null,
+	
+	/** If we&#x27;re out of round */
+	_outOfRangeCount = null,
+	
+	/** The num of times the scrubber has not moved */
+	_scrubberNotMovingCount = 0,
+	
+	/** If the sound successfully played */
+	_successfullyPlayedSound = false,
+	
+	/** The start time for the scrubber */
+	_scrubberStartTime = null,
+	
+	/** The interval ID for checking audio */
+	_checkInterval = null,
+	
+	/** The position of the last scrubber */
+	_lastScrubberPos = null,
+	
+	/** The singleton instance of the audiosprite */
+	_instance = null,
+	
+	/** Instance of page visibility for pause/resuming on page blur/focus */
+	_pageVisibility = null,
+	
+	/** Keep track of the paused state when the page blur/focuses
+	a value of -1 means the page isn&#x27;t hidden, 0 means the 
+	playing before blur, and 1 means paused before blur */
+	_autoPaused = -1,
+	
+	/** The last current time played */
+	_lastCurrentTime = null;
+	
+	/** Event dispatched when load has started */
+	SwishSprite.LOAD_STARTED = &quot;loadStarted&quot;;
+	
+	/** Event dispatched with audio loaded */
+	SwishSprite.LOADED = &quot;loaded&quot;;
+	
+	/** Event dispatched when percentage of load changed */
+	SwishSprite.LOAD_PROGRESS = &quot;loadProgress&quot;;
+	
+	/** Event dispatched when sound play completed */
+	SwishSprite.COMPLETE = &quot;complete&quot;;
+	
+	/** The progress event */
+	SwishSprite.PROGRESS = &quot;progress&quot;;
+	
+	/** The playback has been paused */
+	SwishSprite.PAUSED = &quot;paused&quot;;
+	
+	/** The sound has been unpaused */
+	SwishSprite.RESUMED = &quot;resumed&quot;;
+	
+	/** The sound has been stopped or canceled */
+	SwishSprite.STOPPED = &quot;stopped&quot;;
+	
+	/** The sound has begun playing */
+	SwishSprite.STARTED = &quot;started&quot;;
+	
+	/** A little pading for the m4a audio format will help add extra
+	time for the Kindle Fire who likes to end the sound too early */
+	SwishSprite.M4A_PADDING = 0.1;
+	
+	/** The version of this library */
+	SwishSprite.VERSION = &quot;${version}&quot;;
+	
+	/** If using external update call, you can use this to safe performance
+	if you&#x27;re already running a frame update call (such as request animation frame) */
+	p.manualUpdate = false;
+	
+	/**
+	*  Create the audio sprite
+	*  @param The name of the audio file to load, array of resources, or a spritemap
+	*/
+	p.initialize = function(data)
+	{
+		var AudioUtils = cloudkid.AudioUtils;
+		
+		if (!AudioUtils.supported())
+		{
+			throw &quot;HTML5 Audio is not supported!&quot;;
+		}
+		
+		if (_instance !== null)
+		{
+			throw &quot;SwishSprite instance is already create. Destroy before re-creating&quot;;
+		}
+		
+		this.clear();
+		
+		var playableUrl = (data !== null &amp;&amp; typeof data === &quot;object&quot;) ? 
+			AudioUtils.importSpriteMap(this, data):
+			AudioUtils.getPlayableURL(data);
+				
+		if (!playableUrl)
+		{
+			throw &quot;The supplied filetype is unsupported in this browser.&quot;;
+		}
+		
+		_instance = this;
+		_loadStartedByUserInteraction = false;
+		_loaded = false;
+		_paused = true;
+		_loadStarted = false;
+		_scrubberNotMovingCount = 0;
+		_successfullyPlayedSound = false;
+		_pageVisibility = new cloudkid.PageVisibility(onFocus, onBlur);
+		_autoPaused = -1;
+		_formatPadding = playableUrl.indexOf(&quot;.m4a&quot;) &gt; -1 ? SwishSprite.M4A_PADDING : 0;
+		
+		_audio = global.document.createElement(&quot;audio&quot;);
+				
+		// Listen to media events
+		_audio.addEventListener(&quot;canplay&quot;, onLoadChange);
+		_audio.addEventListener(&quot;canplaythrough&quot;, onCanPlayThrough);
+		_audio.addEventListener(&quot;loadeddata&quot;, onLoadChange);
+		_audio.addEventListener(&quot;loadedmetadata&quot;, onLoadChange);
+		_audio.addEventListener(&quot;progress&quot;, onLoadChange);
+		_audio.addEventListener(&quot;ended&quot;, soundPlayComplete);
+		_audio.addEventListener(&quot;stalled&quot;, onStalled);
+		
+		if (DEBUG)
+		{
+			Debug.log(&quot;_audio.src: &quot; + playableUrl);
+		}
+		_audio.src = playableUrl;
+	};
+	
+	/**
+	*  Get the audio element
+	*/
+	p.getAudioElement = function()
+	{
+		return _audio;
+	};
+	
+	/**
+	*  Mute the audio, not available on all devices
+	*/
+	p.mute = function()
+	{
+		_audio.volume = 0;
+		return this;
+	};
+	
+	/**
+	*  Unmute the audio, not available on all devices
+	*/
+	p.unmute = function()
+	{
+		_audio.volume = 1;
+		return this;
+	};
+
+	/**
+	*  Pause the sound playback
+	*/
+	p.pause = function()
+	{
+		if (DEBUG)
+		{
+			Debug.log(&quot;SwishSprite.pause&quot;);
+		}
+			
+		_updatingPlay = false;
+		
+		if (_playInterval) 
+		{	
+			global.clearInterval(_playInterval);
+		}
+		if (_playTimeout) 
+		{
+			global.clearTimeout(_playTimeout);
+		}
+		var oldPaused = _paused;
+		_audio.pause();
+		_paused = true;
+		
+		if (!oldPaused)
+		{
+			this.trigger(SwishSprite.PAUSED);
+		}
+		return this;
+	};
+	
+	/**
+	*  Unpause the audio playback
+	*/
+	p.resume = function()
+	{
+		if (DEBUG)
+		{
+			Debug.log(&quot;SwishSprite.resume&quot;);
+		}		
+		if (_paused &amp;&amp; _playingAlias)
+		{
+			this.play(_playingAlias, _audio.currentTime);
+			this.trigger(SwishSprite.RESUMED);
+		}
+		return this;
+	};
+	
+	/**
+	*  Stop the sound playback clear the current sound playing
+	*/
+	p.stop = function()
+	{
+		if (DEBUG)
+		{
+			Debug.log(&quot;SwishSprite.stop&quot;);
+		}
+		if (_playingAlias !== null)
+		{
+			this.trigger(SwishSprite.STOPPED);
+		}
+		this.pause();
+		_playingAlias = null;
+		return this;
+	};
+	
+	/**
+	*  Get the length of a sprite
+	*  @param The optional alias, or get the current
+	*  @return The duration in seconds
+	*/
+	p.getLength = function(alias)
+	{
+		if (alias === undefined &amp;&amp; _playingAlias !== undefined)
+		{
+			return _sounds[_playingAlias].duration;
+		}	
+		else if (alias !== undefined)
+		{
+			return _sounds[alias].duration;
+		}
+		return 0;
+	};
+	
+	/**
+	*  Get the current position in seconds of the audio
+	*  @param The optional alias
+	*  @return The duration in seconds
+	*/
+	p.getPosition = function()
+	{		
+		if (_playingAlias !== undefined &amp;&amp; _sounds[_playingAlias] !== undefined)
+		{
+			return _audio.currentTime - _sounds[_playingAlias].start;
+		}
+		return 0;
+	};
+	
+	/**
+	*  Get a sound by name
+	*  @param the sound name, optional, if no sound name returns the current
+	*/
+	p.getSound = function(alias)
+	{
+		if (alias === undefined &amp;&amp; _playingAlias !== undefined)
+		{
+			return _sounds[_playingAlias];
+		}	
+		if (alias)
+		{
+			return _sounds[alias];
+		}
+	};
+	
+	/**
+	*  Add a sound to the list of playable sounds
+	*  @param The name of the audio
+	*/
+	p.setSound = function(alias, startTime, duration, isLoop)
+	{
+		// Only add the padding for non-looping sounds
+		var padding = !isLoop ? _formatPadding : 0;
+		
+		_sounds[alias] = {
+			start: startTime,
+			end: startTime + duration + padding,
+			duration: duration + padding,
+			loop: isLoop
+		};
+		return this;
+	};
+	
+	/**
+	*  Set the current time to the start alias
+	*  @param The name of the sound alias
+	*/
+	p.prepare = function(alias)
+	{
+		if (_sounds[alias] === undefined) return;
+		_audio.currentTime = _sounds[alias].start;
+	};
+	
+	/**
+	*  Clear all of the current sounds
+	*/
+	p.clear = function()
+	{
+		_sounds = {};
+		return this;
+	};
+	
+	/**
+	*  For iOS, start loading the audio via user click
+	*/
+	p.load = function()
+	{
+		if (DEBUG) 
+		{
+			Debug.log(&quot;SwishSprite.load&quot;);
+		}		
+		if (!_loadStartedByUserInteraction)
+		{
+			_loadStartedByUserInteraction = true;
+			
+			try 
+			{
+				if (_loadInterval) 
+				{
+					global.clearInterval(_loadInterval);
+				}
+				_updatingLoad = true;
+				
+				// Call the interval if we aren&#x27;t updating manually
+				if (!this.manualUpdate)
+				{
+					_loadInterval = global.setInterval(onLoadChange, 10);
+				}			
+				_audio.play();
+				_audio.pause();
+			} 
+			catch (e) 
+			{
+				if (DEBUG)
+				{
+					Debug.log(&quot;load: Audio did not play: &quot; + e.message);
+				}
+			}
+		}
+		return this;
+	};
+	
+	/**
+	*  The update function, call this manually if manualUpdate is set to true
+	*/
+	p.update = function()
+	{
+		if (_updatingLoad)
+		{
+			onLoadChange();
+		}
+		if (_updatingPlay)
+		{
+			playUpdate();
+		}
+	};
+	
+	/**
+	*  Play a sound sprite
+	*  @param The sprite name
+	*  @param The play start time
+	*/
+	p.play = function(alias, playStartTime)
+	{
+		var startTime;
+
+		_outOfRangeCount = 0;
+
+		// Clear timers
+		_updatingPlay = false;
+		
+		global.clearInterval(_playInterval);
+		global.clearTimeout(_playTimeout);
+
+		// Ensure sound exists
+		if (_sounds[alias] === undefined)
+		{
+			Debug.error(&quot;SoundUnknown: Sound not found. Playing sound &#x27;&quot; + alias + &quot;&#x27; has failed.&quot;);
+			return false;	
+		}
+		
+		var sound = _sounds[alias];
+		
+		// use the sound as the default start time
+		startTime = sound.start;
+				
+		// If play start time is out of range for the sound, set play start time beginning of the sound
+		if (playStartTime !== undefined &amp;&amp; playStartTime &gt;= sound.start &amp;&amp; playStartTime &lt; sound.end)
+		{
+			startTime = playStartTime;
+		}
+		
+		try 
+		{
+			/*if (DEBUG)
+			{
+				Debug.log(&quot;Play sound: &quot; + alias + &quot;. audio.currentTime: &quot; + _audio.currentTime.toFixed(2) + &quot;, startTime: &quot; + sound.start.toFixed(2) + &quot;, duration: &quot;  + sound.duration.toFixed(2));
+			}*/
+			
+			_scrubberMoved = false;
+
+			// Pause before moving scrubber
+			_audio.pause();
+
+			// Save the current scrubber position
+			_scrubberStartTime = _audio.currentTime;
+			
+			// Move the scrubber to the start time of the sound
+			try 
+			{
+				_audio.currentTime = _lastCurrentTime = startTime;
+			} 
+			catch (ex) 
+			{
+				Debug.error(&quot;CurrentTimeSetException: Setting the current time has failed: &quot; + ex);
+			}
+			
+			if (Math.abs(_audio.currentTime - startTime) &gt; 0.5)
+			{
+				if (DEBUG)
+				{
+					Debug.warn(&quot;ScrubberNotMoving: Set the scrubber to &quot; + startTime + &quot; however it is &quot; +  _audio.currentTime + &quot;. Playing sound &#x27;&quot; + alias + &quot;&#x27; has failed.&quot;);
+				}
+				/*global.setTimeout(function(){
+				
+					if (DEBUG)
+					{
+						Debug.log(&quot;Playing sound because it failed earlier. alias: &quot; + alias + &quot;, playStartTime: &quot; + playStartTime);
+					}
+					_instance.play(alias, playStartTime);
+				}, 1000);*/
+				
+				return true;
+			}
+			
+			_playingAlias = alias;
+			_paused = false;
+			_audio.play();
+			
+			_instance.trigger(SwishSprite.STARTED);
+			
+			// Set an initial progress update
+			var progress = Math.max(0, Math.min((_audio.currentTime - _sounds[_playingAlias].start) / _sounds[_playingAlias].duration, 1));
+			_instance.trigger(SwishSprite.PROGRESS, progress);
+		
+			// Set timeout for if the sound suddently stop playing
+			_playTimeout = global.setTimeout(onPlayTimeout, _sounds[_playingAlias].duration * 1000 + 500);
+			
+			// Set an update interval for the playing
+			_updatingPlay = true;
+			
+			// Run the interval if we aren&#x27;t updating manually
+			if (!this.manualUpdate)
+			{
+				_playInterval = global.setInterval(playUpdate, 10);
+			}	
+		} 
+		catch (ex) 
+		{
+			Debug.error(&quot;SoundPlayException: Sound Playback has failed: &quot; + ex);
+			return false;
+		}
+		return true;
+	};
+	
+	/**
+	*  The play updating function
+	*/
+	var playUpdate = function()
+	{
+		var timeoutAmt;
+		var sound = _sounds[_playingAlias];
+		
+		// Reset the timeout if the scrubber moves
+		if (!_scrubberMoved &amp;&amp; global.Math.abs(_audio.currentTime - _scrubberStartTime) &gt; 0.1)
+		{
+			if (DEBUG) 
+			{
+				Debug.log(&quot;Scrubber moved Once. Current time is: &quot; + _scrubberStartTime.toFixed(3) + &quot; to &quot; + _audio.currentTime.toFixed(3));
+			}
+			_scrubberMoved = true;
+			_scrubberStartTime = _audio.currentTime;
+		
+			if (_playTimeout)
+			{
+				global.clearTimeout(_playTimeout);
+			}
+			
+			timeoutAmt = (sound.end - _audio.currentTime);
+			
+			if (global.Math.abs(timeoutAmt - sound.duration) &gt; 0.1)
+			{
+				timeoutAmt = sound.duration;
+			}
+			
+			_playTimeout = global.setTimeout(onPlayTimeout, timeoutAmt * 1000 + 500);	
+		}
+		else if (!_successfullyPlayedSound &amp;&amp; _audio.currentTime !== _scrubberStartTime)
+		{
+			_successfullyPlayedSound = true;
+			
+			if (DEBUG)
+			{
+				Debug.log(&quot;Scrubber moved for a second time from &quot; + _scrubberStartTime.toFixed(2) + &quot; to &quot; + _audio.currentTime.toFixed(2));	
+			}
+			
+			if (_audio.currentTime &lt; sound.start - 0.5)
+			{
+				if (DEBUG)
+				{
+					Debug.log(&quot;Scrubber moved a second time but is out of range so set current time to the sound start time&quot;);
+				}										
+				_audio.currentTime = sound.start;
+			}
+		}
+		else if (_scrubberMoved &amp;&amp; _successfullyPlayedSound)
+		{
+			// Only progress if the current time increases
+			if (_audio.currentTime &gt; _lastCurrentTime)
+			{
+				// Report the process event, clamp between 0 and 1, incase the current time is out of bounds
+				var progress = Math.max(0, Math.min((_audio.currentTime - sound.start) / sound.duration, 1));
+				_instance.trigger(SwishSprite.PROGRESS, progress);
+			}
+			_lastCurrentTime = _audio.currentTime;
+			
+			// If we&#x27;re at the end
+			if (_audio.currentTime &gt;= sound.end)
+			{
+				// If the current audio sprite is done playing then stop the audio playback
+				if (DEBUG) 
+				{
+					Debug.log(&quot;Audio current time (&quot; + _audio.currentTime + &quot; is greater than the sound duration plus start time (&quot; + sound.end + &quot;), so sound is complete.&quot;);
+				}
+				soundPlayComplete();
+			}
+		}
+	};
+	
+	/**
+	*  Destroy the audiosprite, don&#x27;t use after this
+	*  must recreate the SwishSprite
+	*/
+	p.destroy = function() 
+	{
+		this.manualUpdate = false;
+		
+		_updatingPlay = false;
+		_updatingLoad = false;
+		
+		if (_playInterval)
+		{
+			global.clearInterval(_playInterval);
+		}
+		if (_checkInterval)
+		{
+			global.clearInterval(_checkInterval);
+		}
+		if (_playTimeout)
+		{
+			global.clearTimeout(_playTimeout);
+		}
+		if (_loadInterval)
+		{
+			global.clearInterval(_loadInterval);
+		}
+		if (_pageVisibility)
+		{
+			_pageVisiblity.destroy();
+		}
+		_pageVisibility = null;
+		
+		_audio.removeEventListener(&quot;canplay&quot;, onLoadChange);
+		_audio.removeEventListener(&quot;canplaythrough&quot;, onCanPlayThrough);
+		_audio.removeEventListener(&quot;loadeddata&quot;, onLoadChange);
+		_audio.removeEventListener(&quot;loadedmetadata&quot;, onLoadChange);
+		_audio.removeEventListener(&quot;progress&quot;, onLoadChange);
+		_audio.removeEventListener(&quot;ended&quot;, soundPlayComplete);
+		_audio.removeEventListener(&quot;stalled&quot;, onStalled);
+		
+		this.off();
+		
+		this.stop();
+		this.clear();
+		
+		_audio = null;
+		_instance = null;
+	};
+	
+	/**
+	*  Get whether the audio has been loaded yet
+	*  @return Boolean if loaded
+	*/
+	p.isLoaded = function()
+	{
+		return _loaded;
+	};
+	
+	/** Function call when load has started */
+	var onLoadStarted = function()
+	{
+		if (DEBUG)
+		{
+			Debug.log(&quot;onLoadStarted&quot;);	
+		}
+		
+		if (!_loadStarted)
+		{
+			_loadStarted = true;
+			_instance.trigger(SwishSprite.LOAD_STARTED);
+		
+			// Start a timer that checks the scrubber position
+			_checkInterval = global.setInterval(checkUpdate, 1000);
+		}
+	},
+	
+	/** 
+	* Callback when page visibility has gone to hidden
+	*/
+	onBlur = function() 
+	{
+		if (!_instance) return;
+		
+		// Only do this once (this callback can happen repeatedly)
+		if (_autoPaused == -1)
+		{
+			// save the current status of the paused state
+			_autoPaused = _paused ? 1 : 0;
+		}
+		_instance.pause();
+	},
+	
+	/** 
+	* Callback when page visibility has gone to show
+	*/
+	onFocus = function()
+	{
+		if (!_instance) return;
+		
+		// 0 means we were playing before we went away
+		// if that&#x27;s the case we should unpause what the page
+		// blur created
+		if (_autoPaused === 0)
+		{
+			_instance.resume();
+		}
+		_autoPaused = -1;
+	},
+	
+	/**
+	*  1 second update to check what the status of the scrubber is
+	*/
+	checkUpdate = function()
+	{	
+		var sound = _sounds[_playingAlias];
+		if (_playingAlias)
+		{
+			/*if (DEBUG)
+			{
+				Debug.log(&quot;audio.currentTime: &quot; + _audio.currentTime + &quot;, _sounds[&quot; + _playingAlias + &quot;].start &quot; + sound.start + &quot;, endTime: &quot; + sound.end + &quot;, paused: &quot; + _paused + &quot;, audio.paused: &quot; + _audio.paused);
+			}*/
+			
+			// If the scrubber is out of range
+			if (_audio.currentTime &lt; sound.start - 1 || _audio.currentTime &gt; (sound.end + 1))
+			{
+				_outOfRangeCount += 1;
+				Debug.warn(&quot;ScrubberOutOfRange: The scrubber position (&quot; + _audio.currentTime + &quot;) is out of range (&quot; + sound.start + &quot; - &quot; +  sound.end + &quot;). This warning reported &quot; + _outOfRangeCount + &quot; times.&quot;);
+				if (_outOfRangeCount &gt;= 5)
+				{
+					if (DEBUG)
+					{
+						Debug.log(&quot;OutofRangeCount too many times, setting audio current time to the sound start time: &quot; + sound.start);
+					}
+					_audio.currentTime = sound.start;
+				}
+			} 
+			else 
+			{
+				_outOfRangeCount = 0;
+			}
+			
+			if (_audio.currentTime !== _lastScrubberPos)
+			{
+				_scrubberNotMovingCount = 0;
+				_lastScrubberPos = _audio.currentTime;					
+			} 
+			else
+			{
+				_scrubberNotMovingCount++;
+				
+				if (DEBUG)
+				{
+					Debug.warn(&quot;AudioNotPlaying: The scrubber position has not changed in a while. This warning reported &quot; + _scrubberNotMovingCount + &quot; times.&quot;);
+				}
+				
+				if (!_paused &amp;&amp; _scrubberNotMovingCount &gt;= 5)
+				{
+					if (DEBUG)
+					{
+						Debug.log(&quot;_scrubberNotMovingCount too many times so playing.&quot;);
+					}
+					_audio.play();
+				}
+			}	
+		} 
+		else 
+		{
+			_outOfRangeCount = 0;
+			_scrubberNotMovingCount = 0;				
+		}
+	},
+	
+	/** Function call when load state has changed */
+	onLoadChange = function()
+	{		
+		var buffered = 0, loadAmount;
+		
+		if (_audio.buffered.length)
+		{
+			buffered = _audio.buffered.end(_audio.buffered.length - 1);
+		}
+		
+		if (!_loadStarted &amp;&amp; buffered &gt; 0 &amp;&amp; _audio.duration &gt; 0)
+		{
+			onLoadStarted();
+		}
+		
+		if (!_loaded) 
+		{
+			// Check how much we&#x27;ve current loaded
+			loadAmount = Math.max(1, buffered / _audio.duration);
+			
+			// Make sure we ahve something to buffer and there&#x27;s a duration
+			if (isNaN(loadAmount)) return;
+			
+			// Check for changes in the load amount
+			if (loadAmount !== _loadAmount)
+			{
+				_loadAmount = loadAmount;
+				_instance.trigger(SwishSprite.LOAD_PROGRESS, _loadAmount);
+				if (DEBUG) 
+				{
+					Debug.log(&quot;Audio load Percentage: &quot; + (loadAmount * 100).toFixed(2) + &quot;%&quot;);
+				}
+			}
+			
+			// Check for the load completed
+			if (1 - loadAmount &lt; 0.001)
+			{
+				_updatingLoad = false;
+				global.clearInterval(_loadInterval);
+				_loadAmount = 1;
+				_loaded = true;
+
+				// Start playing the sound right way, having
+				// 5 seconds of silence at the beginning of a sprite
+				// sheet is pretty standard, this fixes
+				// some playback initialization issues with Android
+				if (_sounds.silence !== undefined) 
+					_instance.play(&quot;silence&quot;);
+								
+				_instance.trigger(SwishSprite.LOADED);
+			}
+		}
+	},
+	
+	/** Callback on playback timeout */
+	onPlayTimeout = function()
+	{
+		var sound = _sounds[_playingAlias];
+		if (DEBUG)
+		{
+			Debug.warn(&quot;SoundTimeout: Audio scrubber at position &quot; + _audio.currentTime.toFixed(3) + &quot; but expected &quot; + sound.end.toFixed(3) + &quot; Sound Details [Name: &quot; + _playingAlias + &quot;, Start Time: &quot; + sound.start + &quot; Duration: &quot; + sound.duration + &quot;]&quot;);
+		}
+	},
+	
+	/** Callback on canplaythrough event */
+	onCanPlayThrough = function()
+	{
+		if (DEBUG)
+		{	
+			Debug.log(&quot;onCanPlayThrough&quot;);
+		}
+		onLoadStarted();
+	},
+	
+	/** Callback when audio has stalled */
+	onStalled = function()
+	{
+		if (!_loadStarted) 
+		{
+			Debug.log(&quot;Media stalled before load started&quot;);
+		}
+	},
+	
+	/** When sound has completed callback */
+	soundPlayComplete = function()
+	{
+		var sound = _sounds[_playingAlias];
+		if (sound &amp;&amp; sound.loop)
+		{
+			_instance.pause();
+			
+			// Move the scrubber so if the audio autoplays from coming out of focus it will start from the correct point
+			_audio.currentTime = sound.start;
+			
+			// Use setTimeout so it will not work in Safari Mobile if the window is not in focus
+			global.setTimeout(
+				function()
+				{	
+					if (DEBUG)
+					{
+						Debug.log(&quot;Play sound (&quot; + _playingAlias + &quot;) because it is set to loop.&quot;);
+					}
+					_instance.trigger(SwishSprite.PROGRESS, 1);
+					_instance.trigger(SwishSprite.COMPLETE);
+					if (_playingAlias) _instance.play(_playingAlias);
+				}, 0);
+		} 
+		else 
+		{
+			_instance.stop();
+			_instance.trigger(SwishSprite.PROGRESS, 1);
+			_instance.trigger(SwishSprite.COMPLETE);
+		}
+	};
+	
+	namespace(&#x27;cloudkid&#x27;).SwishSprite = SwishSprite;
+		
+}(window));
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
