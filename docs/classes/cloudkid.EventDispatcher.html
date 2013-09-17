@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/namespace.js - CloudKid OS API</title>
+    <title>cloudkid.EventDispatcher - CloudKid OS API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -92,53 +92,120 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/namespace.js</h1>
+                        <h1>cloudkid.EventDispatcher Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-/**
-*  Static class for namespacing objects and adding
-*  classes to it
-*  @class namespace
-*  @static
-*/
-(function(global){
-	
-	&quot;use strict&quot;;
-	
-	// The namespace function already exists
-	if (&quot;namespace&quot; in global) return;
-	
-	/**
-	*  Create the namespace and assing to the window
-	*
-	*  @example
-	        var SpriteUtils = function(){};
-	        namespace(&#x27;cloudkid.utils&#x27;).SpriteUtils = SpriteUtils;
-	*
-	*  @function namespace
-	*  @param {string} namespaceString Name space, for instance &#x27;cloudkid.utils&#x27;
-	*  @return {object} The namespace object attached to the current window
-	*/
-	var namespace = function(namespaceString) {
-		var parts = namespaceString.split(&#x27;.&#x27;),
-			parent = window,
-			currentPart = &#x27;&#x27;;
+    
 
-		for(var i = 0, length = parts.length; i &lt; length; i++)
-		{
-			currentPart = parts[i];
-			parent[currentPart] = parent[currentPart] || {};
-			parent = parent[currentPart];
-		}
-		return parent;
-	};
-	
-	// Assign to the global namespace
-	global.namespace = namespace;
-	
-}(window));
-    </pre>
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_cloudkid_EventDispatcher.js.html#l5"><code>src&#x2F;cloudkid&#x2F;EventDispatcher.js:5</code></a>
+        </div>
+    
+
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>Constructor for the event dispatcher</p>
+
+</div>
+
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_cloudkid.EventDispatcher" class="method item">
+    <h3 class="name"><code>cloudkid.EventDispatcher</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_cloudkid_EventDispatcher.js.html#l5"><code>src&#x2F;cloudkid&#x2F;EventDispatcher.js:5</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+    </div>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>

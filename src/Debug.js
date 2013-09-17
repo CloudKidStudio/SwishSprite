@@ -60,28 +60,34 @@
 	/**
 	* The minimum log level to show, by default it's set to
 	* show all levels of logging. 
-	* @public
+	* @property {int} minLogLevel
 	* @static
 	*/
 	Debug.minLogLevel = Debug.GENERAL;
 	
 	/** 
 	* Boolean to turn on or off the debugging
-	* @public
+	* @property {bool} enabled
 	* @static
 	*/
 	Debug.enabled = true;
 	
 	/**
-	*  The output jQuery element
+	*  The jQuery element to output debug messages to
+	*
 	*  @public
 	*  @static
+	*  @property {jQuery} output
 	*/
 	Debug.output = null;
 	
 	/**
 	*  Sent to the output
-	*  @param 
+	*  @private
+	*  @static
+	*  @function output
+	*  @param {string} level The log level
+	*  @param {string} args Additional arguments
 	*/
 	function output(level, args)
 	{
@@ -94,7 +100,9 @@
 	/**
 	*  Log something in the console
 	*  @static
-	*  @param The statement to log
+	*  @public 
+	*  @function log
+	*  @param {*} params The statement or object to log
 	*/
 	Debug.log = function(params)
 	{
@@ -108,9 +116,11 @@
 	};
 	
 	/**
-	*  Debug something in the console
+	*  Debug something in the console or remote
 	*  @static
-	*  @param The statement to debug
+	*  @public 
+	*  @function debug
+	*  @param {*} params The statement or object to debug
 	*/
 	Debug.debug = function(params)
 	{
@@ -126,7 +136,9 @@
 	/**
 	*  Info something in the console
 	*  @static
-	*  @param The statement to info
+	*  @public 
+	*  @function info
+	*  @param {*} params The statement or object to info
 	*/
 	Debug.info = function(params)
 	{
@@ -140,9 +152,11 @@
 	};
 	
 	/**
-	*  Warn something in the console
+	*  Warn something in the console or remote
 	*  @static
-	*  @param The statement to warn
+	*  @public 
+	*  @method warn
+	*  @param {*} params The statement or object to warn
 	*/
 	Debug.warn = function(params)
 	{
@@ -156,9 +170,11 @@
 	};
 	
 	/**
-	*  Method to describe an object in the console
+	*  Error something in the console
 	*  @static
-	*  @param The statement to error
+	*  @public 
+	*  @function error
+	*  @param {*} params The statement or object to error
 	*/
 	Debug.error = function(params)
 	{
@@ -174,8 +190,10 @@
 	/**
 	*  Assert that something is true
 	*  @static
-	*  @param As statement that is assumed true
-	*  @param The addition parameters
+	*  @public
+	*  @function assert
+	*  @param {bool} truth As statement that is assumed true
+	*  @param {*} params The message to error if the assert is false
 	*/
 	Debug.assert = function(truth, params)
 	{
@@ -189,7 +207,9 @@
 	/**
 	*  Method to describe an object in the console
 	*  @static
-	*  @param The object
+	*  @function dir
+	*  @public
+	*  @param {object} params The object to describe in the console
 	*/
 	Debug.dir = function(params)
 	{
@@ -202,8 +222,8 @@
 	/**
 	*  Method to clear the console
 	*  @static
-	*  @param Optional parameters
-	*/
+	*  @public
+	*  @function clear
 	Debug.clear = function(params)
 	{
 		if (hasConsole && Debug.enabled) 
@@ -216,7 +236,9 @@
 	/**
 	*  Generate a stack track in the output
 	*  @static
-	*  @param Optional parameters
+	*  @public
+	*  @function trace
+	*  @param {*} params Optional parameters to log
 	*/
 	Debug.trace = function(params)
 	{

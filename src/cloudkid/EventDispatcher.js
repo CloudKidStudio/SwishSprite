@@ -4,6 +4,9 @@
 	
 	/**
 	*  Constructor for the event dispatcher
+	*  
+	*  @class cloudkid.EventDispatcher
+	*  @constructor
 	*/
 	var EventDispatcher = function(){},
 	

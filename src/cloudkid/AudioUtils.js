@@ -4,6 +4,9 @@
 	
 	/** 
 	*  A collection of utilities for detecting the availability of HTML5 audio
+	*  
+	*  @class cloudkid.AudioUtils
+	*  @static
 	*  @author Matt Moore <matt@cloudkid.com>
 	*/
 	var AudioUtils = {};

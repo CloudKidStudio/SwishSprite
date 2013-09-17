@@ -1,7 +1,8 @@
 /**
 *  Static class for namespacing objects and adding
-*  classes to it. For instance:
-*  namespace('cloudkid.utils').SpriteUtils = function(){};
+*  classes to it
+*  @class namespace
+*  @static
 */
 (function(global){
 	
@@ -12,8 +13,14 @@
 	
 	/**
 	*  Create the namespace and assing to the window
-	*  @param Name space, for instance 'cloudkid.utils'
-	*  @return Return the namespace
+	*
+	*  @example
+	        var SpriteUtils = function(){};
+	        namespace('cloudkid.utils').SpriteUtils = SpriteUtils;
+	*
+	*  @function namespace
+	*  @param {string} namespaceString Name space, for instance 'cloudkid.utils'
+	*  @return {object} The namespace object attached to the current window
 	*/
 	var namespace = function(namespaceString) {
 		var parts = namespaceString.split('.'),

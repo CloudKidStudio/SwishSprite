@@ -9,28 +9,36 @@
         "src/cloudkid/AudioUtils.js": {
             "name": "src/cloudkid/AudioUtils.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "cloudkid.AudioUtils": 1
+            },
             "fors": {},
             "namespaces": {}
         },
         "src/cloudkid/EventDispatcher.js": {
             "name": "src/cloudkid/EventDispatcher.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "cloudkid.EventDispatcher": 1
+            },
             "fors": {},
             "namespaces": {}
         },
         "src/cloudkid/PageVisibility.js": {
             "name": "src/cloudkid/PageVisibility.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "cloudkid.PageVisibility": 1
+            },
             "fors": {},
             "namespaces": {}
         },
         "src/cloudkid/SwishSprite.js": {
             "name": "src/cloudkid/SwishSprite.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "cloudkid.SwishSprite": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -46,13 +54,90 @@
         "src/namespace.js": {
             "name": "src/namespace.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "namespace": 1
+            },
             "fors": {},
             "namespaces": {}
         }
     },
     "modules": {},
     "classes": {
+        "cloudkid.AudioUtils": {
+            "name": "cloudkid.AudioUtils",
+            "shortname": "cloudkid.AudioUtils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/cloudkid/AudioUtils.js",
+            "line": 5,
+            "description": "A collection of utilities for detecting the availability of HTML5 audio",
+            "static": 1,
+            "author": "Matt Moore <matt@cloudkid.com>"
+        },
+        "cloudkid.EventDispatcher": {
+            "name": "cloudkid.EventDispatcher",
+            "shortname": "cloudkid.EventDispatcher",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/cloudkid/EventDispatcher.js",
+            "line": 5,
+            "description": "Constructor for the event dispatcher",
+            "is_constructor": 1
+        },
+        "cloudkid.PageVisibility": {
+            "name": "cloudkid.PageVisibility",
+            "shortname": "cloudkid.PageVisibility",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/cloudkid/PageVisibility.js",
+            "line": 5,
+            "description": "Handle the page visiblity change, if supported",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "onFocus",
+                    "description": "Callback when the page becomes visible",
+                    "type": "Function"
+                },
+                {
+                    "name": "onBlur",
+                    "description": "Callback when the page loses visibility",
+                    "type": "Function"
+                }
+            ],
+            "author": "Matt Moore <matt@cloudkid.com>"
+        },
+        "cloudkid.SwishSprite": {
+            "name": "cloudkid.SwishSprite",
+            "shortname": "cloudkid.SwishSprite",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 5,
+            "description": "This class is responsible for playback of an audiosprite \nfile (multiple sounds in a single timeline) using HTML5 audio",
+            "is_constructor": 1,
+            "extends": "cloudkid.EventDispatcher",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The name of the audio file to load, array of resources, or a spritemap",
+                    "type": "*"
+                }
+            ],
+            "author": "Matt Moore <matt@cloudkid.com>"
+        },
         "Debug": {
             "name": "Debug",
             "shortname": "Debug",
@@ -65,19 +150,25 @@
             "line": 1,
             "description": "A static closure to provide easy access to the console\nwithout having errors if the console doesn't exist\nto use call: Debug.log('Your log here')",
             "static": 1
+        },
+        "namespace": {
+            "name": "namespace",
+            "shortname": "namespace",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/namespace.js",
+            "line": 1,
+            "description": "Static class for namespacing objects and adding\nclasses to it",
+            "static": 1
         }
     },
     "classitems": [
         {
             "file": "src/cloudkid/AudioUtils.js",
-            "line": 5,
-            "description": "A collection of utilities for detecting the availability of HTML5 audio",
-            "author": "Matt Moore <matt@cloudkid.com>",
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/AudioUtils.js",
-            "line": 11,
+            "line": 14,
             "description": "Create an SwishSprite object from config",
             "params": [
                 {
@@ -92,27 +183,27 @@
             "return": {
                 "description": "SwishSprite instance"
             },
-            "class": "Debug"
+            "class": "cloudkid.AudioUtils"
         },
         {
             "file": "src/cloudkid/AudioUtils.js",
-            "line": 43,
+            "line": 46,
             "description": "Check if HTML5 Audio is supported in any of the available \nformats. If returns false, we should disable sounds. Modified from modernizr",
             "return": {
                 "description": "If we can play HTML5 audio",
                 "type": "Boolean"
             },
-            "class": "Debug"
+            "class": "cloudkid.AudioUtils"
         },
         {
             "file": "src/cloudkid/AudioUtils.js",
-            "line": 53,
+            "line": 56,
             "description": "Get the the internal cache support",
-            "class": "Debug"
+            "class": "cloudkid.AudioUtils"
         },
         {
             "file": "src/cloudkid/AudioUtils.js",
-            "line": 78,
+            "line": 81,
             "description": "Determines playability of a URL based on audio support.",
             "params": [
                 {
@@ -125,11 +216,11 @@
                 "description": "URL playability",
                 "type": "Boolean"
             },
-            "class": "Debug"
+            "class": "cloudkid.AudioUtils"
         },
         {
             "file": "src/cloudkid/AudioUtils.js",
-            "line": 99,
+            "line": 102,
             "description": "Get the url from the sprite resources array or single url",
             "params": [
                 {
@@ -141,32 +232,26 @@
             "return": {
                 "description": "Result url"
             },
-            "class": "Debug"
+            "class": "cloudkid.AudioUtils"
         },
         {
             "file": "src/cloudkid/AudioUtils.js",
-            "line": 135,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/EventDispatcher.js",
-            "line": 5,
-            "description": "Constructor for the event dispatcher",
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/EventDispatcher.js",
-            "line": 10,
-            "class": "Debug"
+            "line": 138,
+            "class": "cloudkid.AudioUtils"
         },
         {
             "file": "src/cloudkid/EventDispatcher.js",
             "line": 13,
-            "class": "Debug"
+            "class": "cloudkid.EventDispatcher"
         },
         {
             "file": "src/cloudkid/EventDispatcher.js",
             "line": 16,
+            "class": "cloudkid.EventDispatcher"
+        },
+        {
+            "file": "src/cloudkid/EventDispatcher.js",
+            "line": 19,
             "description": "Dispatch an event",
             "params": [
                 {
@@ -178,11 +263,11 @@
                     "description": "parameters"
                 }
             ],
-            "class": "Debug"
+            "class": "cloudkid.EventDispatcher"
         },
         {
             "file": "src/cloudkid/EventDispatcher.js",
-            "line": 34,
+            "line": 37,
             "description": "Add an event listener",
             "params": [
                 {
@@ -194,11 +279,11 @@
                     "description": "callback function when even is fired"
                 }
             ],
-            "class": "Debug"
+            "class": "cloudkid.EventDispatcher"
         },
         {
             "file": "src/cloudkid/EventDispatcher.js",
-            "line": 78,
+            "line": 81,
             "description": "Remove the event listener",
             "params": [
                 {
@@ -210,11 +295,11 @@
                     "description": "listener function"
                 }
             ],
-            "class": "Debug"
+            "class": "cloudkid.EventDispatcher"
         },
         {
             "file": "src/cloudkid/EventDispatcher.js",
-            "line": 124,
+            "line": 127,
             "description": "Return type of the value.",
             "params": [
                 {
@@ -227,11 +312,11 @@
                 "description": "",
                 "type": "String"
             },
-            "class": "Debug"
+            "class": "cloudkid.EventDispatcher"
         },
         {
             "file": "src/cloudkid/EventDispatcher.js",
-            "line": 143,
+            "line": 146,
             "description": "Returns callback array index.",
             "params": [
                 {
@@ -249,48 +334,41 @@
                 "description": "Callback array index, or -1 if isn't registered.",
                 "type": "Int"
             },
-            "class": "Debug"
+            "class": "cloudkid.EventDispatcher"
         },
         {
             "file": "src/cloudkid/EventDispatcher.js",
-            "line": 163,
-            "class": "Debug"
+            "line": 166,
+            "class": "cloudkid.EventDispatcher"
         },
         {
             "file": "src/cloudkid/PageVisibility.js",
-            "line": 5,
-            "description": "Handle the page visiblity change, if supported",
-            "author": "Matt Moore <matt@cloudkid.com>",
-            "class": "Debug"
+            "line": 19,
+            "class": "cloudkid.PageVisibility"
         },
         {
             "file": "src/cloudkid/PageVisibility.js",
-            "line": 14,
-            "class": "Debug"
+            "line": 22,
+            "class": "cloudkid.PageVisibility"
         },
         {
             "file": "src/cloudkid/PageVisibility.js",
-            "line": 17,
-            "class": "Debug"
+            "line": 25,
+            "class": "cloudkid.PageVisibility"
         },
         {
             "file": "src/cloudkid/PageVisibility.js",
-            "line": 20,
-            "class": "Debug"
+            "line": 28,
+            "class": "cloudkid.PageVisibility"
         },
         {
             "file": "src/cloudkid/PageVisibility.js",
-            "line": 23,
-            "class": "Debug"
+            "line": 31,
+            "class": "cloudkid.PageVisibility"
         },
         {
             "file": "src/cloudkid/PageVisibility.js",
-            "line": 26,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/PageVisibility.js",
-            "line": 47,
+            "line": 52,
             "description": "Create new Page visibility",
             "params": [
                 {
@@ -304,1055 +382,1273 @@
                     "type": "Function"
                 }
             ],
-            "class": "Debug"
+            "class": "cloudkid.PageVisibility"
         },
         {
             "file": "src/cloudkid/PageVisibility.js",
-            "line": 83,
+            "line": 88,
             "description": "Disable the detection",
-            "class": "Debug"
+            "class": "cloudkid.PageVisibility"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 5,
-            "description": "This class is responsible for playback of an audiosprite \nfile (multiple sounds in a single timeline) using HTML5 audio",
-            "author": "Matt Moore <matt@cloudkid.com>",
-            "class": "Debug"
+            "line": 20,
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 15,
-            "class": "Debug"
+            "line": 23,
+            "description": "The audio element",
+            "itemtype": "property",
+            "name": "_audio",
+            "type": "DOMElement",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 18,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 21,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 24,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 27,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 30,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 33,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 36,
-            "class": "Debug"
+            "line": 31,
+            "description": "If we're paused",
+            "itemtype": "property",
+            "name": "_paused",
+            "type": "Bool",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
             "line": 39,
-            "class": "Debug"
+            "description": "If the current audio has been loaded",
+            "itemtype": "property",
+            "name": "_loaded",
+            "type": "Bool",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 42,
-            "class": "Debug"
+            "line": 47,
+            "description": "If the loading update should run",
+            "itemtype": "property",
+            "name": "_updatingLoad",
+            "type": "Bool",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 45,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 48,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 51,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 54,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 57,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 60,
-            "class": "Debug"
+            "line": 55,
+            "description": "If the playing update should run",
+            "itemtype": "property",
+            "name": "_updatingPlay",
+            "type": "Bool",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
             "line": 63,
-            "class": "Debug"
+            "description": "For iOS, if the load has been started by user action",
+            "itemtype": "property",
+            "name": "_loadStartedByUserInteraction",
+            "type": "Bool",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 66,
-            "class": "Debug"
+            "line": 71,
+            "description": "If the load has started",
+            "itemtype": "property",
+            "name": "_loadStarted",
+            "type": "Bool",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 69,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 72,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 75,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 78,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 81,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 84,
-            "class": "Debug"
+            "line": 79,
+            "description": "The interval ID for playback",
+            "itemtype": "property",
+            "name": "_playInterval",
+            "type": "String",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
             "line": 87,
-            "description": "a value of -1 means the page isn't hidden, 0 means the",
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 92,
-            "class": "Debug"
+            "description": "The interval ID for loading",
+            "itemtype": "property",
+            "name": "_loadInterval",
+            "type": "String",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
             "line": 95,
-            "class": "Debug"
+            "description": "The playback timeout ID",
+            "itemtype": "property",
+            "name": "_playTimeout",
+            "type": "String",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 98,
-            "class": "Debug"
+            "line": 103,
+            "description": "The previous interval loaded percentage",
+            "itemtype": "property",
+            "name": "_loadAmount",
+            "type": "Int",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 101,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 104,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 107,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 110,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 113,
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 116,
-            "class": "Debug"
+            "line": 111,
+            "description": "The collection of sounds",
+            "itemtype": "property",
+            "name": "_sounds",
+            "type": "Array",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
             "line": 119,
-            "class": "Debug"
+            "description": "Some formats require a little padding to the end of a sprite",
+            "itemtype": "property",
+            "name": "_formatPadding",
+            "type": "Int",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 122,
-            "class": "Debug"
+            "line": 127,
+            "description": "The sound name of the current sprite we're playing",
+            "itemtype": "property",
+            "name": "_playingAlias",
+            "type": "String",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 126,
-            "class": "Debug"
+            "line": 135,
+            "description": "If the scrubber playhead has moved",
+            "itemtype": "property",
+            "name": "_scrubberMoved",
+            "type": "Bool",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 129,
-            "class": "Debug"
+            "line": 143,
+            "description": "If we're out of round",
+            "itemtype": "property",
+            "name": "_outOfRangeCount",
+            "type": "Int",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 133,
+            "line": 150,
+            "description": "The num of times the scrubber has not moved",
+            "itemtype": "property",
+            "name": "_scrubberNotMovingCount",
+            "type": "Int",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 158,
+            "description": "If the sound successfully played",
+            "itemtype": "property",
+            "name": "_successfullyPlayedSound",
+            "type": "Bool",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 166,
+            "description": "The start time for the scrubber",
+            "itemtype": "property",
+            "name": "_scrubberStartTime",
+            "type": "Int",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 174,
+            "description": "The interval ID for checking audio",
+            "itemtype": "property",
+            "name": "_checkInterval",
+            "type": "String",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 182,
+            "description": "The position of the last scrubber",
+            "itemtype": "property",
+            "name": "_lastScrubberPos",
+            "type": "Int",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 190,
+            "description": "The singleton instance of the audiosprite",
+            "itemtype": "property",
+            "name": "_instance",
+            "type": "cloudkid.SwishSprite",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 198,
+            "description": "Instance of page visibility for pause/resuming on page blur/focus",
+            "itemtype": "property",
+            "name": "_pageVisibility",
+            "type": "cloudkid.PageVisibility",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 206,
+            "description": "Keep track of the paused state when the page blur/focuses \na value of -1 means the page isn't hidden, 0 means the \nplaying before blur, and 1 means paused before blur",
+            "itemtype": "property",
+            "name": "_autoPaused",
+            "type": "Int",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 216,
+            "description": "The last current time played",
+            "itemtype": "property",
+            "name": "_lastCurrentTime",
+            "type": "Int",
+            "access": "private",
+            "tagname": "",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 224,
+            "description": "Event dispatched when load has started",
+            "itemtype": "event",
+            "name": "loadStarted",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 231,
+            "description": "Event dispatched with audio loaded",
+            "itemtype": "event",
+            "name": "loaded",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 238,
+            "description": "Event dispatched when percentage of load changed",
+            "itemtype": "event",
+            "name": "loadProgress",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 245,
+            "description": "Event dispatched when sound play completed",
+            "itemtype": "event",
+            "name": "complete",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 252,
+            "description": "The progress event",
+            "itemtype": "event",
+            "name": "progress",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 259,
+            "description": "The playback has been paused",
+            "itemtype": "event",
+            "name": "paused",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 266,
+            "description": "The sound has been unpaused",
+            "itemtype": "event",
+            "name": "resumed",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 273,
+            "description": "The sound has been stopped or canceled",
+            "itemtype": "event",
+            "name": "stopped",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 280,
+            "description": "The sound has begun playing",
+            "itemtype": "event",
+            "name": "started",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 287,
+            "description": "A little padding for the m4a audio format will help add extra\ntime for the Kindle Fire who likes to end the sound too early",
+            "itemtype": "property",
+            "name": "M4A_PADDING",
+            "type": "Float",
+            "static": 1,
+            "final": 1,
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 297,
+            "description": "The version of this library",
+            "itemtype": "property",
+            "name": "VERSION",
+            "type": "String",
+            "static": 1,
+            "final": 1,
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 306,
+            "description": "If using external update call, you can use this to save performance\nif you're already running a frame update call (such as request animation frame)",
+            "itemtype": "property",
+            "name": "manualUpdate",
+            "type": "Bool",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 314,
             "description": "Create the audio sprite",
+            "itemtype": "method",
+            "name": "initialize",
             "params": [
                 {
-                    "name": "The",
-                    "description": "name of the audio file to load, array of resources, or a spritemap"
+                    "name": "data",
+                    "description": "The name of the audio file to load, array of resources, or a spritemap",
+                    "type": "*"
                 }
             ],
-            "class": "Debug"
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 191,
+            "line": 374,
             "description": "Get the audio element",
-            "class": "Debug"
+            "itemtype": "method",
+            "name": "getAudioElement",
+            "return": {
+                "description": "The audio element",
+                "type": "DOMElement"
+            },
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 199,
+            "line": 385,
             "description": "Mute the audio, not available on all devices",
-            "class": "Debug"
+            "itemtype": "method",
+            "name": "mute",
+            "return": {
+                "description": "Return this SwishSprite",
+                "type": "cloudkid.SwishSprite"
+            },
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 208,
+            "line": 397,
             "description": "Unmute the audio, not available on all devices",
-            "class": "Debug"
+            "itemtype": "method",
+            "name": "unmute",
+            "return": {
+                "description": "Return this SwishSprite",
+                "type": "cloudkid.SwishSprite"
+            },
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 217,
+            "line": 409,
             "description": "Pause the sound playback",
-            "class": "Debug"
+            "itemtype": "method",
+            "name": "pause",
+            "return": {
+                "description": "Return this SwishSprite",
+                "type": "cloudkid.SwishSprite"
+            },
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 248,
+            "line": 443,
             "description": "Unpause the audio playback",
-            "class": "Debug"
+            "itemtype": "method",
+            "name": "resume",
+            "return": {
+                "description": "Return this SwishSprite",
+                "type": "cloudkid.SwishSprite"
+            },
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 265,
+            "line": 463,
             "description": "Stop the sound playback clear the current sound playing",
-            "class": "Debug"
+            "itemtype": "method",
+            "name": "stop",
+            "return": {
+                "description": "Return this SwishSprite",
+                "type": "cloudkid.SwishSprite"
+            },
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 283,
+            "line": 484,
             "description": "Get the length of a sprite",
+            "itemtype": "method",
+            "name": "getLength",
             "params": [
                 {
-                    "name": "The",
-                    "description": "optional alias, or get the current"
+                    "name": "alias",
+                    "description": "The optional alias, or get the current",
+                    "type": "String"
                 }
             ],
             "return": {
-                "description": "The duration in seconds"
+                "description": "The duration in seconds",
+                "type": "Int"
             },
-            "class": "Debug"
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 301,
+            "line": 504,
             "description": "Get the current position in seconds of the audio",
+            "itemtype": "method",
+            "name": "getPosition",
+            "return": {
+                "description": "The duration in seconds",
+                "type": "Int"
+            },
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 519,
+            "description": "Get a sound by name",
+            "itemtype": "method",
+            "name": "getSound",
             "params": [
                 {
-                    "name": "The",
-                    "description": "optional alias"
+                    "name": "alias",
+                    "description": "The sound name, optional, if no sound name returns the current",
+                    "type": "String"
                 }
             ],
             "return": {
-                "description": "The duration in seconds"
+                "description": "The sound",
+                "type": "DOMElement"
             },
-            "class": "Debug"
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 315,
-            "description": "Get a sound by name",
-            "params": [
-                {
-                    "name": "the",
-                    "description": "sound name, optional, if no sound name returns the current"
-                }
-            ],
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 331,
+            "line": 538,
             "description": "Add a sound to the list of playable sounds",
+            "itemtype": "method",
+            "name": "setSound",
             "params": [
                 {
-                    "name": "The",
-                    "description": "name of the audio"
-                }
-            ],
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 349,
-            "description": "Set the current time to the start alias",
-            "params": [
-                {
-                    "name": "The",
-                    "description": "name of the sound alias"
-                }
-            ],
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 359,
-            "description": "Clear all of the current sounds",
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 368,
-            "description": "For iOS, start loading the audio via user click",
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 408,
-            "description": "The update function, call this manually if manualUpdate is set to true",
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 423,
-            "description": "Play a sound sprite",
-            "params": [
-                {
-                    "name": "The",
-                    "description": "sprite name"
+                    "name": "alias",
+                    "description": "The name of the audio",
+                    "type": "String"
                 },
                 {
-                    "name": "The",
-                    "description": "play start time"
+                    "name": "startTime",
+                    "description": "Sound's start time",
+                    "type": "Int"
+                },
+                {
+                    "name": "duration",
+                    "description": "Length of the sound",
+                    "type": "Int"
+                },
+                {
+                    "name": "isLoop",
+                    "description": "Whether the sound should loop",
+                    "type": "Bool"
                 }
             ],
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 531,
-            "description": "The play updating function",
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 605,
-            "description": "Destroy the audiosprite, don't use after this\nmust recreate the SwishSprite",
-            "class": "Debug"
-        },
-        {
-            "file": "src/cloudkid/SwishSprite.js",
-            "line": 655,
-            "description": "Get whether the audio has been loaded yet",
             "return": {
-                "description": "Boolean if loaded"
+                "description": "Return this SwishSprite",
+                "type": "cloudkid.SwishSprite"
             },
-            "class": "Debug"
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 664,
-            "class": "Debug"
+            "line": 562,
+            "description": "Set the current time to the start alias",
+            "itemtype": "method",
+            "name": "prepare",
+            "params": [
+                {
+                    "name": "alias",
+                    "description": "The name of the sound alias",
+                    "type": "String"
+                }
+            ],
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 682,
-            "description": "Callback when page visibility has gone to hidden",
-            "class": "Debug"
+            "line": 574,
+            "description": "Clear all of the current sounds",
+            "itemtype": "method",
+            "name": "clear",
+            "return": {
+                "description": "Return this SwishSprite",
+                "type": "cloudkid.SwishSprite"
+            },
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 698,
-            "description": "Callback when page visibility has gone to show",
-            "class": "Debug"
+            "line": 586,
+            "description": "For iOS, start loading the audio via user click",
+            "itemtype": "method",
+            "name": "load",
+            "return": {
+                "description": "Return this SwishSprite",
+                "type": "cloudkid.SwishSprite"
+            },
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 715,
-            "description": "1 second update to check what the status of the scrubber is",
-            "class": "Debug"
+            "line": 629,
+            "description": "The update function, call this manually if manualUpdate is set to true",
+            "itemtype": "method",
+            "name": "update",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 778,
-            "class": "Debug"
+            "line": 645,
+            "description": "Play a sound sprite",
+            "itemtype": "method",
+            "name": "play",
+            "params": [
+                {
+                    "name": "alias",
+                    "description": "The sprite name",
+                    "type": "String"
+                },
+                {
+                    "name": "playStartTime",
+                    "description": "The play start time",
+                    "type": "Int"
+                }
+            ],
+            "return": {
+                "description": "If playback succeeded",
+                "type": "Bool"
+            },
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 756,
+            "description": "The play updating function",
+            "itemtype": "method",
+            "name": "playUpdate",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
             "line": 832,
-            "class": "Debug"
+            "description": "Destroy the audiosprite, don't use after this\nmust recreate the SwishSprite",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 842,
-            "class": "Debug"
+            "line": 884,
+            "description": "Get whether the audio has been loaded yet",
+            "itemtype": "method",
+            "name": "isLoaded",
+            "return": {
+                "description": "If loaded",
+                "type": "Bool"
+            },
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 852,
-            "class": "Debug"
+            "line": 894,
+            "description": "Function call when load has started",
+            "itemtype": "method",
+            "name": "onLoadStarted",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 861,
-            "class": "Debug"
+            "line": 915,
+            "description": "Callback when page visibility has gone to hidden",
+            "itemtype": "method",
+            "name": "onBlur",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 932,
+            "description": "Callback when page visibility has gone to show",
+            "itemtype": "method",
+            "name": "onFocus",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 950,
+            "description": "1 second update to check what the status of the scrubber is",
+            "itemtype": "method",
+            "name": "checkUpdate",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 1014,
+            "description": "Function call when load state has changed",
+            "itemtype": "method",
+            "name": "onLoadChange",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 1071,
+            "description": "Callback on playback timeout",
+            "itemtype": "method",
+            "name": "onPlayTimeout",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 1084,
+            "description": "Callback on canplaythrough event",
+            "itemtype": "method",
+            "name": "onCanPlayThrough",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 1097,
+            "description": "Callback when audio has stalled",
+            "itemtype": "method",
+            "name": "onStalled",
+            "class": "cloudkid.SwishSprite"
+        },
+        {
+            "file": "src/cloudkid/SwishSprite.js",
+            "line": 1110,
+            "description": "When sound has completed callback",
+            "itemtype": "method",
+            "name": "soundPlayComplete",
+            "class": "cloudkid.SwishSprite"
         },
         {
             "file": "src/Debug.js",
             "line": 16,
             "description": "If we have a console",
+            "itemtype": "property",
+            "name": "hasConsole",
+            "type": "Bool",
             "access": "private",
             "tagname": "",
             "class": "Debug"
         },
         {
             "file": "src/Debug.js",
-            "line": 22,
+            "line": 24,
+            "description": "General Log type",
+            "itemtype": "property",
+            "name": "GENERAL",
+            "type": "Int",
+            "static": 1,
+            "final": 1,
             "class": "Debug"
         },
         {
             "file": "src/Debug.js",
-            "line": 29,
+            "line": 31,
+            "description": "Debug Log type",
+            "itemtype": "property",
+            "name": "DEBUG",
+            "type": "Int",
+            "static": 1,
+            "final": 1,
+            "class": "Debug"
+        },
+        {
+            "file": "src/Debug.js",
+            "line": 38,
+            "description": "Info Log type",
+            "itemtype": "property",
+            "name": "INFO",
+            "type": "Int",
+            "static": 1,
+            "final": 1,
+            "class": "Debug"
+        },
+        {
+            "file": "src/Debug.js",
+            "line": 45,
+            "description": "Warning Log type",
+            "itemtype": "property",
+            "name": "WARN",
+            "type": "Int",
+            "static": 1,
+            "final": 1,
+            "class": "Debug"
+        },
+        {
+            "file": "src/Debug.js",
+            "line": 52,
+            "description": "Error Log type",
+            "itemtype": "property",
+            "name": "ERROR",
+            "type": "Int",
+            "static": 1,
+            "final": 1,
+            "class": "Debug"
+        },
+        {
+            "file": "src/Debug.js",
+            "line": 60,
             "description": "The minimum log level to show, by default it's set to\nshow all levels of logging.",
-            "access": "public",
-            "tagname": "",
+            "itemtype": "property",
+            "name": "minLogLevel",
+            "type": "Int",
             "static": 1,
             "class": "Debug"
         },
         {
             "file": "src/Debug.js",
-            "line": 37,
+            "line": 68,
             "description": "Boolean to turn on or off the debugging",
-            "access": "public",
-            "tagname": "",
+            "itemtype": "property",
+            "name": "enabled",
+            "type": "Bool",
             "static": 1,
             "class": "Debug"
         },
         {
             "file": "src/Debug.js",
-            "line": 44,
-            "description": "The output jQuery element",
+            "line": 75,
+            "description": "The jQuery element to output debug messages to",
             "access": "public",
             "tagname": "",
             "static": 1,
+            "itemtype": "property",
+            "name": "output",
+            "type": "JQuery",
             "class": "Debug"
         },
         {
             "file": "src/Debug.js",
-            "line": 51,
+            "line": 84,
             "description": "Sent to the output",
-            "params": [],
-            "class": "Debug"
-        },
-        {
-            "file": "src/Debug.js",
-            "line": 63,
-            "description": "Log something in the console",
+            "access": "private",
+            "tagname": "",
             "static": 1,
+            "itemtype": "method",
+            "name": "output",
             "params": [
                 {
-                    "name": "The",
-                    "description": "statement to log"
-                }
-            ],
-            "class": "Debug"
-        },
-        {
-            "file": "src/Debug.js",
-            "line": 79,
-            "description": "Debug something in the console",
-            "static": 1,
-            "params": [
-                {
-                    "name": "The",
-                    "description": "statement to debug"
-                }
-            ],
-            "class": "Debug"
-        },
-        {
-            "file": "src/Debug.js",
-            "line": 95,
-            "description": "Info something in the console",
-            "static": 1,
-            "params": [
-                {
-                    "name": "The",
-                    "description": "statement to info"
-                }
-            ],
-            "class": "Debug"
-        },
-        {
-            "file": "src/Debug.js",
-            "line": 111,
-            "description": "Warn something in the console",
-            "static": 1,
-            "params": [
-                {
-                    "name": "The",
-                    "description": "statement to warn"
-                }
-            ],
-            "class": "Debug"
-        },
-        {
-            "file": "src/Debug.js",
-            "line": 127,
-            "description": "Method to describe an object in the console",
-            "static": 1,
-            "params": [
-                {
-                    "name": "The",
-                    "description": "statement to error"
-                }
-            ],
-            "class": "Debug"
-        },
-        {
-            "file": "src/Debug.js",
-            "line": 143,
-            "description": "Assert that something is true",
-            "static": 1,
-            "params": [
-                {
-                    "name": "As",
-                    "description": "statement that is assumed true"
+                    "name": "level",
+                    "description": "The log level",
+                    "type": "String"
                 },
                 {
-                    "name": "The",
-                    "description": "addition parameters"
+                    "name": "args",
+                    "description": "Additional arguments",
+                    "type": "String"
                 }
             ],
             "class": "Debug"
         },
         {
             "file": "src/Debug.js",
-            "line": 158,
+            "line": 100,
+            "description": "Log something in the console",
+            "static": 1,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "log",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "The statement or object to log",
+                    "type": "*"
+                }
+            ],
+            "class": "Debug"
+        },
+        {
+            "file": "src/Debug.js",
+            "line": 118,
+            "description": "Debug something in the console or remote",
+            "static": 1,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "debug",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "The statement or object to debug",
+                    "type": "*"
+                }
+            ],
+            "class": "Debug"
+        },
+        {
+            "file": "src/Debug.js",
+            "line": 136,
+            "description": "Info something in the console",
+            "static": 1,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "info",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "The statement or object to info",
+                    "type": "*"
+                }
+            ],
+            "class": "Debug"
+        },
+        {
+            "file": "src/Debug.js",
+            "line": 154,
+            "description": "Warn something in the console or remote",
+            "static": 1,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "warn",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "The statement or object to warn",
+                    "type": "*"
+                }
+            ],
+            "class": "Debug"
+        },
+        {
+            "file": "src/Debug.js",
+            "line": 172,
+            "description": "Error something in the console",
+            "static": 1,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "error",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "The statement or object to error",
+                    "type": "*"
+                }
+            ],
+            "class": "Debug"
+        },
+        {
+            "file": "src/Debug.js",
+            "line": 190,
+            "description": "Assert that something is true",
+            "static": 1,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "assert",
+            "params": [
+                {
+                    "name": "truth",
+                    "description": "As statement that is assumed true",
+                    "type": "Bool"
+                },
+                {
+                    "name": "params",
+                    "description": "The message to error if the assert is false",
+                    "type": "*"
+                }
+            ],
+            "class": "Debug"
+        },
+        {
+            "file": "src/Debug.js",
+            "line": 207,
             "description": "Method to describe an object in the console",
             "static": 1,
+            "itemtype": "method",
+            "name": "dir",
+            "access": "public",
+            "tagname": "",
             "params": [
                 {
-                    "name": "The",
-                    "description": "object"
+                    "name": "params",
+                    "description": "The object to describe in the console",
+                    "type": "Object"
                 }
             ],
             "class": "Debug"
         },
         {
             "file": "src/Debug.js",
-            "line": 171,
+            "line": 222,
             "description": "Method to clear the console",
             "static": 1,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "trace",
+            "type": "!~YUIDOC_LINE~!\t\tif (hasConsole && Debug.enabled) !~YUIDOC_LINE~!\t\t{!~YUIDOC_LINE~!\t\t\tconsole.clear(params);!~YUIDOC_LINE~!\t\t\tif (Debug.output) Debug.output.html(\"\");!~YUIDOC_LINE~!",
             "params": [
                 {
-                    "name": "Optional",
-                    "description": "parameters"
-                }
-            ],
-            "class": "Debug"
-        },
-        {
-            "file": "src/Debug.js",
-            "line": 185,
-            "description": "Generate a stack track in the output",
-            "static": 1,
-            "params": [
-                {
-                    "name": "Optional",
-                    "description": "parameters"
+                    "name": "params",
+                    "description": "Optional parameters to log",
+                    "type": "*"
                 }
             ],
             "class": "Debug"
         },
         {
             "file": "src/namespace.js",
-            "line": 1,
-            "description": "Static class for namespacing objects and adding\nclasses to it. For instance:\nnamespace('cloudkid.utils').SpriteUtils = function(){};",
-            "class": ""
-        },
-        {
-            "file": "src/namespace.js",
-            "line": 13,
+            "line": 14,
             "description": "Create the namespace and assing to the window",
+            "example": [
+                "\n\t        var SpriteUtils = function(){};\n\t        namespace('cloudkid.utils').SpriteUtils = SpriteUtils;"
+            ],
+            "itemtype": "method",
+            "name": "namespace",
             "params": [
                 {
-                    "name": "Name",
-                    "description": "space, for instance 'cloudkid.utils'"
+                    "name": "namespaceString",
+                    "description": "Name space, for instance 'cloudkid.utils'",
+                    "type": "String"
                 }
             ],
             "return": {
-                "description": "Return the namespace"
+                "description": "The namespace object attached to the current window",
+                "type": "Object"
             },
-            "class": ""
+            "class": "namespace"
         }
     ],
     "warnings": [
         {
-            "message": "param name/type/descript missing",
-            "line": " src/Debug.js:51"
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:314"
         },
         {
-            "message": "Missing item type\nA collection of utilities for detecting the availability of HTML5 audio",
-            "line": " src/cloudkid/AudioUtils.js:5"
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:374"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:385"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:397"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:409"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:443"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:463"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:484"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:504"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:519"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:538"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:562"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:574"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:586"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:629"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:645"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:756"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:832"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:884"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:894"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:915"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:932"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:950"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:1014"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:1071"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:1084"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:1097"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/SwishSprite.js:1110"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/Debug.js:84"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/Debug.js:100"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/Debug.js:118"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/Debug.js:136"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/Debug.js:172"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/Debug.js:190"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/Debug.js:207"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/Debug.js:222"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/Debug.js:222"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/namespace.js:14"
         },
         {
             "message": "Missing item type\nCreate an SwishSprite object from config",
-            "line": " src/cloudkid/AudioUtils.js:11"
+            "line": " src/cloudkid/AudioUtils.js:14"
         },
         {
             "message": "Missing item type\nCheck if HTML5 Audio is supported in any of the available \nformats. If returns false, we should disable sounds. Modified from modernizr",
-            "line": " src/cloudkid/AudioUtils.js:43"
+            "line": " src/cloudkid/AudioUtils.js:46"
         },
         {
             "message": "Missing item type\nGet the the internal cache support",
-            "line": " src/cloudkid/AudioUtils.js:53"
+            "line": " src/cloudkid/AudioUtils.js:56"
         },
         {
             "message": "Missing item type\nDetermines playability of a URL based on audio support.",
-            "line": " src/cloudkid/AudioUtils.js:78"
+            "line": " src/cloudkid/AudioUtils.js:81"
         },
         {
             "message": "Missing item type\nGet the url from the sprite resources array or single url",
-            "line": " src/cloudkid/AudioUtils.js:99"
+            "line": " src/cloudkid/AudioUtils.js:102"
         },
         {
             "message": "Missing item type",
-            "line": " src/cloudkid/AudioUtils.js:135"
-        },
-        {
-            "message": "Missing item type\nConstructor for the event dispatcher",
-            "line": " src/cloudkid/EventDispatcher.js:5"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/EventDispatcher.js:10"
+            "line": " src/cloudkid/AudioUtils.js:138"
         },
         {
             "message": "Missing item type",
             "line": " src/cloudkid/EventDispatcher.js:13"
         },
         {
-            "message": "Missing item type\nDispatch an event",
+            "message": "Missing item type",
             "line": " src/cloudkid/EventDispatcher.js:16"
         },
         {
+            "message": "Missing item type\nDispatch an event",
+            "line": " src/cloudkid/EventDispatcher.js:19"
+        },
+        {
             "message": "Missing item type\nAdd an event listener",
-            "line": " src/cloudkid/EventDispatcher.js:34"
+            "line": " src/cloudkid/EventDispatcher.js:37"
         },
         {
             "message": "Missing item type\nRemove the event listener",
-            "line": " src/cloudkid/EventDispatcher.js:78"
+            "line": " src/cloudkid/EventDispatcher.js:81"
         },
         {
             "message": "Missing item type\nReturn type of the value.",
-            "line": " src/cloudkid/EventDispatcher.js:124"
+            "line": " src/cloudkid/EventDispatcher.js:127"
         },
         {
             "message": "Missing item type\nReturns callback array index.",
-            "line": " src/cloudkid/EventDispatcher.js:143"
+            "line": " src/cloudkid/EventDispatcher.js:146"
         },
         {
             "message": "Missing item type",
-            "line": " src/cloudkid/EventDispatcher.js:163"
-        },
-        {
-            "message": "Missing item type\nHandle the page visiblity change, if supported",
-            "line": " src/cloudkid/PageVisibility.js:5"
+            "line": " src/cloudkid/EventDispatcher.js:166"
         },
         {
             "message": "Missing item type",
-            "line": " src/cloudkid/PageVisibility.js:14"
+            "line": " src/cloudkid/PageVisibility.js:19"
         },
         {
             "message": "Missing item type",
-            "line": " src/cloudkid/PageVisibility.js:17"
+            "line": " src/cloudkid/PageVisibility.js:22"
         },
         {
             "message": "Missing item type",
-            "line": " src/cloudkid/PageVisibility.js:20"
+            "line": " src/cloudkid/PageVisibility.js:25"
         },
         {
             "message": "Missing item type",
-            "line": " src/cloudkid/PageVisibility.js:23"
+            "line": " src/cloudkid/PageVisibility.js:28"
         },
         {
             "message": "Missing item type",
-            "line": " src/cloudkid/PageVisibility.js:26"
+            "line": " src/cloudkid/PageVisibility.js:31"
         },
         {
             "message": "Missing item type\nCreate new Page visibility",
-            "line": " src/cloudkid/PageVisibility.js:47"
+            "line": " src/cloudkid/PageVisibility.js:52"
         },
         {
             "message": "Missing item type\nDisable the detection",
-            "line": " src/cloudkid/PageVisibility.js:83"
-        },
-        {
-            "message": "Missing item type\nThis class is responsible for playback of an audiosprite \nfile (multiple sounds in a single timeline) using HTML5 audio",
-            "line": " src/cloudkid/SwishSprite.js:5"
+            "line": " src/cloudkid/PageVisibility.js:88"
         },
         {
             "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:15"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:18"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:21"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:24"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:27"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:30"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:33"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:36"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:39"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:42"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:45"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:48"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:51"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:54"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:57"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:60"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:63"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:66"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:69"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:72"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:75"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:78"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:81"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:84"
-        },
-        {
-            "message": "Missing item type\na value of -1 means the page isn't hidden, 0 means the",
-            "line": " src/cloudkid/SwishSprite.js:87"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:92"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:95"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:98"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:101"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:104"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:107"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:110"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:113"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:116"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:119"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:122"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:126"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:129"
-        },
-        {
-            "message": "Missing item type\nCreate the audio sprite",
-            "line": " src/cloudkid/SwishSprite.js:133"
-        },
-        {
-            "message": "Missing item type\nGet the audio element",
-            "line": " src/cloudkid/SwishSprite.js:191"
-        },
-        {
-            "message": "Missing item type\nMute the audio, not available on all devices",
-            "line": " src/cloudkid/SwishSprite.js:199"
-        },
-        {
-            "message": "Missing item type\nUnmute the audio, not available on all devices",
-            "line": " src/cloudkid/SwishSprite.js:208"
-        },
-        {
-            "message": "Missing item type\nPause the sound playback",
-            "line": " src/cloudkid/SwishSprite.js:217"
-        },
-        {
-            "message": "Missing item type\nUnpause the audio playback",
-            "line": " src/cloudkid/SwishSprite.js:248"
-        },
-        {
-            "message": "Missing item type\nStop the sound playback clear the current sound playing",
-            "line": " src/cloudkid/SwishSprite.js:265"
-        },
-        {
-            "message": "Missing item type\nGet the length of a sprite",
-            "line": " src/cloudkid/SwishSprite.js:283"
-        },
-        {
-            "message": "Missing item type\nGet the current position in seconds of the audio",
-            "line": " src/cloudkid/SwishSprite.js:301"
-        },
-        {
-            "message": "Missing item type\nGet a sound by name",
-            "line": " src/cloudkid/SwishSprite.js:315"
-        },
-        {
-            "message": "Missing item type\nAdd a sound to the list of playable sounds",
-            "line": " src/cloudkid/SwishSprite.js:331"
-        },
-        {
-            "message": "Missing item type\nSet the current time to the start alias",
-            "line": " src/cloudkid/SwishSprite.js:349"
-        },
-        {
-            "message": "Missing item type\nClear all of the current sounds",
-            "line": " src/cloudkid/SwishSprite.js:359"
-        },
-        {
-            "message": "Missing item type\nFor iOS, start loading the audio via user click",
-            "line": " src/cloudkid/SwishSprite.js:368"
-        },
-        {
-            "message": "Missing item type\nThe update function, call this manually if manualUpdate is set to true",
-            "line": " src/cloudkid/SwishSprite.js:408"
-        },
-        {
-            "message": "Missing item type\nPlay a sound sprite",
-            "line": " src/cloudkid/SwishSprite.js:423"
-        },
-        {
-            "message": "Missing item type\nThe play updating function",
-            "line": " src/cloudkid/SwishSprite.js:531"
-        },
-        {
-            "message": "Missing item type\nDestroy the audiosprite, don't use after this\nmust recreate the SwishSprite",
-            "line": " src/cloudkid/SwishSprite.js:605"
-        },
-        {
-            "message": "Missing item type\nGet whether the audio has been loaded yet",
-            "line": " src/cloudkid/SwishSprite.js:655"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:664"
-        },
-        {
-            "message": "Missing item type\nCallback when page visibility has gone to hidden",
-            "line": " src/cloudkid/SwishSprite.js:682"
-        },
-        {
-            "message": "Missing item type\nCallback when page visibility has gone to show",
-            "line": " src/cloudkid/SwishSprite.js:698"
-        },
-        {
-            "message": "Missing item type\n1 second update to check what the status of the scrubber is",
-            "line": " src/cloudkid/SwishSprite.js:715"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:778"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:832"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:842"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:852"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/SwishSprite.js:861"
-        },
-        {
-            "message": "Missing item type\nIf we have a console",
-            "line": " src/Debug.js:16"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/Debug.js:22"
-        },
-        {
-            "message": "Missing item type\nThe minimum log level to show, by default it's set to\nshow all levels of logging.",
-            "line": " src/Debug.js:29"
-        },
-        {
-            "message": "Missing item type\nBoolean to turn on or off the debugging",
-            "line": " src/Debug.js:37"
-        },
-        {
-            "message": "Missing item type\nThe output jQuery element",
-            "line": " src/Debug.js:44"
-        },
-        {
-            "message": "Missing item type\nSent to the output",
-            "line": " src/Debug.js:51"
-        },
-        {
-            "message": "Missing item type\nLog something in the console",
-            "line": " src/Debug.js:63"
-        },
-        {
-            "message": "Missing item type\nDebug something in the console",
-            "line": " src/Debug.js:79"
-        },
-        {
-            "message": "Missing item type\nInfo something in the console",
-            "line": " src/Debug.js:95"
-        },
-        {
-            "message": "Missing item type\nWarn something in the console",
-            "line": " src/Debug.js:111"
-        },
-        {
-            "message": "Missing item type\nMethod to describe an object in the console",
-            "line": " src/Debug.js:127"
-        },
-        {
-            "message": "Missing item type\nAssert that something is true",
-            "line": " src/Debug.js:143"
-        },
-        {
-            "message": "Missing item type\nMethod to describe an object in the console",
-            "line": " src/Debug.js:158"
-        },
-        {
-            "message": "Missing item type\nMethod to clear the console",
-            "line": " src/Debug.js:171"
-        },
-        {
-            "message": "Missing item type\nGenerate a stack track in the output",
-            "line": " src/Debug.js:185"
-        },
-        {
-            "message": "Missing item type\nStatic class for namespacing objects and adding\nclasses to it. For instance:\nnamespace('cloudkid.utils').SpriteUtils = function(){};",
-            "line": " src/namespace.js:1"
-        },
-        {
-            "message": "Missing item type\nCreate the namespace and assing to the window",
-            "line": " src/namespace.js:13"
+            "line": " src/cloudkid/SwishSprite.js:20"
         }
     ]
 }

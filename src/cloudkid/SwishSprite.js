@@ -5,6 +5,11 @@
 	/**
 	*  This class is responsible for playback of an audiosprite 
 	*  file (multiple sounds in a single timeline) using HTML5 audio
+	*  
+	*  @class cloudkid.SwishSprite
+	*  @constructor
+	*  @extends cloudkid.EventDispatcher
+	*  @param {*} data The name of the audio file to load, array of resources, or a spritemap
 	*  @author Matt Moore <matt@cloudkid.com>
 	*/
 	var SwishSprite = function(data)
@@ -12,127 +17,305 @@
 		this.initialize(data);
 	},
 	
-	/** Reference to tye prototype, extends event dispatcher */
+	/** Reference to the prototype, extends event dispatcher */
 	p = SwishSprite.prototype = new cloudkid.EventDispatcher(),
 	
-	/** The audio element */
+	/**
+	* The audio element
+	* 
+	* @property {DOMElement} _audio
+	* @private
+	*/
 	_audio = null,
 	
-	/** If we're paused */
+	/**
+	* If we're paused
+	* 
+	* @property {bool} _paused
+	* @private
+	*/
 	_paused = true,
 	
-	/** If the current audio has been loaded */
+	/**
+	* If the current audio has been loaded
+	* 
+	* @property {bool} _loaded
+	* @private
+	*/
 	_loaded = false,
 	
-	/** If the loading update should run */
+	/**
+	* If the loading update should run
+	* 
+	* @property {bool} _updatingLoad
+	* @private
+	*/
 	_updatingLoad = false,
 	
-	/** If the playing update should run */
+	/**
+	* If the playing update should run
+	* 
+	* @property {bool} _updatingPlay
+	* @private
+	*/
 	_updatingPlay = false,
 	
-	/** For iOS, if the load has been started by user action */
+	/** 
+	* For iOS, if the load has been started by user action
+	* 
+	* @property {bool} _loadStartedByUserInteraction
+	* @private
+	*/
 	_loadStartedByUserInteraction = false,
 	
-	/** If the load has started */
+	/**
+	* If the load has started
+	* 
+	* @property {bool} _loadStarted
+	* @private
+	*/
 	_loadStarted = false,
 	
-	/** The interval ID for playback */
+	/**
+	* The interval ID for playback
+	* 
+	* @property {String} _playInterval
+	* @private
+	*/
 	_playInterval = null,
 	
-	/** The interval ID for loading */
+	/**
+	* The interval ID for loading
+	* 
+	* @property {String} _loadInterval
+	* @private
+	*/
 	_loadInterval = null,
 	
-	/** The playback timeout ID */
+	/**
+	* The playback timeout ID
+	* 
+	* @property {String} _playTimeout
+	* @private
+	*/
 	_playTimeout = null,
 	
-	/** The previous interval loaded percentage */
+	/**
+	* The previous interval loaded percentage 
+	* 
+	* @property {int} _loadAmount
+	* @private
+	*/
 	_loadAmount = 0,
 	
-	/** The collection of sounds */
+	/**
+	* The collection of sounds
+	* 
+	* @property {Array} _sounds
+	* @private
+	*/
 	_sounds = null,
 
-	/** Some formats require a little padding to the end of a sprite */
+	/**
+	* Some formats require a little padding to the end of a sprite
+	* 
+	* @property {int} _formatPadding
+	* @private
+	*/
 	_formatPadding = 0,
 	
-	/** The sound name of the current sprite we're playing */
+	/**
+	* The sound name of the current sprite we're playing
+	* 
+	* @property {String} _playingAlias
+	* @private
+	*/
 	_playingAlias = null,
 	
-	/** If the scrubber playhead has moved */
+	/**
+	* If the scrubber playhead has moved
+	* 
+	* @property {bool} _scrubberMoved
+	* @private
+	*/
 	_scrubberMoved = null,
 	
-	/** If we're out of round */
+	/**
+	* If we're out of round 
+	* @property {int} _outOfRangeCount
+	* @private
+	*/
 	_outOfRangeCount = null,
 	
-	/** The num of times the scrubber has not moved */
+	/**
+	* The num of times the scrubber has not moved
+	* 
+	* @property {int} _scrubberNotMovingCount
+	* @private
+	*/
 	_scrubberNotMovingCount = 0,
 	
-	/** If the sound successfully played */
+	/**
+	* If the sound successfully played
+	* 
+	* @property {bool} _successfullyPlayedSound
+	* @private
+	*/
 	_successfullyPlayedSound = false,
 	
-	/** The start time for the scrubber */
+	/**
+	* The start time for the scrubber
+	* 
+	* @property {int} _scrubberStartTime
+	* @private
+	*/
 	_scrubberStartTime = null,
 	
-	/** The interval ID for checking audio */
+	/**
+	* The interval ID for checking audio
+	* 
+	* @property {String} _checkInterval
+	* @private
+	*/
 	_checkInterval = null,
 	
-	/** The position of the last scrubber */
+	/**
+	* The position of the last scrubber 
+	* 
+	* @property {int} _lastScrubberPos
+	* @private
+	*/
 	_lastScrubberPos = null,
 	
-	/** The singleton instance of the audiosprite */
+	/**
+	* The singleton instance of the audiosprite 
+	* 
+	* @property {cloudkid.SwishSprite} _instance
+	* @private
+	*/
 	_instance = null,
 	
-	/** Instance of page visibility for pause/resuming on page blur/focus */
+	/**
+	* Instance of page visibility for pause/resuming on page blur/focus
+	* 
+	* @property {cloudkid.PageVisibility} _pageVisibility
+	* @private
+	*/
 	_pageVisibility = null,
 	
-	/** Keep track of the paused state when the page blur/focuses
-	a value of -1 means the page isn't hidden, 0 means the 
-	playing before blur, and 1 means paused before blur */
+	/** 
+	* Keep track of the paused state when the page blur/focuses 
+	* a value of -1 means the page isn't hidden, 0 means the 
+	* playing before blur, and 1 means paused before blur
+	* 
+	* @property {int} _autoPaused
+	* @private
+	*/
 	_autoPaused = -1,
 	
-	/** The last current time played */
+	/**
+	* The last current time played
+	* 
+	* @property {int} _lastCurrentTime
+	* @private
+	*/
 	_lastCurrentTime = null;
 	
-	/** Event dispatched when load has started */
+	/** 
+	* Event dispatched when load has started
+	* 
+	* @event loadStarted
+	*/
 	SwishSprite.LOAD_STARTED = "loadStarted";
 	
-	/** Event dispatched with audio loaded */
+	/**
+	* Event dispatched with audio loaded
+	* 
+	* @event loaded
+	*/
 	SwishSprite.LOADED = "loaded";
 	
-	/** Event dispatched when percentage of load changed */
+	/**
+	* Event dispatched when percentage of load changed
+	* 
+	* @event loadProgress
+	*/
 	SwishSprite.LOAD_PROGRESS = "loadProgress";
 	
-	/** Event dispatched when sound play completed */
+	/**
+	* Event dispatched when sound play completed
+	* 
+	* @event complete
+	*/
 	SwishSprite.COMPLETE = "complete";
 	
-	/** The progress event */
+	/**
+	* The progress event
+	* 
+	* @event progress
+	*/
 	SwishSprite.PROGRESS = "progress";
 	
-	/** The playback has been paused */
+	/**
+	* The playback has been paused
+	* 
+	* @event paused
+	*/
 	SwishSprite.PAUSED = "paused";
 	
-	/** The sound has been unpaused */
+	/**
+	* The sound has been unpaused
+	* 
+	* @event resumed
+	*/
 	SwishSprite.RESUMED = "resumed";
 	
-	/** The sound has been stopped or canceled */
+	/**
+	* The sound has been stopped or canceled
+	* 
+	* @event stopped
+	*/
 	SwishSprite.STOPPED = "stopped";
 	
-	/** The sound has begun playing */
+	/**
+	* The sound has begun playing
+	* 
+	* @event started
+	*/
 	SwishSprite.STARTED = "started";
 	
-	/** A little pading for the m4a audio format will help add extra
-	time for the Kindle Fire who likes to end the sound too early */
+	/** 
+	* A little padding for the m4a audio format will help add extra
+	* time for the Kindle Fire who likes to end the sound too early
+	* 
+	* @property {float} M4A_PADDING
+	* @static
+	* @final
+	*/
 	SwishSprite.M4A_PADDING = 0.1;
 	
-	/** The version of this library */
+	/**
+	* The version of this library
+	* 
+	* @property {String} VERSION
+	* @static
+	* @final
+	*/
 	SwishSprite.VERSION = "${version}";
 	
-	/** If using external update call, you can use this to safe performance
-	if you're already running a frame update call (such as request animation frame) */
+	/**
+	* If using external update call, you can use this to save performance
+	* if you're already running a frame update call (such as request animation frame)
+	* 
+	* @property {bool} manualUpdate
+	*/
 	p.manualUpdate = false;
 	
 	/**
 	*  Create the audio sprite
-	*  @param The name of the audio file to load, array of resources, or a spritemap
+	*  
+	*  @function initialize
+	*  @param {*} data The name of the audio file to load, array of resources, or a spritemap
 	*/
 	p.initialize = function(data)
 	{
@@ -190,6 +373,9 @@
 	
 	/**
 	*  Get the audio element
+	*  
+	*  @function getAudioElement
+	*  @return {DOMElement} The audio element
 	*/
 	p.getAudioElement = function()
 	{
@@ -198,6 +384,9 @@
 	
 	/**
 	*  Mute the audio, not available on all devices
+	*  
+	*  @function mute
+	*  @return {cloudkid.SwishSprite} Return this SwishSprite
 	*/
 	p.mute = function()
 	{
@@ -207,6 +396,9 @@
 	
 	/**
 	*  Unmute the audio, not available on all devices
+	*  
+	*  @function unmute
+	*  @return {cloudkid.SwishSprite} Return this SwishSprite
 	*/
 	p.unmute = function()
 	{
@@ -216,6 +408,9 @@
 
 	/**
 	*  Pause the sound playback
+	*  
+	*  @function pause
+	*  @return {cloudkid.SwishSprite} Return this SwishSprite
 	*/
 	p.pause = function()
 	{
@@ -247,6 +442,9 @@
 	
 	/**
 	*  Unpause the audio playback
+	*  
+	*  @function resume
+	*  @return {cloudkid.SwishSprite} Return this SwishSprite
 	*/
 	p.resume = function()
 	{
@@ -264,6 +462,9 @@
 	
 	/**
 	*  Stop the sound playback clear the current sound playing
+	*  
+	*  @function stop
+	*  @return {cloudkid.SwishSprite} Return this SwishSprite
 	*/
 	p.stop = function()
 	{
@@ -282,8 +483,10 @@
 	
 	/**
 	*  Get the length of a sprite
-	*  @param The optional alias, or get the current
-	*  @return The duration in seconds
+	*  
+	*  @function getLength
+	*  @param {String} alias The optional alias, or get the current
+	*  @return {int} The duration in seconds
 	*/
 	p.getLength = function(alias)
 	{
@@ -300,8 +503,9 @@
 	
 	/**
 	*  Get the current position in seconds of the audio
-	*  @param The optional alias
-	*  @return The duration in seconds
+	*  
+	*  @function getPosition
+	*  @return {int} The duration in seconds
 	*/
 	p.getPosition = function()
 	{		
@@ -314,7 +518,10 @@
 	
 	/**
 	*  Get a sound by name
-	*  @param the sound name, optional, if no sound name returns the current
+	*  
+	*  @function getSound
+	*  @param {String} alias The sound name, optional, if no sound name returns the current
+	*  @return {DOMElement} The sound
 	*/
 	p.getSound = function(alias)
 	{
@@ -330,7 +537,13 @@
 	
 	/**
 	*  Add a sound to the list of playable sounds
-	*  @param The name of the audio
+	*  
+	*  @function setSound
+	*  @param {String} alias The name of the audio
+	*  @param {int} startTime Sound's start time
+	*  @param {int} duration Length of the sound
+	*  @param {bool} isLoop Whether the sound should loop
+	*  @return {cloudkid.SwishSprite} Return this SwishSprite
 	*/
 	p.setSound = function(alias, startTime, duration, isLoop)
 	{
@@ -348,7 +561,9 @@
 	
 	/**
 	*  Set the current time to the start alias
-	*  @param The name of the sound alias
+	*  
+	*  @function prepare
+	*  @param {String} alias The name of the sound alias
 	*/
 	p.prepare = function(alias)
 	{
@@ -358,6 +573,9 @@
 	
 	/**
 	*  Clear all of the current sounds
+	*  
+	*  @function clear
+	*  @return {cloudkid.SwishSprite} Return this SwishSprite
 	*/
 	p.clear = function()
 	{
@@ -367,6 +585,9 @@
 	
 	/**
 	*  For iOS, start loading the audio via user click
+	*  
+	*  @function load
+	*  @return {cloudkid.SwishSprite} Return this SwishSprite
 	*/
 	p.load = function()
 	{
@@ -407,6 +628,7 @@
 	
 	/**
 	*  The update function, call this manually if manualUpdate is set to true
+	*  @function update
 	*/
 	p.update = function()
 	{
@@ -422,8 +644,11 @@
 	
 	/**
 	*  Play a sound sprite
-	*  @param The sprite name
-	*  @param The play start time
+	*  
+	*  @function play
+	*  @param {String} alias The sprite name
+	*  @param {int} playStartTime The play start time
+	*  @return {bool} If playback succeeded
 	*/
 	p.play = function(alias, playStartTime)
 	{
@@ -530,6 +755,8 @@
 	
 	/**
 	*  The play updating function
+	*  
+	*  @function playUpdate
 	*/
 	var playUpdate = function()
 	{
@@ -605,6 +832,8 @@
 	/**
 	*  Destroy the audiosprite, don't use after this
 	*  must recreate the SwishSprite
+	*  
+	*  @function destroy
 	*/
 	p.destroy = function() 
 	{
@@ -654,14 +883,18 @@
 	
 	/**
 	*  Get whether the audio has been loaded yet
-	*  @return Boolean if loaded
+	*  @function isLoaded
+	*  @return {bool} If loaded
 	*/
 	p.isLoaded = function()
 	{
 		return _loaded;
 	};
 	
-	/** Function call when load has started */
+	/** 
+	* Function call when load has started
+	* @function onLoadStarted
+	*/
 	var onLoadStarted = function()
 	{
 		if (DEBUG)
@@ -681,6 +914,7 @@
 	
 	/** 
 	* Callback when page visibility has gone to hidden
+	* @function onBlur
 	*/
 	onBlur = function() 
 	{
@@ -697,6 +931,7 @@
 	
 	/** 
 	* Callback when page visibility has gone to show
+	* @function onFocus
 	*/
 	onFocus = function()
 	{
@@ -714,6 +949,7 @@
 	
 	/**
 	*  1 second update to check what the status of the scrubber is
+	*  @function checkUpdate
 	*/
 	checkUpdate = function()
 	{	
@@ -775,7 +1011,10 @@
 		}
 	},
 	
-	/** Function call when load state has changed */
+	/** 
+	* Function call when load state has changed 
+	* @function onLoadChange
+	*/
 	onLoadChange = function()
 	{		
 		var buffered = 0, loadAmount;
@@ -829,7 +1068,10 @@
 		}
 	},
 	
-	/** Callback on playback timeout */
+	/**
+	* Callback on playback timeout
+	* @function onPlayTimeout
+	*/
 	onPlayTimeout = function()
 	{
 		var sound = _sounds[_playingAlias];
@@ -839,7 +1081,10 @@
 		}
 	},
 	
-	/** Callback on canplaythrough event */
+	/**
+	* Callback on canplaythrough event
+	* @function onCanPlayThrough
+	*/
 	onCanPlayThrough = function()
 	{
 		if (DEBUG)
@@ -849,7 +1094,11 @@
 		onLoadStarted();
 	},
 	
-	/** Callback when audio has stalled */
+	/**
+	* Callback when audio has stalled
+	* 
+	* @function onStalled
+	*/
 	onStalled = function()
 	{
 		if (!_loadStarted) 
@@ -858,7 +1107,11 @@
 		}
 	},
 	
-	/** When sound has completed callback */
+	/**
+	* When sound has completed callback
+	* 
+	* @function soundPlayComplete
+	*/
 	soundPlayComplete = function()
 	{
 		var sound = _sounds[_playingAlias];
