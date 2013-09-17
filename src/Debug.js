@@ -2,6 +2,9 @@
 *  A static closure to provide easy access to the console
 *  without having errors if the console doesn't exist
 *  to use call: Debug.log('Your log here')
+*  
+*  @class Debug
+*  @static
 */
 (function(global, undefined){
 	
