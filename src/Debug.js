@@ -2,6 +2,9 @@
 *  A static closure to provide easy access to the console
 *  without having errors if the console doesn't exist
 *  to use call: Debug.log('Your log here')
+*  
+*  @class Debug
+*  @static
 */
 (function(global, undefined){
 	
@@ -12,15 +15,46 @@
 	
 	/**
 	*  If we have a console
+	*  
+	*  @property {bool} hasConsole
 	*  @private
 	*/
 	var hasConsole = (global.console !== undefined);
 	
-	/** The different log levels */
+	/**
+	* General Log type
+	* @property {int} GENERAL
+	* @static
+	* @final
+	*/
 	Debug.GENERAL = 0;
+	/**
+	* Debug Log type
+	* @property {int} DEBUG
+	* @static
+	* @final
+	*/
 	Debug.DEBUG = 1;
+	/**
+	* Info Log type
+	* @property {int} INFO
+	* @static
+	* @final
+	*/
 	Debug.INFO = 2;
+	/**
+	* Warning Log type
+	* @property {int} WARN
+	* @static
+	* @final
+	*/
 	Debug.WARN = 3;
+	/**
+	* Error Log type
+	* @property {int} ERROR
+	* @static
+	* @final
+	*/
 	Debug.ERROR = 4;
 	
 	/**
