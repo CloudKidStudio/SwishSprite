@@ -19,16 +19,33 @@
 	/** Reference to the prototype */
 	p = PageVisibility.prototype,
 	
-	/** The name of the visibility change event for the browser */
+	/** 
+	* The name of the visibility change event for the browser
+	* 
+	* @property {String} _visibilityChange
+	* @private
+	*/
 	_visibilityChange = null;
 	
-	/** Callback when the page becomes visible */
+	/**
+	* Callback when the page becomes visible
+	* @property {function} _onFocus
+	* @private
+	*/
 	p._onFocus = null;
 	
-	/** Callback when the page loses visibility */
+	/**
+	* Callback when the page loses visibility
+	* @property {function} _onBlur
+	* @private
+	*/
 	p._onBlur = null;
 	
-	/** The visibility toggle function */
+	/**
+	* The visibility toggle function
+	* @property {function} _onToggle
+	* @private
+	*/
 	p._onToggle = null;
 	
 	// Select the visiblity change event name
@@ -51,8 +68,10 @@
 	
 	/**
 	*  Create new Page visibility
-	*  @param {function} The callback when the page comes into focus
-	*  @param {function} The callback when the page loses focus
+	*  
+	*  @function initialize
+	*  @param {function} onFocus The callback when the page comes into focus
+	*  @param {function} onBlur The callback when the page loses focus
 	*/
 	p.initialize = function(onFocus, onBlur)
 	{
@@ -87,6 +106,7 @@
 	
 	/**
 	*  Disable the detection
+	*  @function destroy
 	*/
 	p.destroy = function()
 	{

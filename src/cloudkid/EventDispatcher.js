@@ -13,13 +13,18 @@
 	/** Reference to the prototype */
 	p = EventDispatcher.prototype;
 	
-	/** The collection of listeners */
+	/**
+	* The collection of listeners
+	* @property {Array} _listeners
+	* @private
+	*/
 	p._listeners = [];
 	
 	/**
 	*  Dispatch an event
-	*  @param The event string name
-	*  @param Additional parameters
+	*  @function trigger
+	*  @param {String} type The event string name
+	*  @param {*} params Additional parameters
 	*/
 	p.trigger = function(type, params)
 	{
@@ -36,8 +41,11 @@
 	
 	/**
 	*  Add an event listener
-	*  @param The type of event (can be multiple events separated by spaces)
-	*  @param The callback function when even is fired
+	*  
+	*  @function on
+	*  @param {String} name The type of event (can be multiple events separated by spaces)
+	*  @param {function} callback The callback function when event is fired
+	*  @return {cloudkid.EventDispatcher} Return this EventDispatcher
 	*/
 	p.on = function(name, callback)
 	{
@@ -80,8 +88,10 @@
 	
 	/**
 	*  Remove the event listener
-	*  @param The type of event string
-	*  @param The listener function
+	*  
+	*  @function off
+	*  @param {String} name The type of event string
+	*  @param {function} callback The listener function
 	*/
 	p.off = function(name, callback)
 	{	
@@ -127,8 +137,9 @@
 	/**
 	* Return type of the value.
 	*
-	* @param  {Mixed} value
-	* @return {String}
+	*@function type
+	* @param  {*} value
+	* @return {String} The type
 	*/
 	function type(value)
 	{
@@ -146,10 +157,13 @@
 	/**
 	 * Returns callback array index.
 	 *
+	 *@function _callbackIndex
+	 *
 	 * @param  {String}   name Event name.
-	 * @param  {Function} fn   Function
+	 * @param  {Function} callback   Function
 	 *
 	 * @return {Int} Callback array index, or -1 if isn't registered.
+	 * @private
 	 */
 	p._callbackIndex = function(name, callback)
 	{		

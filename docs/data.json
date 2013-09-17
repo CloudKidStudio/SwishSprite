@@ -247,77 +247,103 @@
         {
             "file": "src/cloudkid/EventDispatcher.js",
             "line": 16,
+            "description": "The collection of listeners",
+            "itemtype": "property",
+            "name": "_listeners",
+            "type": "Array",
+            "access": "private",
+            "tagname": "",
             "class": "cloudkid.EventDispatcher"
         },
         {
             "file": "src/cloudkid/EventDispatcher.js",
-            "line": 19,
+            "line": 23,
             "description": "Dispatch an event",
+            "itemtype": "method",
+            "name": "trigger",
             "params": [
                 {
-                    "name": "The",
-                    "description": "event string name"
+                    "name": "type",
+                    "description": "The event string name",
+                    "type": "String"
                 },
                 {
-                    "name": "Additional",
-                    "description": "parameters"
+                    "name": "params",
+                    "description": "Additional parameters",
+                    "type": "*"
                 }
             ],
             "class": "cloudkid.EventDispatcher"
         },
         {
             "file": "src/cloudkid/EventDispatcher.js",
-            "line": 37,
+            "line": 42,
             "description": "Add an event listener",
+            "itemtype": "method",
+            "name": "on",
             "params": [
                 {
-                    "name": "The",
-                    "description": "type of event (can be multiple events separated by spaces)"
+                    "name": "name",
+                    "description": "The type of event (can be multiple events separated by spaces)",
+                    "type": "String"
                 },
                 {
-                    "name": "The",
-                    "description": "callback function when even is fired"
+                    "name": "callback",
+                    "description": "The callback function when event is fired",
+                    "type": "Function"
                 }
             ],
+            "return": {
+                "description": "Return this EventDispatcher",
+                "type": "cloudkid.EventDispatcher"
+            },
             "class": "cloudkid.EventDispatcher"
         },
         {
             "file": "src/cloudkid/EventDispatcher.js",
-            "line": 81,
+            "line": 89,
             "description": "Remove the event listener",
+            "itemtype": "method",
+            "name": "off",
             "params": [
                 {
-                    "name": "The",
-                    "description": "type of event string"
+                    "name": "name",
+                    "description": "The type of event string",
+                    "type": "String"
                 },
                 {
-                    "name": "The",
-                    "description": "listener function"
+                    "name": "callback",
+                    "description": "The listener function",
+                    "type": "Function"
                 }
             ],
             "class": "cloudkid.EventDispatcher"
         },
         {
             "file": "src/cloudkid/EventDispatcher.js",
-            "line": 127,
+            "line": 137,
             "description": "Return type of the value.",
+            "itemtype": "method",
+            "name": "type",
             "params": [
                 {
                     "name": "value",
                     "description": "",
-                    "type": "Mixed"
+                    "type": "*"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "The type",
                 "type": "String"
             },
             "class": "cloudkid.EventDispatcher"
         },
         {
             "file": "src/cloudkid/EventDispatcher.js",
-            "line": 146,
+            "line": 157,
             "description": "Returns callback array index.",
+            "itemtype": "method",
+            "name": "_callbackIndex",
             "params": [
                 {
                     "name": "name",
@@ -325,7 +351,7 @@
                     "type": "String"
                 },
                 {
-                    "name": "fn",
+                    "name": "callback",
                     "description": "Function",
                     "type": "Function"
                 }
@@ -334,11 +360,13 @@
                 "description": "Callback array index, or -1 if isn't registered.",
                 "type": "Int"
             },
+            "access": "private",
+            "tagname": "",
             "class": "cloudkid.EventDispatcher"
         },
         {
             "file": "src/cloudkid/EventDispatcher.js",
-            "line": 166,
+            "line": 180,
             "class": "cloudkid.EventDispatcher"
         },
         {
@@ -349,36 +377,62 @@
         {
             "file": "src/cloudkid/PageVisibility.js",
             "line": 22,
+            "description": "The name of the visibility change event for the browser",
+            "itemtype": "property",
+            "name": "_visibilityChange",
+            "type": "String",
+            "access": "private",
+            "tagname": "",
             "class": "cloudkid.PageVisibility"
         },
         {
             "file": "src/cloudkid/PageVisibility.js",
-            "line": 25,
+            "line": 30,
+            "description": "Callback when the page becomes visible",
+            "itemtype": "property",
+            "name": "_onFocus",
+            "type": "Function",
+            "access": "private",
+            "tagname": "",
             "class": "cloudkid.PageVisibility"
         },
         {
             "file": "src/cloudkid/PageVisibility.js",
-            "line": 28,
+            "line": 37,
+            "description": "Callback when the page loses visibility",
+            "itemtype": "property",
+            "name": "_onBlur",
+            "type": "Function",
+            "access": "private",
+            "tagname": "",
             "class": "cloudkid.PageVisibility"
         },
         {
             "file": "src/cloudkid/PageVisibility.js",
-            "line": 31,
+            "line": 44,
+            "description": "The visibility toggle function",
+            "itemtype": "property",
+            "name": "_onToggle",
+            "type": "Function",
+            "access": "private",
+            "tagname": "",
             "class": "cloudkid.PageVisibility"
         },
         {
             "file": "src/cloudkid/PageVisibility.js",
-            "line": 52,
+            "line": 69,
             "description": "Create new Page visibility",
+            "itemtype": "method",
+            "name": "initialize",
             "params": [
                 {
-                    "name": "The",
-                    "description": "callback when the page comes into focus",
+                    "name": "onFocus",
+                    "description": "The callback when the page comes into focus",
                     "type": "Function"
                 },
                 {
-                    "name": "The",
-                    "description": "callback when the page loses focus",
+                    "name": "onBlur",
+                    "description": "The callback when the page loses focus",
                     "type": "Function"
                 }
             ],
@@ -386,8 +440,10 @@
         },
         {
             "file": "src/cloudkid/PageVisibility.js",
-            "line": 88,
+            "line": 107,
             "description": "Disable the detection",
+            "itemtype": "method",
+            "name": "destroy",
             "class": "cloudkid.PageVisibility"
         },
         {
@@ -1412,6 +1468,34 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/EventDispatcher.js:23"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/EventDispatcher.js:42"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/EventDispatcher.js:89"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/EventDispatcher.js:137"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/EventDispatcher.js:157"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/PageVisibility.js:69"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/cloudkid/PageVisibility.js:107"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
             "line": " src/cloudkid/SwishSprite.js:314"
         },
         {
@@ -1592,59 +1676,11 @@
         },
         {
             "message": "Missing item type",
-            "line": " src/cloudkid/EventDispatcher.js:16"
-        },
-        {
-            "message": "Missing item type\nDispatch an event",
-            "line": " src/cloudkid/EventDispatcher.js:19"
-        },
-        {
-            "message": "Missing item type\nAdd an event listener",
-            "line": " src/cloudkid/EventDispatcher.js:37"
-        },
-        {
-            "message": "Missing item type\nRemove the event listener",
-            "line": " src/cloudkid/EventDispatcher.js:81"
-        },
-        {
-            "message": "Missing item type\nReturn type of the value.",
-            "line": " src/cloudkid/EventDispatcher.js:127"
-        },
-        {
-            "message": "Missing item type\nReturns callback array index.",
-            "line": " src/cloudkid/EventDispatcher.js:146"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/EventDispatcher.js:166"
+            "line": " src/cloudkid/EventDispatcher.js:180"
         },
         {
             "message": "Missing item type",
             "line": " src/cloudkid/PageVisibility.js:19"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/PageVisibility.js:22"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/PageVisibility.js:25"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/PageVisibility.js:28"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/cloudkid/PageVisibility.js:31"
-        },
-        {
-            "message": "Missing item type\nCreate new Page visibility",
-            "line": " src/cloudkid/PageVisibility.js:52"
-        },
-        {
-            "message": "Missing item type\nDisable the detection",
-            "line": " src/cloudkid/PageVisibility.js:88"
         },
         {
             "message": "Missing item type",
