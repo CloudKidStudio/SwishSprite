@@ -55,17 +55,83 @@
 		</sequential>
 	</macrodef>
 	
-	<target name="build" description="Compile JS project in debug mode">
-		<build-js output="${output}-${version}.js" debug="true" options="-b" />
+	<target name="buildDebug" description="Compile JS project in debug mode">
+		<build-js output="${output.debug}" debug="true" options="-b" />
 	</target>
 	
 	<target name="buildRelease" description="Compile JS project in release mode">
-		<build-js output="${output}-${version}.min.js" />
+		<build-js output="${output.min}" />
 	</target>
 	
-	<target name="buildAll" description="Build all versions of the library">
-		<antcall target="build" />
+	<target name="buildUncompressed" description="Compile JS project with the docs">
+		<concat-source output="${output.docs}" dir="${source.dir}" order="${source.order}" />
+		<replaceregexp file="${output.docs}" match="\( ?RELEASE ?\)" replace="(false)" flags="g" />
+		<replaceregexp file="${output.docs}" match="\( ?DEBUG ?\)" replace="(true)" flags="g" />
+	</target>
+	
+	<target name="buildAll" description="Compile the Minified, Debug and Uncompressed versions of the library">
+		<antcall target="buildDebug" />
 		<antcall target="buildRelease" />
+		<antcall target="buildUncompressed" />
+	</target>
+	
+	<macrodef name="concat-source">
+		<attribute name="output" />
+		<attribute name="dir" />
+		<attribute name="order" />
+		<sequential>
+			<concat destfile="@{output}" encoding="UTF-8" outputencoding="UTF-8" fixlastline="true">
+			     <resourcelist> 
+					<file file="@{order}" />
+					<filterchain>
+						<prefixlines prefix="@{dir}/" /> 
+					</filterchain>
+				</resourcelist>
+			</concat>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="docs-config">
+		<attribute name="template" default="${docs.config}" />
+		<attribute name="file" default="temp.json" />
+		<sequential>
+			<copy file="@{template}" tofile="@{file}" overwrite="true" />
+			<replaceregexp file="@{file}" match="\$\{docs\.description\}" replace="${docs.description}" flags="g" />
+			<replaceregexp file="@{file}" match="\$\{docs\.name\}" replace="${docs.name}" flags="g" />
+			<replaceregexp file="@{file}" match="\$\{version\}" replace="${version}" flags="g" />
+			<replaceregexp file="@{file}" match="\$\{docs\.outdir\}" replace="${docs.outdir}" flags="g" />
+			<replaceregexp file="@{file}" match="\$\{docs\.logo\}" replace="${docs.logo}" flags="g" />
+		</sequential>
+	</macrodef>
+		
+	<macrodef name="docs-cleanup">
+		<attribute name="file" default="temp.json" />
+		<sequential>
+			<delete file="@{file}" />
+			<delete dir="${docs.outdir}" />
+		</sequential>
+	</macrodef>
+	
+	<target name="docs" description="Use YUIDoc to build the documentation for this library.">
+		<docs-config />
+		<exec executable="${docs}">
+			<arg line="${source.dir}" />
+			<arg line="--config temp.json" />
+		</exec>
+		<copy toDir="${docs.dir}" overwrite="true">
+		    <fileset dir="${docs.outdir}" />
+		</copy>
+		<docs-cleanup />
+	</target>
+
+	<target name="runDocsServer" description="Set up a server to show a real-time preview of the docs page.  Visit http://127.0.0.1:3000/ and refresh to see changes">
+		<docs-config />
+		<exec executable="${docs}">
+			<arg line="--server" />
+			<arg line="--config temp.json" />
+			<arg line="${source.dir}" />
+		</exec>
+		<docs-cleanup />
 	</target>
 	
 </project>
