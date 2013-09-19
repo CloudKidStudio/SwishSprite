@@ -3,14 +3,15 @@
 	"use strict";
 	
 	/**
-	*  Constructor for the event dispatcher
+	*  The EventDispatcher mirrors the functionality of AS3 and CreateJS's EventDispatcher, 
+	*  but is more robust in terms of inputs for the `on()` and `off()` methods.
 	*  
 	*  @class cloudkid.EventDispatcher
 	*  @constructor
 	*/
 	var EventDispatcher = function(){},
 	
-	/** Reference to the prototype */
+	// Reference to the prototype 
 	p = EventDispatcher.prototype;
 	
 	/**
@@ -22,8 +23,8 @@
 	
 	/**
 	*  Dispatch an event
-	*  @function trigger
-	*  @param {String} type The event string name
+	*  @method trigger
+	*  @param {String} type The event string name, 
 	*  @param {*} params Additional parameters
 	*/
 	p.trigger = function(type, params)
@@ -42,9 +43,10 @@
 	/**
 	*  Add an event listener
 	*  
-	*  @function on
-	*  @param {String} name The type of event (can be multiple events separated by spaces)
-	*  @param {function} callback The callback function when event is fired
+	*  @method on
+	*  @param {String|object} name The type of event (can be multiple events separated by spaces), 
+	* 		or a map of events to handlers
+	*  @param {Function|Array*} callback The callback function when event is fired or an array of callbacks.
 	*  @return {cloudkid.EventDispatcher} Return this EventDispatcher
 	*/
 	p.on = function(name, callback)
@@ -89,9 +91,9 @@
 	/**
 	*  Remove the event listener
 	*  
-	*  @function off
-	*  @param {String} name The type of event string
-	*  @param {function} callback The listener function
+	*  @method off
+	*  @param {String*} name The type of event string separated by spaces, if no name is specifed remove all listeners.
+	*  @param {function|Array*} callback The listener function or collection of callback functions
 	*/
 	p.off = function(name, callback)
 	{	
@@ -137,7 +139,8 @@
 	/**
 	* Return type of the value.
 	*
-	*@function type
+	* @private
+	* @method type
 	* @param  {*} value
 	* @return {String} The type
 	*/
@@ -157,13 +160,11 @@
 	/**
 	 * Returns callback array index.
 	 *
-	 *@function _callbackIndex
-	 *
+	 * @method _callbackIndex
+	 * @private
 	 * @param  {String}   name Event name.
 	 * @param  {Function} callback   Function
-	 *
 	 * @return {Int} Callback array index, or -1 if isn't registered.
-	 * @private
 	 */
 	p._callbackIndex = function(name, callback)
 	{		
@@ -177,7 +178,7 @@
 		return -1;
 	};
 	
-	/** Assign to the global spacing */
+	// Assign to the global spacing
 	namespace('cloudkid').EventDispatcher = EventDispatcher;
 	
 }(window));

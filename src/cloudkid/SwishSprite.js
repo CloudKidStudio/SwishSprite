@@ -17,7 +17,7 @@
 		this.initialize(data);
 	},
 	
-	/** Reference to the prototype, extends event dispatcher */
+	// Reference to the prototype, extends event dispatcher 
 	p = SwishSprite.prototype = new cloudkid.EventDispatcher(),
 	
 	/**
@@ -314,7 +314,7 @@
 	/**
 	*  Create the audio sprite
 	*  
-	*  @function initialize
+	*  @method initialize
 	*  @param {*} data The name of the audio file to load, array of resources, or a spritemap
 	*/
 	p.initialize = function(data)
@@ -374,7 +374,7 @@
 	/**
 	*  Get the audio element
 	*  
-	*  @function getAudioElement
+	*  @method getAudioElement
 	*  @return {DOMElement} The audio element
 	*/
 	p.getAudioElement = function()
@@ -385,7 +385,7 @@
 	/**
 	*  Mute the audio, not available on all devices
 	*  
-	*  @function mute
+	*  @method mute
 	*  @return {cloudkid.SwishSprite} Return this SwishSprite
 	*/
 	p.mute = function()
@@ -397,7 +397,7 @@
 	/**
 	*  Unmute the audio, not available on all devices
 	*  
-	*  @function unmute
+	*  @method unmute
 	*  @return {cloudkid.SwishSprite} Return this SwishSprite
 	*/
 	p.unmute = function()
@@ -409,7 +409,7 @@
 	/**
 	*  Pause the sound playback
 	*  
-	*  @function pause
+	*  @method pause
 	*  @return {cloudkid.SwishSprite} Return this SwishSprite
 	*/
 	p.pause = function()
@@ -443,7 +443,7 @@
 	/**
 	*  Unpause the audio playback
 	*  
-	*  @function resume
+	*  @method resume
 	*  @return {cloudkid.SwishSprite} Return this SwishSprite
 	*/
 	p.resume = function()
@@ -463,7 +463,7 @@
 	/**
 	*  Stop the sound playback clear the current sound playing
 	*  
-	*  @function stop
+	*  @method stop
 	*  @return {cloudkid.SwishSprite} Return this SwishSprite
 	*/
 	p.stop = function()
@@ -484,7 +484,7 @@
 	/**
 	*  Get the length of a sprite
 	*  
-	*  @function getLength
+	*  @method getLength
 	*  @param {String} alias The optional alias, or get the current
 	*  @return {int} The duration in seconds
 	*/
@@ -504,7 +504,7 @@
 	/**
 	*  Get the current position in seconds of the audio
 	*  
-	*  @function getPosition
+	*  @method getPosition
 	*  @return {int} The duration in seconds
 	*/
 	p.getPosition = function()
@@ -519,7 +519,7 @@
 	/**
 	*  Get a sound by name
 	*  
-	*  @function getSound
+	*  @method getSound
 	*  @param {String} alias The sound name, optional, if no sound name returns the current
 	*  @return {DOMElement} The sound
 	*/
@@ -538,7 +538,7 @@
 	/**
 	*  Add a sound to the list of playable sounds
 	*  
-	*  @function setSound
+	*  @method setSound
 	*  @param {String} alias The name of the audio
 	*  @param {int} startTime Sound's start time
 	*  @param {int} duration Length of the sound
@@ -551,18 +551,19 @@
 		var padding = !isLoop ? _formatPadding : 0;
 		
 		_sounds[alias] = {
-			start: startTime,
+			start: startTime - padding,
 			end: startTime + duration + padding,
-			duration: duration + padding,
+			duration: duration + (2 * padding),
 			loop: isLoop
 		};
+		
 		return this;
 	};
 	
 	/**
 	*  Set the current time to the start alias
 	*  
-	*  @function prepare
+	*  @method prepare
 	*  @param {String} alias The name of the sound alias
 	*/
 	p.prepare = function(alias)
@@ -574,7 +575,7 @@
 	/**
 	*  Clear all of the current sounds
 	*  
-	*  @function clear
+	*  @method clear
 	*  @return {cloudkid.SwishSprite} Return this SwishSprite
 	*/
 	p.clear = function()
@@ -586,7 +587,7 @@
 	/**
 	*  For iOS, start loading the audio via user click
 	*  
-	*  @function load
+	*  @method load
 	*  @return {cloudkid.SwishSprite} Return this SwishSprite
 	*/
 	p.load = function()
@@ -628,7 +629,7 @@
 	
 	/**
 	*  The update function, call this manually if manualUpdate is set to true
-	*  @function update
+	*  @method update
 	*/
 	p.update = function()
 	{
@@ -645,7 +646,7 @@
 	/**
 	*  Play a sound sprite
 	*  
-	*  @function play
+	*  @method play
 	*  @param {String} alias The sprite name
 	*  @param {int} playStartTime The play start time
 	*  @return {bool} If playback succeeded
@@ -756,7 +757,7 @@
 	/**
 	*  The play updating function
 	*  
-	*  @function playUpdate
+	*  @method playUpdate
 	*/
 	var playUpdate = function()
 	{
@@ -833,7 +834,7 @@
 	*  Destroy the audiosprite, don't use after this
 	*  must recreate the SwishSprite
 	*  
-	*  @function destroy
+	*  @method destroy
 	*/
 	p.destroy = function() 
 	{
@@ -883,7 +884,7 @@
 	
 	/**
 	*  Get whether the audio has been loaded yet
-	*  @function isLoaded
+	*  @method isLoaded
 	*  @return {bool} If loaded
 	*/
 	p.isLoaded = function()
@@ -893,7 +894,7 @@
 	
 	/** 
 	* Function call when load has started
-	* @function onLoadStarted
+	* @method onLoadStarted
 	*/
 	var onLoadStarted = function()
 	{
@@ -914,7 +915,7 @@
 	
 	/** 
 	* Callback when page visibility has gone to hidden
-	* @function onBlur
+	* @method onBlur
 	*/
 	onBlur = function() 
 	{
@@ -931,7 +932,7 @@
 	
 	/** 
 	* Callback when page visibility has gone to show
-	* @function onFocus
+	* @method onFocus
 	*/
 	onFocus = function()
 	{
@@ -949,7 +950,7 @@
 	
 	/**
 	*  1 second update to check what the status of the scrubber is
-	*  @function checkUpdate
+	*  @method checkUpdate
 	*/
 	checkUpdate = function()
 	{	
@@ -1013,7 +1014,7 @@
 	
 	/** 
 	* Function call when load state has changed 
-	* @function onLoadChange
+	* @method onLoadChange
 	*/
 	onLoadChange = function()
 	{		
@@ -1070,7 +1071,7 @@
 	
 	/**
 	* Callback on playback timeout
-	* @function onPlayTimeout
+	* @method onPlayTimeout
 	*/
 	onPlayTimeout = function()
 	{
@@ -1083,7 +1084,7 @@
 	
 	/**
 	* Callback on canplaythrough event
-	* @function onCanPlayThrough
+	* @method onCanPlayThrough
 	*/
 	onCanPlayThrough = function()
 	{
@@ -1097,7 +1098,7 @@
 	/**
 	* Callback when audio has stalled
 	* 
-	* @function onStalled
+	* @method onStalled
 	*/
 	onStalled = function()
 	{
@@ -1110,7 +1111,7 @@
 	/**
 	* When sound has completed callback
 	* 
-	* @function soundPlayComplete
+	* @method soundPlayComplete
 	*/
 	soundPlayComplete = function()
 	{

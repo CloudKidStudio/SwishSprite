@@ -16,7 +16,7 @@
 		this.initialize(onFocus, onBlur);
 	},
 	
-	/** Reference to the prototype */
+	// Reference to the prototype 
 	p = PageVisibility.prototype,
 	
 	/** 
@@ -69,7 +69,7 @@
 	/**
 	*  Create new Page visibility
 	*  
-	*  @function initialize
+	*  @method initialize
 	*  @param {function} onFocus The callback when the page comes into focus
 	*  @param {function} onBlur The callback when the page loses focus
 	*/
@@ -106,7 +106,7 @@
 	
 	/**
 	*  Disable the detection
-	*  @function destroy
+	*  @method destroy
 	*/
 	p.destroy = function()
 	{
