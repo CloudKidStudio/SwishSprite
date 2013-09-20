@@ -15,8 +15,8 @@
 	*  Create the namespace and assing to the window
 	*
 	*  @example
-	        var SpriteUtils = function(){};
-	        namespace('cloudkid.utils').SpriteUtils = SpriteUtils;
+		var SpriteUtils = function(){};
+		namespace('cloudkid.utils').SpriteUtils = SpriteUtils;
 	*
 	*  @function namespace
 	*  @param {string} namespaceString Name space, for instance 'cloudkid.utils'

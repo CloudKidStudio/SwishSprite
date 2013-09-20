@@ -1,7 +1,7 @@
 {
     "project": {
-        "name": "CloudKid OS API",
-        "description": "CloudKid OS API: A framework for HTML5 content built on top of createjs",
+        "name": "SwishSprite API",
+        "description": "SwishSprite API: HTML5 audio sprite library",
         "version": "1.0.1",
         "logo": "cloudkid.png"
     },
@@ -297,7 +297,7 @@
             "params": [
                 {
                     "name": "name",
-                    "description": "The type of event (can be multiple events separated by spaces), \n \t\tor a map of events to handlers",
+                    "description": "The type of event (can be multiple events separated by spaces), \n        or a map of events to handlers",
                     "type": "String|object"
                 },
                 {
@@ -1447,7 +1447,7 @@
             "line": 14,
             "description": "Create the namespace and assing to the window",
             "example": [
-                "\n\t        var SpriteUtils = function(){};\n\t        namespace('cloudkid.utils').SpriteUtils = SpriteUtils;"
+                "\n\t\tvar SpriteUtils = function(){};\n\t\tnamespace('cloudkid.utils').SpriteUtils = SpriteUtils;"
             ],
             "itemtype": "method",
             "name": "namespace",

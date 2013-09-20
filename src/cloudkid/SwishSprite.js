@@ -861,7 +861,7 @@
 		}
 		if (_pageVisibility)
 		{
-			_pageVisiblity.destroy();
+			_pageVisibility.destroy();
 		}
 		_pageVisibility = null;
 		

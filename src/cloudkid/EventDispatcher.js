@@ -45,7 +45,7 @@
 	*  
 	*  @method on
 	*  @param {String|object} name The type of event (can be multiple events separated by spaces), 
-	* 		or a map of events to handlers
+	*          or a map of events to handlers
 	*  @param {Function|Array*} callback The callback function when event is fired or an array of callbacks.
 	*  @return {cloudkid.EventDispatcher} Return this EventDispatcher
 	*/
