@@ -38,8 +38,6 @@
 		for(alias in config.spritemap)
 		{
 			s = config.spritemap[alias];
-			Debug.log(alias);
-			Debug.log(s);
 			audio.setSound(alias, s.start, (s.end - s.start), s.loop);
 		}
 		return playableUrl;

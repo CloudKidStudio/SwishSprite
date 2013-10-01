@@ -261,8 +261,7 @@
         var playableUrl = AudioUtils.getPlayableURL(config.resources);
         if (config.spritemap === undefined) throw "Sprite configuration must contain 'spritemap': a dictionary of audio sprites";
         var s, alias;
-        for (alias in config.spritemap) s = config.spritemap[alias], Debug.log(alias), Debug.log(s), 
-        audio.setSound(alias, s.start, s.end - s.start, s.loop);
+        for (alias in config.spritemap) s = config.spritemap[alias], audio.setSound(alias, s.start, s.end - s.start, s.loop);
         return playableUrl;
     }, AudioUtils.supported = function() {
         return _fileSupport;
