@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="SwishSprite" default="build" basedir="./">
+<project name="SwishSprite" default="buildUncompressed" basedir="./">
 	<property file="${os.name}.build.properties"/>
 	<property file="build.properties"/>
 	

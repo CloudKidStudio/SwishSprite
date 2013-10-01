@@ -147,8 +147,9 @@
         if (Debug.log("SwishSprite.load"), !_loadStartedByUserInteraction) {
             _loadStartedByUserInteraction = !0;
             try {
-                _loadInterval && global.clearInterval(_loadInterval), _updatingLoad = !0, this.manualUpdate || (_loadInterval = global.setInterval(onLoadChange, 10)), 
-                _audio.play(), _audio.pause();
+                if (_loadInterval && global.clearInterval(_loadInterval), _updatingLoad = !0, this.manualUpdate || (_loadInterval = global.setInterval(onLoadChange, 10)), 
+                _sounds.silence === undefined) throw "'silence' audio is required";
+                this.play("silence");
             } catch (e) {
                 Debug.log("load: Audio did not play: " + e.message);
             }

@@ -613,8 +613,15 @@
 				{
 					_loadInterval = global.setInterval(onLoadChange, 10);
 				}			
-				_audio.play();
-				_audio.pause();
+				
+				if (_sounds.silence !== undefined)
+				{
+					this.play('silence');
+				}
+				else
+				{
+					throw "'silence' audio is required";
+				}
 			} 
 			catch (e) 
 			{
