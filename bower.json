@@ -1,0 +1,17 @@
+{
+    "name": "SwishSprite",
+    "version": "1.0.1",
+    "main": "deploy/SwishSprite-1.0.1.min.js",
+    "ignore": [
+        "nbproject",
+        "src",
+        "example",
+        "docs",
+        "build.properties",
+        "build.xml",
+        "CHANGELOG.md",
+        "LICENSE",
+        "README.md",
+        "src.order"
+    ]
+}
