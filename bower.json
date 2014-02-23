@@ -1,5 +1,5 @@
 {
-    "name": "SwishSprite",
+    "name": "swishsprite",
     "version": "1.0.1",
     "main": "deploy/SwishSprite-1.0.1.min.js",
     "ignore": [
