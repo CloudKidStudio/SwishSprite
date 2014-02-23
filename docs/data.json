@@ -2,7 +2,7 @@
     "project": {
         "name": "SwishSprite API",
         "description": "SwishSprite API: HTML5 audio sprite library",
-        "version": "1.0.1",
+        "version": "1.0.2",
         "logo": "cloudkid.png"
     },
     "files": {
@@ -192,7 +192,7 @@
         },
         {
             "file": "src/cloudkid/AudioUtils.js",
-            "line": 48,
+            "line": 46,
             "description": "Check if HTML5 Audio is supported in any of the available \nformats. If returns false, we should disable sounds. Modified from modernizr",
             "itemtype": "method",
             "name": "supported",
@@ -205,7 +205,7 @@
         },
         {
             "file": "src/cloudkid/AudioUtils.js",
-            "line": 60,
+            "line": 58,
             "description": "Get the the internal cache support",
             "itemtype": "method",
             "name": "_fileSupport",
@@ -219,7 +219,7 @@
         },
         {
             "file": "src/cloudkid/AudioUtils.js",
-            "line": 89,
+            "line": 87,
             "description": "Determines playability of a URL based on audio support.",
             "itemtype": "method",
             "name": "canPlayURL",
@@ -239,7 +239,7 @@
         },
         {
             "file": "src/cloudkid/AudioUtils.js",
-            "line": 112,
+            "line": 110,
             "description": "Get the url from the sprite resources array or single url",
             "itemtype": "method",
             "name": "getPlayableURL",
@@ -1041,7 +1041,7 @@
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 630,
+            "line": 637,
             "description": "The update function, call this manually if manualUpdate is set to true",
             "itemtype": "method",
             "name": "update",
@@ -1049,7 +1049,7 @@
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 646,
+            "line": 653,
             "description": "Play a sound sprite",
             "itemtype": "method",
             "name": "play",
@@ -1073,7 +1073,7 @@
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 757,
+            "line": 764,
             "description": "The play updating function",
             "itemtype": "method",
             "name": "playUpdate",
@@ -1081,7 +1081,7 @@
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 833,
+            "line": 840,
             "description": "Destroy the audiosprite, don't use after this\nmust recreate the SwishSprite",
             "itemtype": "method",
             "name": "destroy",
@@ -1089,7 +1089,7 @@
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 885,
+            "line": 892,
             "description": "Get whether the audio has been loaded yet",
             "itemtype": "method",
             "name": "isLoaded",
@@ -1101,7 +1101,7 @@
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 895,
+            "line": 902,
             "description": "Function call when load has started",
             "itemtype": "method",
             "name": "onLoadStarted",
@@ -1109,7 +1109,7 @@
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 916,
+            "line": 923,
             "description": "Callback when page visibility has gone to hidden",
             "itemtype": "method",
             "name": "onBlur",
@@ -1117,7 +1117,7 @@
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 933,
+            "line": 940,
             "description": "Callback when page visibility has gone to show",
             "itemtype": "method",
             "name": "onFocus",
@@ -1125,7 +1125,7 @@
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 951,
+            "line": 958,
             "description": "1 second update to check what the status of the scrubber is",
             "itemtype": "method",
             "name": "checkUpdate",
@@ -1133,7 +1133,7 @@
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 1015,
+            "line": 1022,
             "description": "Function call when load state has changed",
             "itemtype": "method",
             "name": "onLoadChange",
@@ -1141,7 +1141,7 @@
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 1072,
+            "line": 1079,
             "description": "Callback on playback timeout",
             "itemtype": "method",
             "name": "onPlayTimeout",
@@ -1149,7 +1149,7 @@
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 1085,
+            "line": 1092,
             "description": "Callback on canplaythrough event",
             "itemtype": "method",
             "name": "onCanPlayThrough",
@@ -1157,7 +1157,7 @@
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 1098,
+            "line": 1105,
             "description": "Callback when audio has stalled",
             "itemtype": "method",
             "name": "onStalled",
@@ -1165,7 +1165,7 @@
         },
         {
             "file": "src/cloudkid/SwishSprite.js",
-            "line": 1111,
+            "line": 1118,
             "description": "When sound has completed callback",
             "itemtype": "method",
             "name": "soundPlayComplete",

@@ -1,0 +1,6 @@
+docs/ export-ignore
+example/ export-ignore
+src/ export-ignore
+build.properties export-ignore
+build.xml export-ignore
+src.order export-ignore

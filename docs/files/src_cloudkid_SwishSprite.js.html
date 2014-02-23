@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.0.1</em>
+            <em>API Docs for: 1.0.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -711,8 +711,15 @@
 				{
 					_loadInterval = global.setInterval(onLoadChange, 10);
 				}			
-				_audio.play();
-				_audio.pause();
+				
+				if (_sounds.silence !== undefined)
+				{
+					this.play(&#x27;silence&#x27;);
+				}
+				else
+				{
+					throw &quot;&#x27;silence&#x27; audio is required&quot;;
+				}
 			} 
 			catch (e) 
 			{

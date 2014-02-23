@@ -1,4 +1,4 @@
-(function(global) {
+!function(global) {
     "use strict";
     if (!("namespace" in global)) {
         var namespace = function(namespaceString) {
@@ -8,7 +8,7 @@
         };
         global.namespace = namespace;
     }
-})(window), function(global, undefined) {
+}(window), function(global, undefined) {
     "use strict";
     function output(level, args) {
         Debug.output && Debug.output.append('<div class="' + level + '">' + args + "</div>");
@@ -63,11 +63,11 @@
 }(window, document), function(global, undefined) {
     "use strict";
     function type(value) {
-        return null === value ? value + "" : "object" == typeof value || "function" == typeof value ? Object.prototype.toString.call(value).match(/\s([a-z]+)/i)[1].toLowerCase() || "object" : typeof value;
+        return null === value ? String(value) : "object" == typeof value || "function" == typeof value ? Object.prototype.toString.call(value).match(/\s([a-z]+)/i)[1].toLowerCase() || "object" : typeof value;
     }
     var EventDispatcher = function() {}, p = EventDispatcher.prototype;
     p._listeners = [], p.trigger = function(type, params) {
-        if (this._listeners[type] !== undefined) for (var listeners = this._listeners[type], i = 0; listeners.length > i; i++) listeners[i](params);
+        if (this._listeners[type] !== undefined) for (var listeners = this._listeners[type], i = 0; i < listeners.length; i++) listeners[i](params);
     }, p.on = function(name, callback) {
         if ("object" === type(name)) for (var key in name) name.hasOwnProperty(key) && this.on(key, name[key]); else if ("function" === type(callback)) for (var names = name.split(" "), n = null, i = 0, nl = names.length; nl > i; i++) n = names[i], 
         this._listeners[n] = this._listeners[n] || [], -1 === this._callbackIndex(n, callback) && this._listeners[n].push(callback); else if ("array" === type(callback)) for (var f = 0, fl = callback.length; fl > f; f++) this.on(name, callback[f]);
@@ -91,7 +91,7 @@
     SwishSprite.LOAD_STARTED = "loadStarted", SwishSprite.LOADED = "loaded", SwishSprite.LOAD_PROGRESS = "loadProgress", 
     SwishSprite.COMPLETE = "complete", SwishSprite.PROGRESS = "progress", SwishSprite.PAUSED = "paused", 
     SwishSprite.RESUMED = "resumed", SwishSprite.STOPPED = "stopped", SwishSprite.STARTED = "started", 
-    SwishSprite.M4A_PADDING = .1, SwishSprite.VERSION = "1.0.1", p.manualUpdate = !1, 
+    SwishSprite.M4A_PADDING = .1, SwishSprite.VERSION = "1.0.2", p.manualUpdate = !1, 
     p.initialize = function(data) {
         var AudioUtils = cloudkid.AudioUtils;
         if (!AudioUtils.supported()) throw "HTML5 Audio is not supported!";
@@ -130,7 +130,7 @@
     }, p.getPosition = function() {
         return _playingAlias !== undefined && _sounds[_playingAlias] !== undefined ? _audio.currentTime - _sounds[_playingAlias].start : 0;
     }, p.getSound = function(alias) {
-        return alias === undefined && _playingAlias !== undefined ? _sounds[_playingAlias] : alias ? _sounds[alias] : undefined;
+        return alias === undefined && _playingAlias !== undefined ? _sounds[_playingAlias] : alias ? _sounds[alias] : void 0;
     }, p.setSound = function(alias, startTime, duration, isLoop) {
         var padding = isLoop ? 0 : _formatPadding;
         return _sounds[alias] = {
@@ -163,7 +163,7 @@
         global.clearTimeout(_playTimeout), _sounds[alias] === undefined) return Debug.error("SoundUnknown: Sound not found. Playing sound '" + alias + "' has failed."), 
         !1;
         var sound = _sounds[alias];
-        startTime = sound.start, playStartTime !== undefined && playStartTime >= sound.start && sound.end > playStartTime && (startTime = playStartTime);
+        startTime = sound.start, playStartTime !== undefined && playStartTime >= sound.start && playStartTime < sound.end && (startTime = playStartTime);
         try {
             _scrubberMoved = !1, _audio.pause(), _scrubberStartTime = _audio.currentTime;
             try {

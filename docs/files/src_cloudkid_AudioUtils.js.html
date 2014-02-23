@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.0.1</em>
+            <em>API Docs for: 1.0.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -136,8 +136,6 @@
 		for(alias in config.spritemap)
 		{
 			s = config.spritemap[alias];
-			Debug.log(alias);
-			Debug.log(s);
 			audio.setSound(alias, s.start, (s.end - s.start), s.loop);
 		}
 		return playableUrl;

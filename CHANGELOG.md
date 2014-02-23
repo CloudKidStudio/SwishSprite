@@ -1,3 +1,9 @@
+##1.0.2 (2014-02-23)
+
+- Updated to use Bower for installation
+- Renamed output file to exclude version number
+- Added gitattributes to ignore export files and folders
+
 ##1.0.1 (2013-09-03)
 
 Features:
