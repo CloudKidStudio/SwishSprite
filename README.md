@@ -11,6 +11,14 @@ JavaScript library for playing HTML5 audio sprites. An audio sprite is multiple 
 + Tested on iOS5+ Safari & Chrome, Android 2.3+ and current desktop browsers
 + Ideal for HTML5 game audio when WebAudio API is not available
 
+##Installation
+
+Install using bower.
+
+```bash
+bower install swish-sprite
+```
+
 ##Usage
 
 ```js
@@ -191,6 +199,6 @@ Audio codec support vary widely between browsers. We suggest using m4a, oga, mp3
 
 ##License
 
-Copyright (c) 2013 Matt Karl [@bigtimebuddy](http://github.com/bigtimebuddy) and [CloudKid, LLC](http://cloudkid.com)
+Copyright (c) 2014 Matt Karl [@bigtimebuddy](http://github.com/bigtimebuddy) and [CloudKid, LLC](http://cloudkid.com)
 
 Released under the MIT License.
