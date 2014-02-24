@@ -91,7 +91,7 @@
     SwishSprite.LOAD_STARTED = "loadStarted", SwishSprite.LOADED = "loaded", SwishSprite.LOAD_PROGRESS = "loadProgress", 
     SwishSprite.COMPLETE = "complete", SwishSprite.PROGRESS = "progress", SwishSprite.PAUSED = "paused", 
     SwishSprite.RESUMED = "resumed", SwishSprite.STOPPED = "stopped", SwishSprite.STARTED = "started", 
-    SwishSprite.M4A_PADDING = .1, SwishSprite.VERSION = "1.0.2", p.manualUpdate = !1, 
+    SwishSprite.M4A_PADDING = .1, SwishSprite.VERSION = "1.0.3", p.manualUpdate = !1, 
     p.initialize = function(data) {
         var AudioUtils = cloudkid.AudioUtils;
         if (!AudioUtils.supported()) throw "HTML5 Audio is not supported!";
@@ -149,7 +149,7 @@
             try {
                 if (_loadInterval && global.clearInterval(_loadInterval), _updatingLoad = !0, this.manualUpdate || (_loadInterval = global.setInterval(onLoadChange, 10)), 
                 _sounds.silence === undefined) throw "'silence' audio is required";
-                this.play("silence");
+                _audio.play(), _audio.pause();
             } catch (e) {
                 Debug.log("load: Audio did not play: " + e.message);
             }

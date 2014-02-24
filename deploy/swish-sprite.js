@@ -1228,7 +1228,8 @@
 				
 				if (_sounds.silence !== undefined)
 				{
-					this.play('silence');
+					_audio.play();
+					_audio.pause();
 				}
 				else
 				{
