@@ -167,7 +167,7 @@
         try {
             _scrubberMoved = !1, _audio.pause(), _scrubberStartTime = _audio.currentTime;
             try {
-                _audio.currentTime = _lastCurrentTime = startTime;
+                _lastCurrentTime = startTime, _audio.buffered && _audio.buffered.length && (_audio.currentTime = _lastCurrentTime);
             } catch (ex) {
                 Debug.error("CurrentTimeSetException: Setting the current time has failed: " + ex);
             }

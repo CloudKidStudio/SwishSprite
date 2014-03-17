@@ -708,7 +708,10 @@
 			// Move the scrubber to the start time of the sound
 			try 
 			{
-				_audio.currentTime = _lastCurrentTime = startTime;
+				_lastCurrentTime = startTime;
+				//only set the current time if the audio element has at least started loading, otherwise it will be an error that gets caught
+				if(_audio.buffered && _audio.buffered.length)
+					_audio.currentTime = _lastCurrentTime;
 			} 
 			catch (ex) 
 			{
