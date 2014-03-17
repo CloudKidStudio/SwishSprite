@@ -616,8 +616,9 @@
 				
 				if (_sounds.silence !== undefined)
 				{
-					_audio.play();
-					_audio.pause();
+					this.play("silence");
+					/*_audio.play();
+					_audio.pause();*/
 				}
 				else
 				{
