@@ -1,3 +1,7 @@
+##1.0.4 (2014-03-19)
+
+- Externalized Debug and namespace into Bower dependencies
+
 ##1.0.2 (2014-02-23)
 
 - Updated to use Bower for installation

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project name="SwishSprite" default="build-all" basedir="./">
 	<property file="${os.name}.build.properties"/>
-	<property file="build.properties"/>
+	<property file="build/build.properties"/>
 	
 	<macrodef name="uglifyjs">
 		<attribute name="options" default="-m" />
@@ -125,7 +125,7 @@
 			<arg line="${source.dir}" />
 			<arg line="--config temp.json" />
 		</exec>
-		<copy toDir="${docs.outdir}" file="${docs.logo}" overwrite="true" />
+		<copy toDir="${docs.outdir}" file="${build.dir}/${docs.logo}" overwrite="true" />
 		<docs-cleanup />
 	</target>
 

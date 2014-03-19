@@ -1,7 +1,5 @@
-build.properties export-ignore
-build.xml export-ignore
-docs.json export-ignore
-cloudkid.png export-ignore
-src/ export-ignore
-src.order export-ignore
+build/ export-ignore
 example/ export-ignore
+src/ export-ignore
+build.xml export-ignore
+src.order export-ignore
