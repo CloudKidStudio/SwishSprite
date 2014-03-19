@@ -1,7 +1,11 @@
 {
     "name": "swish-sprite",
-    "version": "1.0.3",
-    "main": "deploy/SwishSprite-1.0.1.min.js",
+    "version": "1.0.4",
+    "main": "deploy/swish-sprite.min.js",
+    "dependencies": {
+        "cloudkid-debug" : "*",
+        "cloudkid-namespace" : "*"
+    },
     "ignore": [
         "nbproject",
         "src",

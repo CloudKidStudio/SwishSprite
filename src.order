@@ -1,6 +1,4 @@
-namespace.js
-Debug.js
-cloudkid/PageVisibility.js
-cloudkid/EventDispatcher.js
-cloudkid/SwishSprite.js
-cloudkid/AudioUtils.js
+PageVisibility.js
+EventDispatcher.js
+SwishSprite.js
+AudioUtils.js

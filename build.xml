@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<project name="SwishSprite" default="buildUncompressed" basedir="./">
+<project name="SwishSprite" default="build-all" basedir="./">
 	<property file="${os.name}.build.properties"/>
 	<property file="build.properties"/>
 	
-	<macrodef name="build-js">
+	<macrodef name="uglifyjs">
 		<attribute name="options" default="-m" />
 		<attribute name="debug" default="false" />
 		<attribute name="compress" default="" />
@@ -12,7 +12,7 @@
 			<fail unless="source.order" message="version needs to be specified in the build.properties as the output directory" />
 			<fail unless="source.dir" message="The folder that contains all the source" />
 			<fail unless="compressor" message="Path to the uglify-js program" />
-			<validate-js list="${source.order}" dir="${source.dir}" />
+			<jshint list="${source.order}" dir="${source.dir}" />
 			<echo message="+---------------------------------+" />
 			<echo message="| Building the Library JavaScript |" />
 			<echo message="+---------------------------------+" />
@@ -34,7 +34,7 @@
 		</sequential>
 	</macrodef>
 	
-	<macrodef name="validate-js">
+	<macrodef name="jshint">
 		<attribute name="list" />
 		<attribute name="dir" />
 		<sequential>
@@ -55,24 +55,24 @@
 		</sequential>
 	</macrodef>
 	
-	<target name="buildDebug" description="Compile JS project in debug mode">
-		<build-js output="${output.debug}" debug="true" options="-b" />
+	<target name="build-debug" description="Compile JS project in debug mode">
+		<uglifyjs output="${output.debug}" debug="true" options="-b" />
 	</target>
 	
-	<target name="buildRelease" description="Compile JS project in release mode">
-		<build-js output="${output.min}" />
+	<target name="build-release" description="Compile JS project in release mode">
+		<uglifyjs output="${output.min}" />
 	</target>
 	
-	<target name="buildUncompressed" description="Compile JS project with the docs">
+	<target name="build-uncompressed" description="Compile JS project with the docs">
 		<concat-source output="${output.docs}" dir="${source.dir}" order="${source.order}" />
 		<replaceregexp file="${output.docs}" match="\( ?RELEASE ?\)" replace="(false)" flags="g" />
 		<replaceregexp file="${output.docs}" match="\( ?DEBUG ?\)" replace="(true)" flags="g" />
 	</target>
 	
-	<target name="buildAll" description="Compile the Minified, Debug and Uncompressed versions of the library">
-		<antcall target="buildDebug" />
-		<antcall target="buildRelease" />
-		<antcall target="buildUncompressed" />
+	<target name="build-all" description="Compile the Minified, Debug and Uncompressed versions of the library">
+		<antcall target="build-debug" />
+		<antcall target="build-release" />
+		<antcall target="build-uncompressed" />
 	</target>
 	
 	<macrodef name="concat-source">
@@ -91,6 +91,14 @@
 		</sequential>
 	</macrodef>
 	
+	<target name="import-example-libs" description="Copy the files specified in dependencies.txt to examples project">
+		<fail unless="libs" message="libs needs to be specified in build.properties as the bower libs to install" />
+		<exec executable="${bower}" failonerror="true">
+			<arg line="install" />
+			<arg line="${libs}" />
+		</exec>
+	</target>
+	
 	<macrodef name="docs-config">
 		<attribute name="template" default="${docs.config}" />
 		<attribute name="file" default="temp.json" />
@@ -108,7 +116,6 @@
 		<attribute name="file" default="temp.json" />
 		<sequential>
 			<delete file="@{file}" />
-			<delete dir="${docs.outdir}" />
 		</sequential>
 	</macrodef>
 	
@@ -118,13 +125,11 @@
 			<arg line="${source.dir}" />
 			<arg line="--config temp.json" />
 		</exec>
-		<copy toDir="${docs.dir}" overwrite="true">
-		    <fileset dir="${docs.outdir}" />
-		</copy>
+		<copy toDir="${docs.outdir}" file="${docs.logo}" overwrite="true" />
 		<docs-cleanup />
 	</target>
 
-	<target name="runDocsServer" description="Set up a server to show a real-time preview of the docs page.  Visit http://127.0.0.1:3000/ and refresh to see changes">
+	<target name="docs-server" description="Set up a server to show a real-time preview of the docs page.  Visit http://127.0.0.1:3000/ and refresh to see changes">
 		<docs-config />
 		<exec executable="${docs}">
 			<arg line="--server" />
@@ -132,6 +137,51 @@
 			<arg line="${source.dir}" />
 		</exec>
 		<docs-cleanup />
+	</target>
+
+	<target name="docs-to-git" description="Auto-sync the docs to the Git docs branch">
+		<antcall target="docs" />
+		<delete dir="../${docs.outdir}" />
+		<copy todir="../${docs.outdir}">
+			<fileset dir="${docs.outdir}"/>
+		</copy>
+		<!-- Switch the branch -->
+		<exec executable="${git}" failonerror="true">
+			<arg line="checkout" />
+			<arg line="${git.docs}" />
+		</exec>
+		<delete includeEmptyDirs="true">
+			<fileset dir="." />
+		</delete>
+		<copy todir="./" overwrite="true">
+			<fileset dir="../${docs.outdir}" includes="**/*">
+				<depth max="3" />
+			</fileset>
+		</copy>
+		<delete dir="../${docs.outdir}" />
+		<!-- Add the files -->
+		<exec executable="${git}" failonerror="true">
+			<arg line="add" />
+			<arg line="-A" />
+			<arg line="." />
+		</exec>
+		<!-- Commit the files -->
+		<exec executable="${git}" failonerror="true">
+			<arg line="commit" />
+			<arg line="-m" />
+			<arg line='"Auto updated docs"' />
+		</exec>
+		<!-- Sync the files -->
+		<exec executable="${git}" failonerror="true">
+			<arg line="push" />
+			<arg line="origin" />
+			<arg line="${git.docs}" />
+		</exec>
+		<!-- Switch the branch back -->
+		<exec executable="${git}" failonerror="true">
+			<arg line="checkout" />
+			<arg line="${git.master}" />
+		</exec>
 	</target>
 	
 </project>

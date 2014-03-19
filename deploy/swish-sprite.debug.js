@@ -1,43 +1,4 @@
-!function(global) {
-    "use strict";
-    if (!("namespace" in global)) {
-        var namespace = function(namespaceString) {
-            for (var parts = namespaceString.split("."), parent = window, currentPart = "", i = 0, length = parts.length; length > i; i++) currentPart = parts[i], 
-            parent[currentPart] = parent[currentPart] || {}, parent = parent[currentPart];
-            return parent;
-        };
-        global.namespace = namespace;
-    }
-}(window), function(global, undefined) {
-    "use strict";
-    function output(level, args) {
-        Debug.output && Debug.output.append('<div class="' + level + '">' + args + "</div>");
-    }
-    var Debug = function() {}, hasConsole = global.console !== undefined;
-    Debug.GENERAL = 0, Debug.DEBUG = 1, Debug.INFO = 2, Debug.WARN = 3, Debug.ERROR = 4, 
-    Debug.minLogLevel = Debug.GENERAL, Debug.enabled = !0, Debug.output = null, Debug.log = function(params) {
-        Debug.enabled && Debug.minLogLevel == Debug.GENERAL && hasConsole && (console.log(params), 
-        output("general", params));
-    }, Debug.debug = function(params) {
-        Debug.enabled && Debug.minLogLevel <= Debug.DEBUG && hasConsole && (console.debug(params), 
-        output("debug", params));
-    }, Debug.info = function(params) {
-        Debug.enabled && Debug.minLogLevel <= Debug.INFO && hasConsole && (console.info(params), 
-        output("info", params));
-    }, Debug.warn = function(params) {
-        Debug.enabled && Debug.minLogLevel <= Debug.WARN && hasConsole && (console.warn(params), 
-        output("warn", params));
-    }, Debug.error = function(params) {
-        Debug.enabled && hasConsole && (console.error(params), output("error", params));
-    }, Debug.assert = function(truth, params) {
-        hasConsole && Debug.enabled && console.assert && (console.assert(truth, params), 
-        truth || output("error", params));
-    }, Debug.dir = function(params) {
-        Debug.minLogLevel == Debug.GENERAL && hasConsole && Debug.enabled && console.dir(params);
-    }, Debug.trace = function(params) {
-        Debug.minLogLevel == Debug.GENERAL && hasConsole && Debug.enabled && console.trace(params);
-    }, global.Debug = Debug;
-}(window), function(global, doc, undefined) {
+!function(global, doc, undefined) {
     "use strict";
     var PageVisibility = function(onFocus, onBlur) {
         this.initialize(onFocus, onBlur);
@@ -91,7 +52,7 @@
     SwishSprite.LOAD_STARTED = "loadStarted", SwishSprite.LOADED = "loaded", SwishSprite.LOAD_PROGRESS = "loadProgress", 
     SwishSprite.COMPLETE = "complete", SwishSprite.PROGRESS = "progress", SwishSprite.PAUSED = "paused", 
     SwishSprite.RESUMED = "resumed", SwishSprite.STOPPED = "stopped", SwishSprite.STARTED = "started", 
-    SwishSprite.M4A_PADDING = .1, SwishSprite.VERSION = "1.0.3", p.manualUpdate = !1, 
+    SwishSprite.M4A_PADDING = .1, SwishSprite.VERSION = "1.0.4", p.manualUpdate = !1, 
     p.initialize = function(data) {
         var AudioUtils = cloudkid.AudioUtils;
         if (!AudioUtils.supported()) throw "HTML5 Audio is not supported!";
