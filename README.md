@@ -63,6 +63,10 @@ Audio codec support vary widely between browsers. We suggest using m4a, oga, mp3
 
 ##API Documentation
 
+### YUI Docs
+
+http://cloudkidstudio.github.io/SwishSprite/
+
 ###cloudkid.SwishSprite
 
 ####Methods
