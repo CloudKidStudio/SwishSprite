@@ -60,14 +60,6 @@
 	*/
 	_updatingPlay = false,
 	
-	/** 
-	* For iOS, if the load has been started by user action
-	* 
-	* @property {bool} _loadStartedByUserInteraction
-	* @private
-	*/
-	_loadStartedByUserInteraction = false,
-	
 	/**
 	* If the load has started
 	* 
@@ -343,7 +335,6 @@
 		}
 		
 		_instance = this;
-		_loadStartedByUserInteraction = false;
 		_loaded = false;
 		_paused = true;
 		_loadStarted = false;
@@ -595,42 +586,37 @@
 		if (DEBUG) 
 		{
 			Debug.log("SwishSprite.load");
-		}		
-		if (!_loadStartedByUserInteraction)
+		}
+		try 
 		{
-			_loadStartedByUserInteraction = true;
+			if (_loadInterval) 
+			{
+				global.clearInterval(_loadInterval);
+			}
+			_updatingLoad = true;
 			
-			try 
+			// Call the interval if we aren't updating manually
+			if (!this.manualUpdate)
 			{
-				if (_loadInterval) 
-				{
-					global.clearInterval(_loadInterval);
-				}
-				_updatingLoad = true;
-				
-				// Call the interval if we aren't updating manually
-				if (!this.manualUpdate)
-				{
-					_loadInterval = global.setInterval(onLoadChange, 10);
-				}			
-				
-				if (_sounds.silence !== undefined)
-				{
-					this.play("silence");
-					/*_audio.play();
-					_audio.pause();*/
-				}
-				else
-				{
-					throw "'silence' audio is required";
-				}
-			} 
-			catch (e) 
+				_loadInterval = global.setInterval(onLoadChange, 10);
+			}			
+			
+			if (_sounds.silence !== undefined)
 			{
-				if (DEBUG)
-				{
-					Debug.log("load: Audio did not play: " + e.message);
-				}
+				this.play("silence");
+				/*_audio.play();
+				_audio.pause();*/
+			}
+			else
+			{
+				throw "'silence' audio is required";
+			}
+		} 
+		catch (e) 
+		{
+			if (DEBUG)
+			{
+				Debug.log("load: Audio did not play: " + e.message);
 			}
 		}
 		return this;
@@ -748,6 +734,7 @@
 		
 			// Set timeout for if the sound suddently stop playing
 			_playTimeout = global.setTimeout(onPlayTimeout, _sounds[_playingAlias].duration * 1000 + 500);
+
 			
 			// Set an update interval for the playing
 			_updatingPlay = true;

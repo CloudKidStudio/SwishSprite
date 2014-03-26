@@ -48,11 +48,11 @@
     "use strict";
     var SwishSprite = function(data) {
         this.initialize(data);
-    }, p = SwishSprite.prototype = new cloudkid.EventDispatcher(), _audio = null, _paused = !0, _loaded = !1, _updatingLoad = !1, _updatingPlay = !1, _loadStartedByUserInteraction = !1, _loadStarted = !1, _playInterval = null, _loadInterval = null, _playTimeout = null, _loadAmount = 0, _sounds = null, _formatPadding = 0, _playingAlias = null, _scrubberMoved = null, _outOfRangeCount = null, _scrubberNotMovingCount = 0, _successfullyPlayedSound = !1, _scrubberStartTime = null, _checkInterval = null, _lastScrubberPos = null, _instance = null, _pageVisibility = null, _autoPaused = -1, _lastCurrentTime = null;
+    }, p = SwishSprite.prototype = new cloudkid.EventDispatcher(), _audio = null, _paused = !0, _loaded = !1, _updatingLoad = !1, _updatingPlay = !1, _loadStarted = !1, _playInterval = null, _loadInterval = null, _playTimeout = null, _loadAmount = 0, _sounds = null, _formatPadding = 0, _playingAlias = null, _scrubberMoved = null, _outOfRangeCount = null, _scrubberNotMovingCount = 0, _successfullyPlayedSound = !1, _scrubberStartTime = null, _checkInterval = null, _lastScrubberPos = null, _instance = null, _pageVisibility = null, _autoPaused = -1, _lastCurrentTime = null;
     SwishSprite.LOAD_STARTED = "loadStarted", SwishSprite.LOADED = "loaded", SwishSprite.LOAD_PROGRESS = "loadProgress", 
     SwishSprite.COMPLETE = "complete", SwishSprite.PROGRESS = "progress", SwishSprite.PAUSED = "paused", 
     SwishSprite.RESUMED = "resumed", SwishSprite.STOPPED = "stopped", SwishSprite.STARTED = "started", 
-    SwishSprite.M4A_PADDING = .1, SwishSprite.VERSION = "1.0.4", p.manualUpdate = !1, 
+    SwishSprite.M4A_PADDING = .1, SwishSprite.VERSION = "1.0.5", p.manualUpdate = !1, 
     p.initialize = function(data) {
         var AudioUtils = cloudkid.AudioUtils;
         if (!AudioUtils.supported()) throw "HTML5 Audio is not supported!";
@@ -60,8 +60,8 @@
         this.clear();
         var playableUrl = null !== data && "object" == typeof data ? AudioUtils.importSpriteMap(this, data) : AudioUtils.getPlayableURL(data);
         if (!playableUrl) throw "The supplied filetype is unsupported in this browser.";
-        _instance = this, _loadStartedByUserInteraction = !1, _loaded = !1, _paused = !0, 
-        _loadStarted = !1, _scrubberNotMovingCount = 0, _successfullyPlayedSound = !1, _pageVisibility = new cloudkid.PageVisibility(onFocus, onBlur), 
+        _instance = this, _loaded = !1, _paused = !0, _loadStarted = !1, _scrubberNotMovingCount = 0, 
+        _successfullyPlayedSound = !1, _pageVisibility = new cloudkid.PageVisibility(onFocus, onBlur), 
         _autoPaused = -1, _formatPadding = playableUrl.indexOf(".m4a") > -1 ? SwishSprite.M4A_PADDING : 0, 
         _audio = global.document.createElement("audio"), _audio.addEventListener("canplay", onLoadChange), 
         _audio.addEventListener("canplaythrough", onCanPlayThrough), _audio.addEventListener("loadeddata", onLoadChange), 
@@ -105,15 +105,13 @@
     }, p.clear = function() {
         return _sounds = {}, this;
     }, p.load = function() {
-        if (Debug.log("SwishSprite.load"), !_loadStartedByUserInteraction) {
-            _loadStartedByUserInteraction = !0;
-            try {
-                if (_loadInterval && global.clearInterval(_loadInterval), _updatingLoad = !0, this.manualUpdate || (_loadInterval = global.setInterval(onLoadChange, 10)), 
-                _sounds.silence === undefined) throw "'silence' audio is required";
-                this.play("silence");
-            } catch (e) {
-                Debug.log("load: Audio did not play: " + e.message);
-            }
+        Debug.log("SwishSprite.load");
+        try {
+            if (_loadInterval && global.clearInterval(_loadInterval), _updatingLoad = !0, this.manualUpdate || (_loadInterval = global.setInterval(onLoadChange, 10)), 
+            _sounds.silence === undefined) throw "'silence' audio is required";
+            this.play("silence");
+        } catch (e) {
+            Debug.log("load: Audio did not play: " + e.message);
         }
         return this;
     }, p.update = function() {
