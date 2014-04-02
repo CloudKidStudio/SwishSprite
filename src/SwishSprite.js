@@ -694,14 +694,14 @@
 			// Move the scrubber to the start time of the sound
 			try 
 			{
-				_lastCurrentTime = startTime;
-				//only set the current time if the audio element has at least started loading, otherwise it will be an error that gets caught
-				if(_audio.buffered && _audio.buffered.length)
-					_audio.currentTime = _lastCurrentTime;
+				_audio.currentTime = _lastCurrentTime = startTime;
 			} 
 			catch (ex) 
 			{
-				Debug.error("CurrentTimeSetException: Setting the current time has failed: " + ex);
+				if (DEBUG)//Error happens first time audio is loaded from user interaction. This is the only way to get Android Stock Browser working.
+				{
+					Debug.error("CurrentTimeSetException: Setting the current time has failed: " + ex);
+				}
 			}
 			
 			if (Math.abs(_audio.currentTime - startTime) > 0.5)
