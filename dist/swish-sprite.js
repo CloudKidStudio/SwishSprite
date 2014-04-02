@@ -1013,7 +1013,7 @@
 			} 
 			catch (ex) 
 			{
-				if (true)
+				if (true)//Error happens first time audio is loaded from user interaction. This is the only way to get Android Stock Browser working.
 				{
 					Debug.error("CurrentTimeSetException: Setting the current time has failed: " + ex);
 				}

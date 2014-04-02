@@ -52,7 +52,7 @@
     SwishSprite.LOAD_STARTED = "loadStarted", SwishSprite.LOADED = "loaded", SwishSprite.LOAD_PROGRESS = "loadProgress", 
     SwishSprite.COMPLETE = "complete", SwishSprite.PROGRESS = "progress", SwishSprite.PAUSED = "paused", 
     SwishSprite.RESUMED = "resumed", SwishSprite.STOPPED = "stopped", SwishSprite.STARTED = "started", 
-    SwishSprite.M4A_PADDING = .1, SwishSprite.VERSION = "1.0.5", p.manualUpdate = !1, 
+    SwishSprite.M4A_PADDING = .1, SwishSprite.VERSION = "1.0.6", p.manualUpdate = !1, 
     p.initialize = function(data) {
         var AudioUtils = cloudkid.AudioUtils;
         if (!AudioUtils.supported()) throw "HTML5 Audio is not supported!";
