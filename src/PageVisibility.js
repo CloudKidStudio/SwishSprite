@@ -5,11 +5,11 @@
 	/**
 	*  Handle the page visiblity change, if supported
 	*  
-	*  @class cloudkid.PageVisibility
+	*  @module cloudkid
+	*  @class PageVisibility
 	*  @constructor
 	*  @param {function} onFocus Callback when the page becomes visible
 	*  @param {function} onBlur Callback when the page loses visibility
-	*  @author Matt Moore <matt@cloudkid.com>
 	*/
 	var PageVisibility = function(onFocus, onBlur)
 	{

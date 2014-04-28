@@ -46,22 +46,63 @@
     }, namespace("cloudkid").EventDispatcher = EventDispatcher;
 }(window), function(global, undefined) {
     "use strict";
-    var SwishSprite = function(data) {
+    var AudioUtils = {};
+    AudioUtils.importSpriteMap = function(audio, config) {
+        if (config.resources === undefined) throw "Sprite configuration must contain 'resources': an array of file types";
+        var playableUrl = AudioUtils.getPlayableURL(config.resources);
+        if (config.spritemap === undefined) throw "Sprite configuration must contain 'spritemap': a dictionary of audio sprites";
+        var s, alias;
+        for (alias in config.spritemap) s = config.spritemap[alias], audio.setSound(alias, s.start, s.end - s.start, s.loop);
+        return playableUrl;
+    }, AudioUtils.supported = function() {
+        return _fileSupport;
+    };
+    var _fileSupport = function() {
+        var elem = document.createElement("audio"), bool = !1;
+        try {
+            bool = !!elem.canPlayType, bool && (bool = {}, bool.ogg = elem.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, ""), 
+            bool.oga = bool.ogg, bool.mp3 = elem.canPlayType("audio/mpeg;").replace(/^no$/, ""), 
+            bool.wav = elem.canPlayType('audio/wav; codecs="1"').replace(/^no$/, ""), bool.caf = elem.canPlayType("audio/x-caf").replace(/^no$/, ""), 
+            bool.m4a = (elem.canPlayType("audio/x-m4a;") || elem.canPlayType("audio/aac;")).replace(/^no$/, ""));
+        } catch (e) {}
+        return bool;
+    }();
+    AudioUtils.canPlayURL = function(url) {
+        if (!_fileSupport) return !1;
+        var ext = url.toLowerCase().match(/\.([a-z0-9]{3})(\?.*)?$/i);
+        return ext && ext.length ? (ext = ext[1], _fileSupport[ext] || !1) : !1;
+    }, AudioUtils.getPlayableURL = function(url) {
+        var i, len, result = null;
+        if (url instanceof Array) {
+            for (i = 0, len = url.length; len > i; i++) if (url[i] instanceof Object) {
+                if (AudioUtils.canPlayURL(url[i].url)) {
+                    result = url[i].url;
+                    break;
+                }
+            } else if (AudioUtils.canPlayURL(url[i])) {
+                result = url[i];
+                break;
+            }
+        } else AudioUtils.canPlayURL(url) && (result = url);
+        return result;
+    }, namespace("cloudkid").AudioUtils = AudioUtils;
+}(window), function(global, undefined) {
+    "use strict";
+    var EventDispatcher = cloudkid.EventDispatcher, PageVisibility = cloudkid.PageVisibility, AudioUtils = cloudkid.AudioUtils, SwishSprite = function(data) {
         this.initialize(data);
-    }, p = SwishSprite.prototype = new cloudkid.EventDispatcher(), _audio = null, _paused = !0, _loaded = !1, _updatingLoad = !1, _updatingPlay = !1, _loadStarted = !1, _playInterval = null, _loadInterval = null, _playTimeout = null, _loadAmount = 0, _sounds = null, _formatPadding = 0, _playingAlias = null, _scrubberMoved = null, _outOfRangeCount = null, _scrubberNotMovingCount = 0, _successfullyPlayedSound = !1, _scrubberStartTime = null, _checkInterval = null, _lastScrubberPos = null, _instance = null, _pageVisibility = null, _autoPaused = -1, _lastCurrentTime = null;
+    }, p = SwishSprite.prototype = new EventDispatcher(), _audio = null, _paused = !0, _loaded = !1, _updatingLoad = !1, _updatingPlay = !1, _loadStarted = !1, _playInterval = null, _loadInterval = null, _playTimeout = null, _loadAmount = 0, _sounds = null, _formatPadding = 0, _playingAlias = null, _scrubberMoved = null, _outOfRangeCount = null, _scrubberNotMovingCount = 0, _successfullyPlayedSound = !1, _scrubberStartTime = null, _checkInterval = null, _lastScrubberPos = null, _instance = null, _pageVisibility = null, _autoPaused = -1, _lastCurrentTime = null;
     SwishSprite.LOAD_STARTED = "loadStarted", SwishSprite.LOADED = "loaded", SwishSprite.LOAD_PROGRESS = "loadProgress", 
     SwishSprite.COMPLETE = "complete", SwishSprite.PROGRESS = "progress", SwishSprite.PAUSED = "paused", 
     SwishSprite.RESUMED = "resumed", SwishSprite.STOPPED = "stopped", SwishSprite.STARTED = "started", 
     SwishSprite.M4A_PADDING = .1, SwishSprite.VERSION = "1.0.6", p.manualUpdate = !1, 
     p.initialize = function(data) {
-        var AudioUtils = cloudkid.AudioUtils;
         if (!AudioUtils.supported()) throw "HTML5 Audio is not supported!";
         if (null !== _instance) throw "SwishSprite instance is already create. Destroy before re-creating";
         this.clear();
         var playableUrl = null !== data && "object" == typeof data ? AudioUtils.importSpriteMap(this, data) : AudioUtils.getPlayableURL(data);
         if (!playableUrl) throw "The supplied filetype is unsupported in this browser.";
         _instance = this, _loaded = !1, _paused = !0, _loadStarted = !1, _scrubberNotMovingCount = 0, 
-        _successfullyPlayedSound = !1, _pageVisibility = new cloudkid.PageVisibility(onFocus, onBlur), 
+        _successfullyPlayedSound = !1, _pageVisibility = new PageVisibility(onFocus, onBlur), 
         _autoPaused = -1, _formatPadding = playableUrl.indexOf(".m4a") > -1 ? SwishSprite.M4A_PADDING : 0, 
         _audio = global.document.createElement("audio"), _audio.addEventListener("canplay", onLoadChange), 
         _audio.addEventListener("canplaythrough", onCanPlayThrough), _audio.addEventListener("loadeddata", onLoadChange), 
@@ -212,46 +253,4 @@
         }, 0)) : (_instance.stop(), _instance.trigger(SwishSprite.PROGRESS, 1), _instance.trigger(SwishSprite.COMPLETE));
     };
     namespace("cloudkid").SwishSprite = SwishSprite;
-}(window), function(global, undefined) {
-    "use strict";
-    var AudioUtils = {};
-    AudioUtils.importSpriteMap = function(audio, config) {
-        if (config.resources === undefined) throw "Sprite configuration must contain 'resources': an array of file types";
-        var playableUrl = AudioUtils.getPlayableURL(config.resources);
-        if (config.spritemap === undefined) throw "Sprite configuration must contain 'spritemap': a dictionary of audio sprites";
-        var s, alias;
-        for (alias in config.spritemap) s = config.spritemap[alias], audio.setSound(alias, s.start, s.end - s.start, s.loop);
-        return playableUrl;
-    }, AudioUtils.supported = function() {
-        return _fileSupport;
-    };
-    var _fileSupport = function() {
-        var elem = document.createElement("audio"), bool = !1;
-        try {
-            bool = !!elem.canPlayType, bool && (bool = {}, bool.ogg = elem.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, ""), 
-            bool.oga = bool.ogg, bool.mp3 = elem.canPlayType("audio/mpeg;").replace(/^no$/, ""), 
-            bool.wav = elem.canPlayType('audio/wav; codecs="1"').replace(/^no$/, ""), bool.caf = elem.canPlayType("audio/x-caf").replace(/^no$/, ""), 
-            bool.m4a = (elem.canPlayType("audio/x-m4a;") || elem.canPlayType("audio/aac;")).replace(/^no$/, ""));
-        } catch (e) {}
-        return bool;
-    }();
-    AudioUtils.canPlayURL = function(url) {
-        if (!_fileSupport) return !1;
-        var ext = url.toLowerCase().match(/\.([a-z0-9]{3})(\?.*)?$/i);
-        return ext && ext.length ? (ext = ext[1], _fileSupport[ext] || !1) : !1;
-    }, AudioUtils.getPlayableURL = function(url) {
-        var i, len, result = null;
-        if (url instanceof Array) {
-            for (i = 0, len = url.length; len > i; i++) if (url[i] instanceof Object) {
-                if (AudioUtils.canPlayURL(url[i].url)) {
-                    result = url[i].url;
-                    break;
-                }
-            } else if (AudioUtils.canPlayURL(url[i])) {
-                result = url[i];
-                break;
-            }
-        } else AudioUtils.canPlayURL(url) && (result = url);
-        return result;
-    }, namespace("cloudkid").AudioUtils = AudioUtils;
 }(window);

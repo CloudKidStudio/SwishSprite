@@ -6,7 +6,8 @@
 	*  The EventDispatcher mirrors the functionality of AS3 and CreateJS's EventDispatcher, 
 	*  but is more robust in terms of inputs for the `on()` and `off()` methods.
 	*  
-	*  @class cloudkid.EventDispatcher
+	*  @module cloudkid
+	*  @class EventDispatcher
 	*  @constructor
 	*/
 	var EventDispatcher = function(){},
@@ -47,7 +48,7 @@
 	*  @param {String|object} name The type of event (can be multiple events separated by spaces), 
 	*          or a map of events to handlers
 	*  @param {Function|Array*} callback The callback function when event is fired or an array of callbacks.
-	*  @return {cloudkid.EventDispatcher} Return this EventDispatcher
+	*  @return {EventDispatcher} Return this EventDispatcher
 	*/
 	p.on = function(name, callback)
 	{

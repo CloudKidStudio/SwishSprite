@@ -2,15 +2,20 @@
 	
 	"use strict";
 	
+	// Class imports
+	var EventDispatcher = cloudkid.EventDispatcher,
+		PageVisibility = cloudkid.PageVisibility,
+		AudioUtils = cloudkid.AudioUtils;
+
 	/**
 	*  This class is responsible for playback of an audiosprite 
 	*  file (multiple sounds in a single timeline) using HTML5 audio
 	*  
-	*  @class cloudkid.SwishSprite
+	*  @module cloudkid
+	*  @class SwishSprite
 	*  @constructor
-	*  @extends cloudkid.EventDispatcher
+	*  @extends EventDispatcher
 	*  @param {*} data The name of the audio file to load, array of resources, or a spritemap
-	*  @author Matt Moore <matt@cloudkid.com>
 	*/
 	var SwishSprite = function(data)
 	{
@@ -18,7 +23,7 @@
 	},
 	
 	// Reference to the prototype, extends event dispatcher 
-	p = SwishSprite.prototype = new cloudkid.EventDispatcher(),
+	p = SwishSprite.prototype = new EventDispatcher(),
 	
 	/**
 	* The audio element
@@ -182,7 +187,7 @@
 	/**
 	* The singleton instance of the audiosprite 
 	* 
-	* @property {cloudkid.SwishSprite} _instance
+	* @property {SwishSprite} _instance
 	* @private
 	*/
 	_instance = null,
@@ -190,7 +195,7 @@
 	/**
 	* Instance of page visibility for pause/resuming on page blur/focus
 	* 
-	* @property {cloudkid.PageVisibility} _pageVisibility
+	* @property {PageVisibility} _pageVisibility
 	* @private
 	*/
 	_pageVisibility = null,
@@ -310,9 +315,7 @@
 	*  @param {*} data The name of the audio file to load, array of resources, or a spritemap
 	*/
 	p.initialize = function(data)
-	{
-		var AudioUtils = cloudkid.AudioUtils;
-		
+	{		
 		if (!AudioUtils.supported())
 		{
 			throw "HTML5 Audio is not supported!";
@@ -340,7 +343,7 @@
 		_loadStarted = false;
 		_scrubberNotMovingCount = 0;
 		_successfullyPlayedSound = false;
-		_pageVisibility = new cloudkid.PageVisibility(onFocus, onBlur);
+		_pageVisibility = new PageVisibility(onFocus, onBlur);
 		_autoPaused = -1;
 		_formatPadding = playableUrl.indexOf(".m4a") > -1 ? SwishSprite.M4A_PADDING : 0;
 		
@@ -377,7 +380,7 @@
 	*  Mute the audio, not available on all devices
 	*  
 	*  @method mute
-	*  @return {cloudkid.SwishSprite} Return this SwishSprite
+	*  @return {SwishSprite} Return this SwishSprite
 	*/
 	p.mute = function()
 	{
@@ -389,7 +392,7 @@
 	*  Unmute the audio, not available on all devices
 	*  
 	*  @method unmute
-	*  @return {cloudkid.SwishSprite} Return this SwishSprite
+	*  @return {SwishSprite} Return this SwishSprite
 	*/
 	p.unmute = function()
 	{
@@ -401,7 +404,7 @@
 	*  Pause the sound playback
 	*  
 	*  @method pause
-	*  @return {cloudkid.SwishSprite} Return this SwishSprite
+	*  @return {SwishSprite} Return this SwishSprite
 	*/
 	p.pause = function()
 	{
@@ -435,7 +438,7 @@
 	*  Unpause the audio playback
 	*  
 	*  @method resume
-	*  @return {cloudkid.SwishSprite} Return this SwishSprite
+	*  @return {SwishSprite} Return this SwishSprite
 	*/
 	p.resume = function()
 	{
@@ -455,7 +458,7 @@
 	*  Stop the sound playback clear the current sound playing
 	*  
 	*  @method stop
-	*  @return {cloudkid.SwishSprite} Return this SwishSprite
+	*  @return {SwishSprite} Return this SwishSprite
 	*/
 	p.stop = function()
 	{
@@ -534,7 +537,7 @@
 	*  @param {int} startTime Sound's start time
 	*  @param {int} duration Length of the sound
 	*  @param {bool} isLoop Whether the sound should loop
-	*  @return {cloudkid.SwishSprite} Return this SwishSprite
+	*  @return {SwishSprite} Return this SwishSprite
 	*/
 	p.setSound = function(alias, startTime, duration, isLoop)
 	{
@@ -567,7 +570,7 @@
 	*  Clear all of the current sounds
 	*  
 	*  @method clear
-	*  @return {cloudkid.SwishSprite} Return this SwishSprite
+	*  @return {SwishSprite} Return this SwishSprite
 	*/
 	p.clear = function()
 	{
@@ -579,7 +582,7 @@
 	*  For iOS, start loading the audio via user click
 	*  
 	*  @method load
-	*  @return {cloudkid.SwishSprite} Return this SwishSprite
+	*  @return {SwishSprite} Return this SwishSprite
 	*/
 	p.load = function()
 	{
