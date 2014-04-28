@@ -793,7 +793,7 @@ kbd .cmd {
 }
 .apis a:hover,
 .apis a:focus {
-  background: #444444;
+  background: #1DCBE0;
   color: white !important;
   color: #444444;
   outline: none;

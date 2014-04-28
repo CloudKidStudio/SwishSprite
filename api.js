@@ -1,12 +1,20 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
-        "cloudkid.AudioUtils",
-        "cloudkid.EventDispatcher",
-        "cloudkid.PageVisibility",
-        "cloudkid.SwishSprite"
+        "AudioUtils",
+        "EventDispatcher",
+        "PageVisibility",
+        "SwishSprite"
     ],
-    "modules": [],
-    "allModules": []
+    "modules": [
+        "cloudkid"
+    ],
+    "allModules": [
+        {
+            "displayName": "cloudkid",
+            "name": "cloudkid",
+            "description": "A collection of utilities for detecting the availability of HTML5 audio"
+        }
+    ]
 } };
 });
