@@ -1,3 +1,6 @@
+/**
+*  @module cloudkid
+*/
 (function(global, undefined){
 	
 	"use strict";
@@ -11,7 +14,6 @@
 	*  This class is responsible for playback of an audiosprite 
 	*  file (multiple sounds in a single timeline) using HTML5 audio
 	*  
-	*  @module cloudkid
 	*  @class SwishSprite
 	*  @constructor
 	*  @extends EventDispatcher

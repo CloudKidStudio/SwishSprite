@@ -1,3 +1,6 @@
+/**
+*  @module cloudkid
+*/
 (function(global, doc, undefined){
 	
 	"use strict";
@@ -5,7 +8,6 @@
 	/**
 	*  Handle the page visiblity change, if supported
 	*  
-	*  @module cloudkid
 	*  @class PageVisibility
 	*  @constructor
 	*  @param {function} onFocus Callback when the page becomes visible

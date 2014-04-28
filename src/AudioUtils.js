@@ -1,3 +1,6 @@
+/**
+*  @module cloudkid
+*/
 (function(global, undefined){
 	
 	"use strict";
@@ -5,7 +8,6 @@
 	/** 
 	*  A collection of utilities for detecting the availability of HTML5 audio
 	*  
-	*  @module cloudkid
 	*  @class AudioUtils
 	*/
 	var AudioUtils = {};
