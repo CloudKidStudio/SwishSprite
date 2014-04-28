@@ -91,10 +91,14 @@
     
 
     
+        <div class="extends">
+            Extends <a href="../classes/EventDispatcher.html" class="crosslink">EventDispatcher</a>
+        </div>
+    
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_SwishSprite.js.html#l10"><code>SwishSprite:10</code></a>
+            Defined in: <a href="../files/src_SwishSprite.js.html#l13"><code>SwishSprite:13</code></a>
         </div>
     
 
@@ -115,6 +119,97 @@ file (multiple sounds in a single timeline) using HTML5 audio</p>
 
 </div>
 
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_SwishSprite" class="method item">
+    <h3 class="name"><code>SwishSprite</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>data</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_SwishSprite.js.html#l13"><code>SwishSprite:13</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">data</code>
+                        <span class="type"></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The name of the audio file to load, array of resources, or a spritemap</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+    </div>
 
 
 <div id="classdocs" class="tabview">
@@ -141,7 +236,14 @@ file (multiple sounds in a single timeline) using HTML5 audio</p>
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__callbackIndex">_callbackIndex</a>
+
+                                
+                                
+                            </li>
                         
                             <li class="index-item method">
                                 <a href="#method_checkUpdate">checkUpdate</a>
@@ -215,6 +317,20 @@ file (multiple sounds in a single timeline) using HTML5 audio</p>
                         
                             <li class="index-item method">
                                 <a href="#method_mute">mute</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_off">off</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_on">on</a>
 
                                 
                                 
@@ -325,6 +441,20 @@ file (multiple sounds in a single timeline) using HTML5 audio</p>
                                 
                             </li>
                         
+                            <li class="index-item method inherited">
+                                <a href="#method_trigger">trigger</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method_type">type</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method">
                                 <a href="#method_unmute">unmute</a>
 
@@ -347,7 +477,7 @@ file (multiple sounds in a single timeline) using HTML5 audio</p>
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
-                    <ul class="index-list properties">
+                    <ul class="index-list properties extends">
                         
                             <li class="index-item property private">
                                 <a href="#property__audio">_audio</a>
@@ -393,6 +523,13 @@ file (multiple sounds in a single timeline) using HTML5 audio</p>
                         
                             <li class="index-item property private">
                                 <a href="#property__lastScrubberPos">_lastScrubberPos</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private inherited">
+                                <a href="#property__listeners">_listeners</a>
 
                                 
                                 
@@ -552,7 +689,7 @@ file (multiple sounds in a single timeline) using HTML5 audio</p>
                 <div class="index-section events">
                     <h3>Events</h3>
 
-                    <ul class="index-list events">
+                    <ul class="index-list events extends">
                         
                             <li class="index-item event">
                                 <a href="#event_complete">complete</a>
@@ -627,6 +764,134 @@ file (multiple sounds in a single timeline) using HTML5 audio</p>
                 <h2 class="off-left">Methods</h2>
 
                 
+                    <div id="method__callbackIndex" class="method item private inherited">
+    <h3 class="name"><code>_callbackIndex</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>name</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>callback</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Int</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/EventDispatcher.html#method__callbackIndex">EventDispatcher</a>:
+            
+        
+        
+        <a href="../files/src_EventDispatcher.js.html#l163"><code>_callbackIndex:163</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns callback array index.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Event name.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">callback</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Function</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Int</span>:
+                    
+                    <p>Callback array index, or -1 if isn&#39;t registered.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method_checkUpdate" class="method item">
     <h3 class="name"><code>checkUpdate</code></h3>
 
@@ -659,7 +924,7 @@ file (multiple sounds in a single timeline) using HTML5 audio</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l953"><code>checkUpdate:953</code></a>
+        <a href="../files/src_SwishSprite.js.html#l955"><code>checkUpdate:955</code></a>
         
         </p>
 
@@ -718,7 +983,7 @@ file (multiple sounds in a single timeline) using HTML5 audio</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l569"><code>clear:569</code></a>
+        <a href="../files/src_SwishSprite.js.html#l571"><code>clear:571</code></a>
         
         </p>
 
@@ -787,7 +1052,7 @@ file (multiple sounds in a single timeline) using HTML5 audio</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l835"><code>destroy:835</code></a>
+        <a href="../files/src_SwishSprite.js.html#l837"><code>destroy:837</code></a>
         
         </p>
 
@@ -847,7 +1112,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l368"><code>getAudioElement:368</code></a>
+        <a href="../files/src_SwishSprite.js.html#l370"><code>getAudioElement:370</code></a>
         
         </p>
 
@@ -930,7 +1195,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l478"><code>getLength:478</code></a>
+        <a href="../files/src_SwishSprite.js.html#l480"><code>getLength:480</code></a>
         
         </p>
 
@@ -1027,7 +1292,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l498"><code>getPosition:498</code></a>
+        <a href="../files/src_SwishSprite.js.html#l500"><code>getPosition:500</code></a>
         
         </p>
 
@@ -1110,7 +1375,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l513"><code>getSound:513</code></a>
+        <a href="../files/src_SwishSprite.js.html#l515"><code>getSound:515</code></a>
         
         </p>
 
@@ -1213,7 +1478,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l311"><code>initialize:311</code></a>
+        <a href="../files/src_SwishSprite.js.html#l313"><code>initialize:313</code></a>
         
         </p>
 
@@ -1296,7 +1561,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l887"><code>isLoaded:887</code></a>
+        <a href="../files/src_SwishSprite.js.html#l889"><code>isLoaded:889</code></a>
         
         </p>
 
@@ -1369,7 +1634,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l581"><code>load:581</code></a>
+        <a href="../files/src_SwishSprite.js.html#l583"><code>load:583</code></a>
         
         </p>
 
@@ -1442,7 +1707,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l379"><code>mute:379</code></a>
+        <a href="../files/src_SwishSprite.js.html#l381"><code>mute:381</code></a>
         
         </p>
 
@@ -1469,6 +1734,241 @@ must recreate the SwishSprite</p>
                         <span class="type"><a href="../classes/SwishSprite.html" class="crosslink">SwishSprite</a></span>:
                     
                     <p>Return this SwishSprite</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_off" class="method item inherited">
+    <h3 class="name"><code>off</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>name</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>callback</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/EventDispatcher.html#method_off">EventDispatcher</a>:
+            
+        
+        
+        <a href="../files/src_EventDispatcher.js.html#l94"><code>off:94</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Remove the event listener</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String*</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The type of event string separated by spaces, if no name is specifed remove all listeners.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">callback</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array*</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The listener function or collection of callback functions</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_on" class="method item inherited">
+    <h3 class="name"><code>on</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>name</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>callback</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/EventDispatcher.html" class="crosslink">EventDispatcher</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/EventDispatcher.html#method_on">EventDispatcher</a>:
+            
+        
+        
+        <a href="../files/src_EventDispatcher.js.html#l46"><code>on:46</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Add an event listener</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The type of event (can be multiple events separated by spaces), 
+        or a map of events to handlers</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">callback</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array*</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The callback function when event is fired or an array of callbacks.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/EventDispatcher.html" class="crosslink">EventDispatcher</a></span>:
+                    
+                    <p>Return this EventDispatcher</p>
 
                 
             </div>
@@ -1511,7 +2011,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l918"><code>onBlur:918</code></a>
+        <a href="../files/src_SwishSprite.js.html#l920"><code>onBlur:920</code></a>
         
         </p>
 
@@ -1566,7 +2066,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l1087"><code>onCanPlayThrough:1087</code></a>
+        <a href="../files/src_SwishSprite.js.html#l1089"><code>onCanPlayThrough:1089</code></a>
         
         </p>
 
@@ -1621,7 +2121,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l935"><code>onFocus:935</code></a>
+        <a href="../files/src_SwishSprite.js.html#l937"><code>onFocus:937</code></a>
         
         </p>
 
@@ -1676,7 +2176,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l1017"><code>onLoadChange:1017</code></a>
+        <a href="../files/src_SwishSprite.js.html#l1019"><code>onLoadChange:1019</code></a>
         
         </p>
 
@@ -1731,7 +2231,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l897"><code>onLoadStarted:897</code></a>
+        <a href="../files/src_SwishSprite.js.html#l899"><code>onLoadStarted:899</code></a>
         
         </p>
 
@@ -1786,7 +2286,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l1074"><code>onPlayTimeout:1074</code></a>
+        <a href="../files/src_SwishSprite.js.html#l1076"><code>onPlayTimeout:1076</code></a>
         
         </p>
 
@@ -1841,7 +2341,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l1100"><code>onStalled:1100</code></a>
+        <a href="../files/src_SwishSprite.js.html#l1102"><code>onStalled:1102</code></a>
         
         </p>
 
@@ -1900,7 +2400,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l403"><code>pause:403</code></a>
+        <a href="../files/src_SwishSprite.js.html#l405"><code>pause:405</code></a>
         
         </p>
 
@@ -1989,7 +2489,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l644"><code>play:644</code></a>
+        <a href="../files/src_SwishSprite.js.html#l646"><code>play:646</code></a>
         
         </p>
 
@@ -2098,7 +2598,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l759"><code>playUpdate:759</code></a>
+        <a href="../files/src_SwishSprite.js.html#l761"><code>playUpdate:761</code></a>
         
         </p>
 
@@ -2163,7 +2663,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l557"><code>prepare:557</code></a>
+        <a href="../files/src_SwishSprite.js.html#l559"><code>prepare:559</code></a>
         
         </p>
 
@@ -2246,7 +2746,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l437"><code>resume:437</code></a>
+        <a href="../files/src_SwishSprite.js.html#l439"><code>resume:439</code></a>
         
         </p>
 
@@ -2347,7 +2847,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l532"><code>setSound:532</code></a>
+        <a href="../files/src_SwishSprite.js.html#l534"><code>setSound:534</code></a>
         
         </p>
 
@@ -2488,7 +2988,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l1113"><code>soundPlayComplete:1113</code></a>
+        <a href="../files/src_SwishSprite.js.html#l1115"><code>soundPlayComplete:1115</code></a>
         
         </p>
 
@@ -2547,7 +3047,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l457"><code>stop:457</code></a>
+        <a href="../files/src_SwishSprite.js.html#l459"><code>stop:459</code></a>
         
         </p>
 
@@ -2574,6 +3074,219 @@ must recreate the SwishSprite</p>
                         <span class="type"><a href="../classes/SwishSprite.html" class="crosslink">SwishSprite</a></span>:
                     
                     <p>Return this SwishSprite</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_trigger" class="method item inherited">
+    <h3 class="name"><code>trigger</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>type</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>params</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/EventDispatcher.html#method_trigger">EventDispatcher</a>:
+            
+        
+        
+        <a href="../files/src_EventDispatcher.js.html#l27"><code>trigger:27</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Dispatch an event</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">type</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The event string name,</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">params</code>
+                        <span class="type"></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Additional parameters</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_type" class="method item private inherited">
+    <h3 class="name"><code>type</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/EventDispatcher.html#method_type">EventDispatcher</a>:
+            
+        
+        
+        <a href="../files/src_EventDispatcher.js.html#l142"><code>type:142</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Return type of the value.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type"></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    
+                    <p>The type</p>
 
                 
             </div>
@@ -2620,7 +3333,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l391"><code>unmute:391</code></a>
+        <a href="../files/src_SwishSprite.js.html#l393"><code>unmute:393</code></a>
         
         </p>
 
@@ -2689,7 +3402,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l628"><code>update:628</code></a>
+        <a href="../files/src_SwishSprite.js.html#l630"><code>update:630</code></a>
         
         </p>
 
@@ -2745,7 +3458,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l28"><code>_audio:28</code></a>
+        <a href="../files/src_SwishSprite.js.html#l30"><code>_audio:30</code></a>
         
         </p>
 
@@ -2792,7 +3505,7 @@ must recreate the SwishSprite</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l203"><code>_autoPaused:203</code></a>
+        <a href="../files/src_SwishSprite.js.html#l205"><code>_autoPaused:205</code></a>
         
         </p>
 
@@ -2841,7 +3554,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l171"><code>_checkInterval:171</code></a>
+        <a href="../files/src_SwishSprite.js.html#l173"><code>_checkInterval:173</code></a>
         
         </p>
 
@@ -2888,7 +3601,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l116"><code>_formatPadding:116</code></a>
+        <a href="../files/src_SwishSprite.js.html#l118"><code>_formatPadding:118</code></a>
         
         </p>
 
@@ -2935,7 +3648,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l187"><code>_instance:187</code></a>
+        <a href="../files/src_SwishSprite.js.html#l189"><code>_instance:189</code></a>
         
         </p>
 
@@ -2982,7 +3695,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l213"><code>_lastCurrentTime:213</code></a>
+        <a href="../files/src_SwishSprite.js.html#l215"><code>_lastCurrentTime:215</code></a>
         
         </p>
 
@@ -3029,7 +3742,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l179"><code>_lastScrubberPos:179</code></a>
+        <a href="../files/src_SwishSprite.js.html#l181"><code>_lastScrubberPos:181</code></a>
         
         </p>
 
@@ -3040,6 +3753,50 @@ playing before blur, and 1 means paused before blur</p>
 
     <div class="description">
         <p>The position of the last scrubber</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__listeners" class="property item private inherited">
+    <h3 class="name"><code>_listeners</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/EventDispatcher.html#property__listeners">EventDispatcher</a>:
+            
+        
+        
+        <a href="../files/src_EventDispatcher.js.html#l20"><code>_listeners:20</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The collection of listeners</p>
 
     </div>
 
@@ -3076,7 +3833,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l100"><code>_loadAmount:100</code></a>
+        <a href="../files/src_SwishSprite.js.html#l102"><code>_loadAmount:102</code></a>
         
         </p>
 
@@ -3123,7 +3880,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l44"><code>_loaded:44</code></a>
+        <a href="../files/src_SwishSprite.js.html#l46"><code>_loaded:46</code></a>
         
         </p>
 
@@ -3170,7 +3927,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l84"><code>_loadInterval:84</code></a>
+        <a href="../files/src_SwishSprite.js.html#l86"><code>_loadInterval:86</code></a>
         
         </p>
 
@@ -3217,7 +3974,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l68"><code>_loadStarted:68</code></a>
+        <a href="../files/src_SwishSprite.js.html#l70"><code>_loadStarted:70</code></a>
         
         </p>
 
@@ -3264,7 +4021,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l140"><code>_outOfRangeCount:140</code></a>
+        <a href="../files/src_SwishSprite.js.html#l142"><code>_outOfRangeCount:142</code></a>
         
         </p>
 
@@ -3311,7 +4068,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l195"><code>_pageVisibility:195</code></a>
+        <a href="../files/src_SwishSprite.js.html#l197"><code>_pageVisibility:197</code></a>
         
         </p>
 
@@ -3358,7 +4115,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l36"><code>_paused:36</code></a>
+        <a href="../files/src_SwishSprite.js.html#l38"><code>_paused:38</code></a>
         
         </p>
 
@@ -3405,7 +4162,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l124"><code>_playingAlias:124</code></a>
+        <a href="../files/src_SwishSprite.js.html#l126"><code>_playingAlias:126</code></a>
         
         </p>
 
@@ -3452,7 +4209,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l76"><code>_playInterval:76</code></a>
+        <a href="../files/src_SwishSprite.js.html#l78"><code>_playInterval:78</code></a>
         
         </p>
 
@@ -3499,7 +4256,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l92"><code>_playTimeout:92</code></a>
+        <a href="../files/src_SwishSprite.js.html#l94"><code>_playTimeout:94</code></a>
         
         </p>
 
@@ -3546,7 +4303,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l132"><code>_scrubberMoved:132</code></a>
+        <a href="../files/src_SwishSprite.js.html#l134"><code>_scrubberMoved:134</code></a>
         
         </p>
 
@@ -3593,7 +4350,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l147"><code>_scrubberNotMovingCount:147</code></a>
+        <a href="../files/src_SwishSprite.js.html#l149"><code>_scrubberNotMovingCount:149</code></a>
         
         </p>
 
@@ -3640,7 +4397,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l163"><code>_scrubberStartTime:163</code></a>
+        <a href="../files/src_SwishSprite.js.html#l165"><code>_scrubberStartTime:165</code></a>
         
         </p>
 
@@ -3687,7 +4444,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l108"><code>_sounds:108</code></a>
+        <a href="../files/src_SwishSprite.js.html#l110"><code>_sounds:110</code></a>
         
         </p>
 
@@ -3734,7 +4491,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l155"><code>_successfullyPlayedSound:155</code></a>
+        <a href="../files/src_SwishSprite.js.html#l157"><code>_successfullyPlayedSound:157</code></a>
         
         </p>
 
@@ -3781,7 +4538,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l52"><code>_updatingLoad:52</code></a>
+        <a href="../files/src_SwishSprite.js.html#l54"><code>_updatingLoad:54</code></a>
         
         </p>
 
@@ -3828,7 +4585,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l60"><code>_updatingPlay:60</code></a>
+        <a href="../files/src_SwishSprite.js.html#l62"><code>_updatingPlay:62</code></a>
         
         </p>
 
@@ -3877,7 +4634,7 @@ playing before blur, and 1 means paused before blur</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l284"><code>M4A_PADDING:284</code></a>
+        <a href="../files/src_SwishSprite.js.html#l286"><code>M4A_PADDING:286</code></a>
         
         </p>
 
@@ -3923,7 +4680,7 @@ time for the Kindle Fire who likes to end the sound too early</p>
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l303"><code>manualUpdate:303</code></a>
+        <a href="../files/src_SwishSprite.js.html#l305"><code>manualUpdate:305</code></a>
         
         </p>
 
@@ -3973,7 +4730,7 @@ if you&#39;re already running a frame update call (such as request animation fra
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l294"><code>VERSION:294</code></a>
+        <a href="../files/src_SwishSprite.js.html#l296"><code>VERSION:296</code></a>
         
         </p>
 
@@ -4028,7 +4785,7 @@ if you&#39;re already running a frame update call (such as request animation fra
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l242"><code>complete:242</code></a>
+        <a href="../files/src_SwishSprite.js.html#l244"><code>complete:244</code></a>
         
         </p>
 
@@ -4072,7 +4829,7 @@ if you&#39;re already running a frame update call (such as request animation fra
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l228"><code>loaded:228</code></a>
+        <a href="../files/src_SwishSprite.js.html#l230"><code>loaded:230</code></a>
         
         </p>
 
@@ -4116,7 +4873,7 @@ if you&#39;re already running a frame update call (such as request animation fra
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l235"><code>loadProgress:235</code></a>
+        <a href="../files/src_SwishSprite.js.html#l237"><code>loadProgress:237</code></a>
         
         </p>
 
@@ -4160,7 +4917,7 @@ if you&#39;re already running a frame update call (such as request animation fra
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l221"><code>loadStarted:221</code></a>
+        <a href="../files/src_SwishSprite.js.html#l223"><code>loadStarted:223</code></a>
         
         </p>
 
@@ -4204,7 +4961,7 @@ if you&#39;re already running a frame update call (such as request animation fra
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l256"><code>paused:256</code></a>
+        <a href="../files/src_SwishSprite.js.html#l258"><code>paused:258</code></a>
         
         </p>
 
@@ -4248,7 +5005,7 @@ if you&#39;re already running a frame update call (such as request animation fra
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l249"><code>progress:249</code></a>
+        <a href="../files/src_SwishSprite.js.html#l251"><code>progress:251</code></a>
         
         </p>
 
@@ -4292,7 +5049,7 @@ if you&#39;re already running a frame update call (such as request animation fra
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l263"><code>resumed:263</code></a>
+        <a href="../files/src_SwishSprite.js.html#l265"><code>resumed:265</code></a>
         
         </p>
 
@@ -4336,7 +5093,7 @@ if you&#39;re already running a frame update call (such as request animation fra
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l277"><code>started:277</code></a>
+        <a href="../files/src_SwishSprite.js.html#l279"><code>started:279</code></a>
         
         </p>
 
@@ -4380,7 +5137,7 @@ if you&#39;re already running a frame update call (such as request animation fra
             
         
         
-        <a href="../files/src_SwishSprite.js.html#l270"><code>stopped:270</code></a>
+        <a href="../files/src_SwishSprite.js.html#l272"><code>stopped:272</code></a>
         
         </p>
 

@@ -12,8 +12,7 @@ YUI.add("yuidoc-meta", function(Y) {
     "allModules": [
         {
             "displayName": "cloudkid",
-            "name": "cloudkid",
-            "description": "A collection of utilities for detecting the availability of HTML5 audio"
+            "name": "cloudkid"
         }
     ]
 } };

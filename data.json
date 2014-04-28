@@ -59,22 +59,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src/SwishSprite.js",
-            "line": 10,
-            "description": "A collection of utilities for detecting the availability of HTML5 audio",
-            "is_constructor": 1,
-            "params": [
-                {
-                    "name": "onFocus",
-                    "description": "Callback when the page becomes visible",
-                    "type": "Function"
-                },
-                {
-                    "name": "onBlur",
-                    "description": "Callback when the page loses visibility",
-                    "type": "Function"
-                }
-            ],
-            "extends": "EventDispatcher"
+            "line": 13
         }
     },
     "classes": {
@@ -89,7 +74,7 @@
             "module": "cloudkid",
             "namespace": "",
             "file": "src/AudioUtils.js",
-            "line": 5,
+            "line": 8,
             "description": "A collection of utilities for detecting the availability of HTML5 audio"
         },
         "EventDispatcher": {
@@ -103,8 +88,9 @@
             "module": "cloudkid",
             "namespace": "",
             "file": "src/EventDispatcher.js",
-            "line": 5,
-            "description": "The EventDispatcher mirrors the functionality of AS3 and CreateJS's EventDispatcher, \nbut is more robust in terms of inputs for the `on()` and `off()` methods."
+            "line": 8,
+            "description": "The EventDispatcher mirrors the functionality of AS3 and CreateJS's EventDispatcher, \nbut is more robust in terms of inputs for the `on()` and `off()` methods.",
+            "is_constructor": 1
         },
         "PageVisibility": {
             "name": "PageVisibility",
@@ -117,8 +103,21 @@
             "module": "cloudkid",
             "namespace": "",
             "file": "src/PageVisibility.js",
-            "line": 5,
-            "description": "Handle the page visiblity change, if supported"
+            "line": 8,
+            "description": "Handle the page visiblity change, if supported",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "onFocus",
+                    "description": "Callback when the page becomes visible",
+                    "type": "Function"
+                },
+                {
+                    "name": "onBlur",
+                    "description": "Callback when the page loses visibility",
+                    "type": "Function"
+                }
+            ]
         },
         "SwishSprite": {
             "name": "SwishSprite",
@@ -131,14 +130,23 @@
             "module": "cloudkid",
             "namespace": "",
             "file": "src/SwishSprite.js",
-            "line": 10,
-            "description": "This class is responsible for playback of an audiosprite \nfile (multiple sounds in a single timeline) using HTML5 audio"
+            "line": 13,
+            "description": "This class is responsible for playback of an audiosprite \nfile (multiple sounds in a single timeline) using HTML5 audio",
+            "is_constructor": 1,
+            "extends": "EventDispatcher",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The name of the audio file to load, array of resources, or a spritemap",
+                    "type": "*"
+                }
+            ]
         }
     },
     "classitems": [
         {
             "file": "src/AudioUtils.js",
-            "line": 13,
+            "line": 15,
             "description": "Create an SwishSprite object from config",
             "itemtype": "method",
             "name": "importSpriteMap",
@@ -164,7 +172,7 @@
         },
         {
             "file": "src/AudioUtils.js",
-            "line": 46,
+            "line": 48,
             "description": "Check if HTML5 Audio is supported in any of the available \nformats. If returns false, we should disable sounds. Modified from modernizr",
             "itemtype": "method",
             "name": "supported",
@@ -178,7 +186,7 @@
         },
         {
             "file": "src/AudioUtils.js",
-            "line": 58,
+            "line": 60,
             "description": "Get the the internal cache support",
             "itemtype": "method",
             "name": "_fileSupport",
@@ -193,7 +201,7 @@
         },
         {
             "file": "src/AudioUtils.js",
-            "line": 87,
+            "line": 89,
             "description": "Determines playability of a URL based on audio support.",
             "itemtype": "method",
             "name": "canPlayURL",
@@ -214,7 +222,7 @@
         },
         {
             "file": "src/AudioUtils.js",
-            "line": 110,
+            "line": 112,
             "description": "Get the url from the sprite resources array or single url",
             "itemtype": "method",
             "name": "getPlayableURL",
@@ -235,7 +243,7 @@
         },
         {
             "file": "src/EventDispatcher.js",
-            "line": 18,
+            "line": 20,
             "description": "The collection of listeners",
             "itemtype": "property",
             "name": "_listeners",
@@ -247,7 +255,7 @@
         },
         {
             "file": "src/EventDispatcher.js",
-            "line": 25,
+            "line": 27,
             "description": "Dispatch an event",
             "itemtype": "method",
             "name": "trigger",
@@ -268,7 +276,7 @@
         },
         {
             "file": "src/EventDispatcher.js",
-            "line": 44,
+            "line": 46,
             "description": "Add an event listener",
             "itemtype": "method",
             "name": "on",
@@ -293,7 +301,7 @@
         },
         {
             "file": "src/EventDispatcher.js",
-            "line": 92,
+            "line": 94,
             "description": "Remove the event listener",
             "itemtype": "method",
             "name": "off",
@@ -314,7 +322,7 @@
         },
         {
             "file": "src/EventDispatcher.js",
-            "line": 140,
+            "line": 142,
             "description": "Return type of the value.",
             "access": "private",
             "tagname": "",
@@ -336,7 +344,7 @@
         },
         {
             "file": "src/EventDispatcher.js",
-            "line": 161,
+            "line": 163,
             "description": "Returns callback array index.",
             "itemtype": "method",
             "name": "_callbackIndex",
@@ -363,7 +371,7 @@
         },
         {
             "file": "src/PageVisibility.js",
-            "line": 22,
+            "line": 24,
             "description": "The name of the visibility change event for the browser",
             "itemtype": "property",
             "name": "_visibilityChange",
@@ -375,7 +383,7 @@
         },
         {
             "file": "src/PageVisibility.js",
-            "line": 30,
+            "line": 32,
             "description": "Callback when the page becomes visible",
             "itemtype": "property",
             "name": "_onFocus",
@@ -387,7 +395,7 @@
         },
         {
             "file": "src/PageVisibility.js",
-            "line": 37,
+            "line": 39,
             "description": "Callback when the page loses visibility",
             "itemtype": "property",
             "name": "_onBlur",
@@ -399,7 +407,7 @@
         },
         {
             "file": "src/PageVisibility.js",
-            "line": 44,
+            "line": 46,
             "description": "The visibility toggle function",
             "itemtype": "property",
             "name": "_onToggle",
@@ -411,7 +419,7 @@
         },
         {
             "file": "src/PageVisibility.js",
-            "line": 69,
+            "line": 71,
             "description": "Create new Page visibility",
             "itemtype": "method",
             "name": "initialize",
@@ -432,7 +440,7 @@
         },
         {
             "file": "src/PageVisibility.js",
-            "line": 107,
+            "line": 109,
             "description": "Disable the detection",
             "itemtype": "method",
             "name": "destroy",
@@ -441,7 +449,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 28,
+            "line": 30,
             "description": "The audio element",
             "itemtype": "property",
             "name": "_audio",
@@ -453,7 +461,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 36,
+            "line": 38,
             "description": "If we're paused",
             "itemtype": "property",
             "name": "_paused",
@@ -465,7 +473,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 44,
+            "line": 46,
             "description": "If the current audio has been loaded",
             "itemtype": "property",
             "name": "_loaded",
@@ -477,7 +485,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 52,
+            "line": 54,
             "description": "If the loading update should run",
             "itemtype": "property",
             "name": "_updatingLoad",
@@ -489,7 +497,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 60,
+            "line": 62,
             "description": "If the playing update should run",
             "itemtype": "property",
             "name": "_updatingPlay",
@@ -501,7 +509,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 68,
+            "line": 70,
             "description": "If the load has started",
             "itemtype": "property",
             "name": "_loadStarted",
@@ -513,7 +521,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 76,
+            "line": 78,
             "description": "The interval ID for playback",
             "itemtype": "property",
             "name": "_playInterval",
@@ -525,7 +533,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 84,
+            "line": 86,
             "description": "The interval ID for loading",
             "itemtype": "property",
             "name": "_loadInterval",
@@ -537,7 +545,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 92,
+            "line": 94,
             "description": "The playback timeout ID",
             "itemtype": "property",
             "name": "_playTimeout",
@@ -549,7 +557,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 100,
+            "line": 102,
             "description": "The previous interval loaded percentage",
             "itemtype": "property",
             "name": "_loadAmount",
@@ -561,7 +569,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 108,
+            "line": 110,
             "description": "The collection of sounds",
             "itemtype": "property",
             "name": "_sounds",
@@ -573,7 +581,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 116,
+            "line": 118,
             "description": "Some formats require a little padding to the end of a sprite",
             "itemtype": "property",
             "name": "_formatPadding",
@@ -585,7 +593,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 124,
+            "line": 126,
             "description": "The sound name of the current sprite we're playing",
             "itemtype": "property",
             "name": "_playingAlias",
@@ -597,7 +605,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 132,
+            "line": 134,
             "description": "If the scrubber playhead has moved",
             "itemtype": "property",
             "name": "_scrubberMoved",
@@ -609,7 +617,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 140,
+            "line": 142,
             "description": "If we're out of round",
             "itemtype": "property",
             "name": "_outOfRangeCount",
@@ -621,7 +629,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 147,
+            "line": 149,
             "description": "The num of times the scrubber has not moved",
             "itemtype": "property",
             "name": "_scrubberNotMovingCount",
@@ -633,7 +641,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 155,
+            "line": 157,
             "description": "If the sound successfully played",
             "itemtype": "property",
             "name": "_successfullyPlayedSound",
@@ -645,7 +653,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 163,
+            "line": 165,
             "description": "The start time for the scrubber",
             "itemtype": "property",
             "name": "_scrubberStartTime",
@@ -657,7 +665,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 171,
+            "line": 173,
             "description": "The interval ID for checking audio",
             "itemtype": "property",
             "name": "_checkInterval",
@@ -669,7 +677,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 179,
+            "line": 181,
             "description": "The position of the last scrubber",
             "itemtype": "property",
             "name": "_lastScrubberPos",
@@ -681,7 +689,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 187,
+            "line": 189,
             "description": "The singleton instance of the audiosprite",
             "itemtype": "property",
             "name": "_instance",
@@ -693,7 +701,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 195,
+            "line": 197,
             "description": "Instance of page visibility for pause/resuming on page blur/focus",
             "itemtype": "property",
             "name": "_pageVisibility",
@@ -705,7 +713,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 203,
+            "line": 205,
             "description": "Keep track of the paused state when the page blur/focuses \na value of -1 means the page isn't hidden, 0 means the \nplaying before blur, and 1 means paused before blur",
             "itemtype": "property",
             "name": "_autoPaused",
@@ -717,7 +725,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 213,
+            "line": 215,
             "description": "The last current time played",
             "itemtype": "property",
             "name": "_lastCurrentTime",
@@ -729,7 +737,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 221,
+            "line": 223,
             "description": "Event dispatched when load has started",
             "itemtype": "event",
             "name": "loadStarted",
@@ -738,7 +746,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 228,
+            "line": 230,
             "description": "Event dispatched with audio loaded",
             "itemtype": "event",
             "name": "loaded",
@@ -747,7 +755,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 235,
+            "line": 237,
             "description": "Event dispatched when percentage of load changed",
             "itemtype": "event",
             "name": "loadProgress",
@@ -756,7 +764,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 242,
+            "line": 244,
             "description": "Event dispatched when sound play completed",
             "itemtype": "event",
             "name": "complete",
@@ -765,7 +773,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 249,
+            "line": 251,
             "description": "The progress event",
             "itemtype": "event",
             "name": "progress",
@@ -774,7 +782,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 256,
+            "line": 258,
             "description": "The playback has been paused",
             "itemtype": "event",
             "name": "paused",
@@ -783,7 +791,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 263,
+            "line": 265,
             "description": "The sound has been unpaused",
             "itemtype": "event",
             "name": "resumed",
@@ -792,7 +800,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 270,
+            "line": 272,
             "description": "The sound has been stopped or canceled",
             "itemtype": "event",
             "name": "stopped",
@@ -801,7 +809,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 277,
+            "line": 279,
             "description": "The sound has begun playing",
             "itemtype": "event",
             "name": "started",
@@ -810,7 +818,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 284,
+            "line": 286,
             "description": "A little padding for the m4a audio format will help add extra\ntime for the Kindle Fire who likes to end the sound too early",
             "itemtype": "property",
             "name": "M4A_PADDING",
@@ -822,7 +830,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 294,
+            "line": 296,
             "description": "The version of this library",
             "itemtype": "property",
             "name": "VERSION",
@@ -834,7 +842,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 303,
+            "line": 305,
             "description": "If using external update call, you can use this to save performance\nif you're already running a frame update call (such as request animation frame)",
             "itemtype": "property",
             "name": "manualUpdate",
@@ -844,7 +852,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 311,
+            "line": 313,
             "description": "Create the audio sprite",
             "itemtype": "method",
             "name": "initialize",
@@ -860,7 +868,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 368,
+            "line": 370,
             "description": "Get the audio element",
             "itemtype": "method",
             "name": "getAudioElement",
@@ -873,7 +881,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 379,
+            "line": 381,
             "description": "Mute the audio, not available on all devices",
             "itemtype": "method",
             "name": "mute",
@@ -886,7 +894,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 391,
+            "line": 393,
             "description": "Unmute the audio, not available on all devices",
             "itemtype": "method",
             "name": "unmute",
@@ -899,7 +907,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 403,
+            "line": 405,
             "description": "Pause the sound playback",
             "itemtype": "method",
             "name": "pause",
@@ -912,7 +920,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 437,
+            "line": 439,
             "description": "Unpause the audio playback",
             "itemtype": "method",
             "name": "resume",
@@ -925,7 +933,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 457,
+            "line": 459,
             "description": "Stop the sound playback clear the current sound playing",
             "itemtype": "method",
             "name": "stop",
@@ -938,7 +946,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 478,
+            "line": 480,
             "description": "Get the length of a sprite",
             "itemtype": "method",
             "name": "getLength",
@@ -958,7 +966,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 498,
+            "line": 500,
             "description": "Get the current position in seconds of the audio",
             "itemtype": "method",
             "name": "getPosition",
@@ -971,7 +979,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 513,
+            "line": 515,
             "description": "Get a sound by name",
             "itemtype": "method",
             "name": "getSound",
@@ -991,7 +999,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 532,
+            "line": 534,
             "description": "Add a sound to the list of playable sounds",
             "itemtype": "method",
             "name": "setSound",
@@ -1026,7 +1034,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 557,
+            "line": 559,
             "description": "Set the current time to the start alias",
             "itemtype": "method",
             "name": "prepare",
@@ -1042,7 +1050,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 569,
+            "line": 571,
             "description": "Clear all of the current sounds",
             "itemtype": "method",
             "name": "clear",
@@ -1055,7 +1063,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 581,
+            "line": 583,
             "description": "For iOS, start loading the audio via user click",
             "itemtype": "method",
             "name": "load",
@@ -1068,7 +1076,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 628,
+            "line": 630,
             "description": "The update function, call this manually if manualUpdate is set to true",
             "itemtype": "method",
             "name": "update",
@@ -1077,7 +1085,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 644,
+            "line": 646,
             "description": "Play a sound sprite",
             "itemtype": "method",
             "name": "play",
@@ -1102,7 +1110,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 759,
+            "line": 761,
             "description": "The play updating function",
             "itemtype": "method",
             "name": "playUpdate",
@@ -1111,7 +1119,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 835,
+            "line": 837,
             "description": "Destroy the audiosprite, don't use after this\nmust recreate the SwishSprite",
             "itemtype": "method",
             "name": "destroy",
@@ -1120,7 +1128,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 887,
+            "line": 889,
             "description": "Get whether the audio has been loaded yet",
             "itemtype": "method",
             "name": "isLoaded",
@@ -1133,7 +1141,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 897,
+            "line": 899,
             "description": "Function call when load has started",
             "itemtype": "method",
             "name": "onLoadStarted",
@@ -1142,7 +1150,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 918,
+            "line": 920,
             "description": "Callback when page visibility has gone to hidden",
             "itemtype": "method",
             "name": "onBlur",
@@ -1151,7 +1159,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 935,
+            "line": 937,
             "description": "Callback when page visibility has gone to show",
             "itemtype": "method",
             "name": "onFocus",
@@ -1160,7 +1168,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 953,
+            "line": 955,
             "description": "1 second update to check what the status of the scrubber is",
             "itemtype": "method",
             "name": "checkUpdate",
@@ -1169,7 +1177,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 1017,
+            "line": 1019,
             "description": "Function call when load state has changed",
             "itemtype": "method",
             "name": "onLoadChange",
@@ -1178,7 +1186,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 1074,
+            "line": 1076,
             "description": "Callback on playback timeout",
             "itemtype": "method",
             "name": "onPlayTimeout",
@@ -1187,7 +1195,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 1087,
+            "line": 1089,
             "description": "Callback on canplaythrough event",
             "itemtype": "method",
             "name": "onCanPlayThrough",
@@ -1196,7 +1204,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 1100,
+            "line": 1102,
             "description": "Callback when audio has stalled",
             "itemtype": "method",
             "name": "onStalled",
@@ -1205,7 +1213,7 @@
         },
         {
             "file": "src/SwishSprite.js",
-            "line": 1113,
+            "line": 1115,
             "description": "When sound has completed callback",
             "itemtype": "method",
             "name": "soundPlayComplete",
