@@ -31,7 +31,7 @@ audio.setSound('music', 5, 20, true);
 audio.setSound('bleep', 26, 0.5, false);
 
 // Add listener for the Loaded event
-audio.on(SwishSprite.LOAD_STARTED, function(){
+audio.on('loaded', function(){
 	
     // Play the audio when it's done loading
 	audio.play('music');
@@ -54,6 +54,18 @@ $.getJSON("sprite.json", function(data){
 
 	// Create new SwishSprite from map
 	var audio = new cloudkid.SwishSprite(data);
+	
+	// Trigger a user load on a button press
+	// for mobile browser that require a user's
+	// input before initiating the audio load
+	$('button#load').click(function(){
+		audio.load();
+	});
+
+	// Add event for when audio finishes loading
+	audio.on('loaded', function(){
+		audio.play('music');
+	});
 });
 ```
 
