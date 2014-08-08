@@ -119,7 +119,7 @@
 		global.removeEventListener("pageshow", this._onFocus);
 		global.removeEventListener("blur", this._onBlur);
 		global.removeEventListener("focus", this._onFocus);
-		global.addEventListener("visibilitychange", this._onToggle);
+		global.removeEventListener("visibilitychange", this._onToggle);
 		
 		doc.removeEventListener(_visibilityChange, this._onToggle, false);
 		
